@@ -1,0 +1,846 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+  
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  <meta name="author" content="对六, pengrui55555@163.com">
+  
+  
+  
+  <title>python学习 | Duiliuliu</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  
+    <meta name="keywords" content="python,python,">
+  
+
+  <script>
+    console.log('\n%c github' + '%c 🎉 https://github.com/duiliuliu🎉\n' + '\n%c 简历 ' + '%c 🔍 https://godbmw.com/ 🔍  \n' , 'color: #fadfa3; background: #030307; padding:3px 0;', '', 'color: #fadfa3; background: #030307; padding:3px 0;', '');
+  </script>
+
+  
+    <meta name="description" content="随笔">
+  
+
+  
+
+  
+    <link rel="icon" href="/images/favicon.ico">
+    <link rel="apple-touch-icon" href="/images/touch-icon.png">
+  
+
+  <link href="https://cdn.bootcss.com/fancybox/3.5.2/jquery.fancybox.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="/css/base.css">
+<link rel="stylesheet" href="/icon/iconfont.css">
+<link rel="stylesheet" href="/css/github-markdown.css">
+<link rel="stylesheet" href="/css/highlight.css">
+
+  <script src="/js/util.js"></script>
+<script src="/js/valine.min.js"></script>
+
+  
+
+  
+    <link href="https://cdn.bootcss.com/aplayer/1.10.1/APlayer.min.css" rel="stylesheet">
+    <script src="https://cdn.bootcss.com/aplayer/1.10.1/APlayer.min.js" async></script>
+  
+
+  
+    <link href="https://cdn.bootcss.com/social-share.js/1.0.16/css/share.min.css" rel="stylesheet">
+  
+  
+  <script src="//cdn.bootcss.com/jquery/3.3.1/jquery.min.js" async></script>
+  
+  
+    <script src="//cdn.jsdelivr.net/npm/leancloud-storage@3.11.0/dist/av-min.js"></script>
+  
+
+</head>
+
+  <body>
+
+    
+
+    <div id="app">
+
+      <div class="header-wrap">
+  <header>
+    <div class="site-brand">
+      <div class="site-title">
+        <a href="/"><svg t="1524919571304" class="icon" style="margin-top: 5;margin-bottom: -5;margin-right: 10" viewbox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="1405" xmlns:xlink="http://www.w3.org/1999/xlink" width="55" height="40"><defs><style type="text/css"/></defs><path d="M519.391852 655.664004l5.143137 0 0 0.765433-5.143137 0L519.391852 655.664004 519.391852 655.664004zM461.986421 953.196421l2.953262 1.055029c-7.259334-5.752004-25.818015-19.157315-49.984415-27.129894-28.747741-9.475815-71.581292-12.96529-112.364137 24.231891-0.464581 0.427742-1.047866 0.567935-1.685385 0.405229-9.751085-2.39249-51.969629-106.711394-89.576131-204.463742-2.042519 1.379417-4.027733 2.939959-6.100952 4.581342-3.653203 2.885723-7.614421 5.993504-12.480242 8.460696 47.004547 117.482715 94.16566 232.4307 101.068883 239.10368C336.773651 908.386866 394.807393 929.148725 461.986421 953.196421L461.986421 953.196421zM743.040539 950.431447c-0.64366 0.153496-1.221828 0.01842-1.685385-0.413416-40.797172-37.208437-83.647095-33.721009-112.413256-24.245194-24.045649 7.922437-42.522466 21.217231-49.841152 26.997887l0.271176-0.100284c62.594617-22.972201 127.316687-46.734394 170.756035 45.327348 6.707772-6.489808 51.394531-115.128087 97.024777-229.021044-0.511653-0.23536-1.004887-0.449231-1.455141-0.572028-7.698333-2.072195-13.239536-5.879917-17.913998-9.841136C791.466458 852.460112 752.374114 948.137195 743.040539 950.431447L743.040539 950.431447zM516.283048 657.190777l-0.227174-0.261966c-17.194614-19.894096-173.199691-193.161325-353.35377-152.168702-1.26583 1.962701 8.032954 21.381983 17.873066 39.153742l31.232328-0.881067-16.154935-28.411073 1.083681-0.173962c104.879676-16.950044 280.193517 111.976304 314.27166 137.992841l-0.839111 1.191128c0.949628 0.539282 1.882883 1.083681 2.788509 1.62501l1.503237 0.8913-1.678222 0.493234c-0.561795 0.165776-1.158383 0.98749-1.158383 2.176572l8.861832 291.0027c0 1.331321 0.73678 2.302439 1.391696 2.302439l1.596358 0c0.655939 0 1.39272-0.971118 1.39272-2.276856l8.862855-290.721291c0-1.109264-0.585331-1.935072-1.387603-1.935072l-3.568269 0 2.320858-1.413186c39.282678-23.985274 119.364575-51.532677 204.024743-70.176292 67.964928-14.969946 145.82011-25.104771 160.492274-8.645914l0.308015 0.339738-0.156566 0.429789c-1.726318 4.714372-15.611559 42.691311-34.417881 92.735078 7.316639 1.836835 15.287171 4.197602 22.308075 6.879688 19.531845-49.306986 37.231973-94.376461 49.724495-126.388549-193.349613-19.583011-353.160365 72.461335-397.590274 101.183494l-0.877997-1.251503c47.767933-36.480866 211.434503-154.25113 312.301795-137.948839l1.087774 0.173962-16.152888 28.373211 31.231305 0.813528c9.833973-17.700127 19.134803-37.052894 17.793248-39.065737-179.497117-40.803311-336.053756 133.669372-353.312838 153.699568l-0.233314 0.268106-1.399883 0 0-0.76748-1.685385 0-5.139044 0-1.676176 0 0 0.76748-1.436722 0L516.287141 657.190777zM148.189575 578.905806l-0.155543-0.429789 0.302899-0.339738c14.607696-16.381086 92.526323-6.441713 160.580279 8.316409 81.782631 17.73799 159.444409 43.61638 200.1239 66.535369-46.01808-29.54592-205.276247-120.142288-398.47134-100.571556 11.655458 29.860075 27.838022 71.071685 45.808302 116.484991 7.874341-2.036379 16.295128-3.63376 23.423479-4.684696C162.431951 617.877399 149.827889 583.38891 148.189575 578.905806L148.189575 578.905806zM132.757095 687.280072c-0.661056 3.91517 1.546216 7.232728 2.920516 8.857738 3.337002 3.950985 7.864108 5.516644 9.336646 4.588505 12.595876-7.907087 32.694633-14.82566 59.738569-20.556175 3.251044-0.691755 12.350283-3.613294 11.516288-7.858992-1.093914-5.564739-9.55461-6.729262-16.458857-6.729262-2.217505 0-4.13518 0.121773-5.285377 0.193405-0.446162 0.027629-0.788969 0.048095-1.01205 0.060375-10.218736 0.349971-37.748742 4.875031-52.061726 11.208273C137.895115 678.619832 133.426337 683.335227 132.757095 687.280072L132.757095 687.280072zM139.60813 715.676819c1.680269 5.915733 4.780887 8.92016 9.213849 8.92016 3.095501 0 5.754051-1.471514 6.494924-1.922792l0.682545-0.413416c6.164397-3.774977 24.920576-15.263635 53.91391-18.61701 12.890588-1.488911 27.972075-7.912204 27.364231-13.657045-0.200568-1.944282-0.806365-7.836479-13.252839-7.836479-6.547113 0-14.192234 1.555425-20.801768 3.065825-15.765055 3.62762-42.147936 11.713786-56.292074 17.975397C143.670655 704.632275 137.984143 709.941188 139.60813 715.676819L139.60813 715.676819zM218.057853 707.125049c-0.329505 0.039909-0.610914 0.075725-0.839111 0.098237-13.143345 1.228991-37.343513 7.423063-59.398832 18.119683-3.426029 1.664919-7.2798 5.961782-7.525394 9.998725-0.277316 4.604878 1.490957 7.504928 3.0208 9.127891 2.305509 2.455935 5.195326 3.327792 7.132444 3.327792 0.624217 0 1.181919-0.088004 1.659803-0.251733 9.397021-3.317559 16.104793-7.123234 22.596647-10.800997 5.963829-3.384074 12.132318-6.879688 20.165272-9.809413 0.285502-0.107447 1.013073-0.303922 2.061962-0.587378 20.999266-5.609765 23.64042-9.920954 23.344684-11.992125-0.727571-5.110391-3.53757-7.486508-8.836249-7.486508C220.122885 706.869223 218.927663 707.014532 218.057853 707.125049L218.057853 707.125049zM203.405131 732.825384l-0.410346 0.148379c-9.522887 3.355421-15.303544 7.039323-26.811646 14.386662-1.992377 1.2689-4.151553 2.648316-6.528694 4.151553-1.651616 1.041726-2.614547 2.178619-2.861164 3.37998-0.23536 1.167592 0.166799 2.520403 1.200338 4.019547 2.675946 3.873214 4.740978 4.323469 6.067182 4.323469l0 0c1.373277 0 2.78237-0.572028 4.14746-1.119497 0.998747-0.402159 2.034333-0.819668 3.072989-1.019213 9.760295-1.889023 16.008602-6.829546 22.056342-11.612479 2.744507-2.166339 5.335519-4.219091 8.185426-5.938246 0.172939-0.106424 0.397043-0.234337 0.665149-0.385786 1.984191-1.134847 7.261381-4.14746 7.975649-7.846712 0.280386-1.480724-0.189312-2.967588-1.441838-4.53734-0.436952-0.545422-1.512447-0.849344-3.037173-0.849344C211.464691 729.925335 205.399555 732.106 203.405131 732.825384L203.405131 732.825384zM840.178903 669.444868c-1.847068-0.25378-5.28026-0.727571-9.035794-0.727571-5.2864 0-11.860119 0.985444-13.140275 5.67014-1.133823 4.168949 7.723915 7.740288 10.924817 8.662287 26.551726 7.67889 46.101991 16.031115 58.096163 24.825408 0.320295 0.234337 0.816598 0.36225 1.431605 0.36225 2.163269 0 5.812379-1.608637 8.601912-4.682649 2.304486-2.530636 3.422959-5.446036 3.157923-8.204869-0.378623-3.985778-4.498454-9.014304-7.928576-10.842952-13.818727-7.351432-40.947598-13.848403-51.112098-14.938224C840.951499 669.544129 840.613808 669.500127 840.178903 669.444868L840.178903 669.444868zM884.934223 710.188828c-13.651928-7.259334-39.383986-17.234523-54.844096-21.988804-7.506974-2.300392-16.116049-4.657067-23.052019-4.657067-8.991792 0-10.737552 3.967358-11.266601 6.949272-1.013073 5.688559 13.563924 13.187347 26.307156 15.603373 28.65462 5.432733 46.536896 18.237363 52.40965 22.449291l0.666172 0.471744c0.797156 0.565888 3.65218 2.413979 7.014764 2.413979 4.086062 0 7.169283-2.778276 9.166777-8.258081C893.371382 717.571982 888.080889 711.866027 884.934223 710.188828L884.934223 710.188828zM872.474446 731.498156c-21.234627-12.267395-44.921095-20.191878-57.945737-22.361287-0.220011-0.035816-0.49528-0.094144-0.812505-0.155543-1.087774-0.217964-2.735297-0.547469-4.476965-0.547469-4.53734 0-7.231705 2.248204-8.238638 6.873548-0.444115 2.044566 1.88186 6.53995 22.425755 13.646811 1.02126 0.352017 1.730411 0.605797 2.00875 0.727571 7.798617 3.507894 13.69593 7.440459 19.404955 11.246135 6.206352 4.14132 12.619412 8.4126 21.75549 12.403494 0.584308 0.255827 1.324158 0.387833 2.145873 0.387833 4.308119 0 10.416234-3.63376 10.512425-11.70253C879.301945 737.969545 875.775632 733.406622 872.474446 731.498156L872.474446 731.498156zM826.860573 735.851301l-0.397043-0.173962c-5.692652-2.532683-9.987468-3.815909-12.769838-3.815909-0.799202 0-1.856277 0.11768-2.357697 0.653893-1.363044 1.480724-1.939165 2.923586-1.765203 4.420683 0.442068 3.739161 5.485945 7.125281 7.386224 8.396227 0.254803 0.176009 0.468674 0.318248 0.633427 0.431835 2.719948 1.922792 5.154393 4.155646 7.739265 6.52153 5.685489 5.202489 11.559267 10.585079 21.155832 13.168927 1.02433 0.276293 2.028193 0.76748 2.997264 1.245364 1.429559 0.701988 2.912329 1.425466 4.411473 1.425466 1.941212 0 3.90596-1.264806 6.006807-3.883447 1.137916-1.423419 1.638313-2.744507 1.487887-3.921309-0.159636-1.218758-1.035586-2.424212-2.610454-3.581572-2.254344-1.664919-4.296863-3.189645-6.186909-4.594645C841.634044 743.983515 836.128657 739.886197 826.860573 735.851301L826.860573 735.851301zM826.860573 735.851301" fill="#399ea8" p-id="1406"/><path d="M135.362432 563.761897 276.571525 933.502893 520.485767 949.820534 769.2689 928.898015 907.408073 569.735959 772.338818 563.761897 709.408557 592.759325 655.688052 602.819448 629.594767 611.177813 580.352249 626.183576 541.605783 641.875976 528.7725 657.190777 524.536013 656.429437 462.567659 626.183576 360.990193 594.972736 219.7811 563.761897Z" fill="#399ea8" p-id="1407"/><path d="M255.660262 315.224358c0 67.713194 26.611078 129.415488 70.39835 175.036525C182.678064 546.322713 83.941296 669.785629 83.941296 846.798159c0 160.327522 849.423963 184.136787 858.580506 0 8.902764-177.295985-94.468558-301.329906-241.517659-357.140003 43.214221-45.591361 69.799716-106.750279 69.799716-174.46552 0-140.746558-115.361401-254.883061-257.57231-254.883061S255.660262 174.446078 255.660262 315.224358L255.660262 315.224358zM312.896848 315.224358c0-109.611443 89.580225-198.247156 200.334701-198.247156 110.7555 0 200.334701 88.661296 200.334701 198.247156 0 79.30316-47.219441 147.848303-115.361401 179.556469C762.765789 532.729114 885.28624 650.555659 885.28624 825.02118c0 134.539182-744.106312 127.439484-744.106312 0 0-174.46552 122.493845-292.260343 287.054785-330.240353C360.118336 463.072661 312.896848 394.527518 312.896848 315.224358L312.896848 315.224358zM312.896848 315.224358" fill="#399ea8" p-id="1408"/><path d="M140.11262 579.11149 162.113703 626.183576 204.58091 566.575989 168.765193 563.761897Z" fill="#399ea8" p-id="1409"/><path d="M879.780853 641.875976 912.012951 574.340837 879.780853 563.761897 844.477812 563.761897 816.850591 569.736982Z" fill="#399ea8" p-id="1410"/></svg>Duiliuliu</a>
+      </div>
+    </div>
+    <nav class="site-navigation">
+      <ul class="nav-menu">
+      
+        <li class="nav-item" data-path="/">
+          
+            
+            <a href="/" target="_self">
+             <img src="/icon/主页.svg">
+              主页
+            </a>
+          
+        </li>
+      
+        <li class="nav-item" data-path="/archives/">
+          
+            
+            <a href="/archives/" target="_self">
+             <img src="/icon/归档.svg">
+              归档
+            </a>
+          
+        </li>
+      
+        <li class="nav-item" data-path="/categories/">
+          
+            
+            <a href="/categories/" target="_self">
+             <img src="/icon/分类.svg">
+              分类
+            </a>
+          
+        </li>
+      
+        <li class="nav-item" data-path="/tags/">
+          
+            
+            <a href="/tags/" target="_self">
+             <img src="/icon/标签.svg">
+              标签
+            </a>
+          
+        </li>
+      
+        <li class="nav-item" data-path="/about/">
+          
+            
+            <a href="/about/" target="_self">
+             <img src="/icon/关于我.svg">
+              关于
+            </a>
+          
+        </li>
+      
+      <!-- <li class="nav-item">
+          <input type="text" id="local-search-input" style="width: 200px;" results="0"/>
+      </li> -->
+      </ul>
+    </nav>
+    <i class="iconfont icon-menu"></i>
+  </header>
+</div>
+
+<script>
+  let links = document.querySelectorAll('.nav-item');
+  for(let link of links){
+    let childrenLink = link.querySelector('ul');
+    link.addEventListener('mouseenter', () => {
+      if(childrenLink) {
+        childrenLink.className = "nav-menu--dropdown active";
+      }
+    })
+    link.addEventListener('mouseleave', () => {
+      if(childrenLink) {
+        childrenLink.className = "nav-menu--dropdown";
+      }
+    })
+  }
+  let rootRealPath = getRealPath(window.location.pathname, true);
+  for(let link of links) {
+    let linkPath = link.getAttribute("data-path");
+    if(linkPath && getRealPath(linkPath, true) === rootRealPath) {
+      link.className = "nav-item hover";
+    }
+  }
+
+  let iconMenu = document.querySelector("i.iconfont.icon-menu"),
+    iconMenuClicked = false;
+  let navDOM = document.querySelector("nav.site-navigation");
+  iconMenu.addEventListener("click", () => {
+    iconMenuClicked 
+      ? navDOM.className = "site-navigation active"
+      : navDOM.className = "site-navigation";
+    iconMenuClicked = !iconMenuClicked;
+  })
+</script>
+
+      
+
+
+
+
+
+
+
+
+<div class="container post-index">
+
+  
+
+<div class="post">
+  <h1 class="article-title">
+    <span>python学习</span>
+  </h1>
+  <div class="article-top-meta">
+    <span>
+      发布 : 
+      2018-03-13
+    </span>
+    
+      <span>
+        分类 : 
+          <a href="/categories/python/">
+            python
+          </a>
+      </span>
+    
+    
+      <span>
+        浏览 : <span class="article-timer" data-identity="python学习"></span>
+      </span>
+    
+  </div>
+
+  
+
+  <div class="article-content">
+    <div class="markdown-body">
+      <h2 id="Python-基础"><a href="#Python-基础" class="headerlink" title="Python 基础"></a>Python 基础</h2><p>python 是一门比较流行的高级编程语言， 是一门解释型语言</p>
+<pre><code>- 解释型
+  解释性语言通常把源程序编译成中间代码，然后用解释器把中间代码一条条翻译成目标机器代码，一条条执行。
+
+  Python的工作过程：先把代码编译成字节码，在对字节码解释执行。字节码在python虚拟机程序里对应的是PyCodeObject对象，pyc文件是字节码在磁盘上的表现形式。
+- 编译型
+  编译性语言写的程序在被执行之前，需要一个专门的编译过程，把程序编译成为机器语言的文件，比如exe文件，以后要运行的话就不用重新翻译了，直接使用编译的结果就行了（exe文件），因为翻译只做了一次，运行时不需要翻译，所以编译型语言的程序执行效率高
+
+  Java则是编译型语言。编译为字节码文件(.class)，然后会经jvm平台编译为目标机器代码
+
+- 字节码    易跨平台迁移
+- 机器码    运行快速
+</code></pre><h2 id="Python-简明约定"><a href="#Python-简明约定" class="headerlink" title="Python 简明约定"></a>Python 简明约定</h2><ul>
+<li>编码<ul>
+<li>通常使用 UDF-8 编码</li>
+<li>Python2 遗留的习惯， 文件头部加入 # -*- coding=utf-8 -*-</li>
+</ul>
+</li>
+<li><p>代码格式</p>
+<ul>
+<li>缩进<br>一般使用四个空格进行缩进(javascript 规范为 2 个空格)</li>
+<li>行宽<br>每行代码一般不应过长，太长可能是设计有缺陷</li>
+<li>引号<br>单引号和双引号都可以用来表示一个字符串<br>一般字典 key 使用单引号</li>
+<li><p>空行<br>模块级函数和类定义之间空两行；<br>类成员函数之间空一行；</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">class A:</span><br><span class="line"></span><br><span class="line">    def __init__(self):</span><br><span class="line">        pass</span><br><span class="line"></span><br><span class="line">    def hello(self):</span><br><span class="line">        pass</span><br></pre></td></tr></table></figure>
+<pre><code>def main():
+    pass
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">- import 语句</span><br><span class="line">  import 语句应该分行书写</span><br></pre></td></tr></table></figure>
+</code></pre></li>
+</ul>
+<h1 id="正确的写法"><a href="#正确的写法" class="headerlink" title="正确的写法"></a>正确的写法</h1><p>import os<br>import sys</p>
+<h1 id="不推荐的写法"><a href="#不推荐的写法" class="headerlink" title="不推荐的写法"></a>不推荐的写法</h1><p>import sys,os</p>
+<h1 id="正确的写法-1"><a href="#正确的写法-1" class="headerlink" title="正确的写法"></a>正确的写法</h1><p>from subprocess import Popen, PIPE</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">import 语句应该使用 absolute import</span><br></pre></td></tr></table></figure>
+<h1 id="正确的写法-2"><a href="#正确的写法-2" class="headerlink" title="正确的写法"></a>正确的写法</h1><p>from foo.bar import Bar</p>
+<h1 id="不推荐的写法-1"><a href="#不推荐的写法-1" class="headerlink" title="不推荐的写法"></a>不推荐的写法</h1><p>from ..bar import Bar</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">- 空格</span><br><span class="line">  运算符前后空格</span><br></pre></td></tr></table></figure>
+<h1 id="正确的写法-3"><a href="#正确的写法-3" class="headerlink" title="正确的写法"></a>正确的写法</h1><p>i = i + 1<br>submitted += 1<br>x = x <em> 2 - 1<br>hypot2 = x </em> x + y <em> y<br>c = (a + b) </em> (a - b)</p>
+<h1 id="不推荐的写法-2"><a href="#不推荐的写法-2" class="headerlink" title="不推荐的写法"></a>不推荐的写法</h1><p>i=i+1<br>submitted +=1<br>x = x<em>2 - 1<br>hypot2 = x</em>x + y<em>y<br>c = (a+b) </em> (a-b)</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">- 换行</span><br><span class="line">  使用反斜杠\换行，二元运算符+ .等应出现在行末；长字符串也可以用此法换行</span><br></pre></td></tr></table></figure>
+<p>session.query(MyTable).\</p>
+<pre><code>filter_by(id=1).\
+one()
+</code></pre><p>print ‘Hello, ‘\</p>
+<pre><code>&apos;%s %s!&apos; %\
+(&apos;Harry&apos;, &apos;Potter&apos;)
+</code></pre><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">- docstring(文档注释)</span><br><span class="line">  一般公共模块、函数、类、方法，都应该写 docstring</span><br><span class="line"></span><br><span class="line">- 注释</span><br><span class="line"></span><br><span class="line">  - “#”号后空一格，段落件用空行分开</span><br></pre></td></tr></table></figure>
+<pre><code># 块注释
+# 块注释
+#
+# 块注释
+# 块注释
+</code></pre>  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">- 文档注释 文档注释以 &quot;&quot;&quot; 开头和结尾, 首行不换行, 如有多行, 末行必需换行</span><br></pre></td></tr></table></figure>
+<h1 id="coding-utf-8"><a href="#coding-utf-8" class="headerlink" title="-- coding: utf-8 --"></a>-<em>- coding: utf-8 -</em>-</h1><p>  “””Example docstrings.</p>
+<p>  This module demonstrates documentation as specified by the <code>Google Python
+  Style Guide</code>_. Docstrings may extend over multiple lines. Sections are created<br>  with a section header and a colon followed by a block of indented text.</p>
+<p>  Example:</p>
+<pre><code>Examples can be given using either the ``Example`` or ``Examples``
+sections. Sections support any reStructuredText formatting, including
+literal blocks::
+
+    $ python example_google.py
+</code></pre><p>  Section breaks are created by resuming unindented text. Section breaks<br>  are also implicitly created anytime a new section starts.<br>  “””</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">- 命名规范</span><br><span class="line"></span><br><span class="line">  - 模块</span><br><span class="line">    模块名一般小写</span><br></pre></td></tr></table></figure>
+<pre><code># 正确的模块名
+import decoder
+import html_parser
+
+# 不推荐的模块名
+import Decoder
+</code></pre>  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">- 类名</span><br><span class="line">  类名使用驼峰(CamelCase)命名风格，首字母大写，私有类可用一个下划线开头</span><br></pre></td></tr></table></figure>
+<pre><code>class Farm():
+    pass
+
+class AnimalFarm(Farm):
+    pass
+
+class _PrivateFarm(Farm):
+    pass
+</code></pre>  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">  将相关的类和顶级函数放在同一个模块里. 不像 Java, 没必要限制一个类一个模块.</span><br><span class="line"></span><br><span class="line">- 函数</span><br><span class="line">  函数名一律小写，如有多个单词，用下划线隔开</span><br></pre></td></tr></table></figure>
+<pre><code>def run():
+    pass
+
+def run_with_env():
+    pass
+</code></pre>  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">- 变量名</span><br><span class="line">  变量名尽量小写, 如有多个单词，用下划线隔开</span><br></pre></td></tr></table></figure>
+<pre><code>if __name__ == &apos;__main__&apos;:
+    count = 0
+    school_name = &apos;&apos;
+</code></pre>  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">- 常量</span><br><span class="line">  常量采用全大写，如有多个单词，使用下划线隔开</span><br></pre></td></tr></table></figure>
+<pre><code>MAX_CLIENT = 100
+MAX_CONNECTION = 1000
+CONNECTION_TIMEOUT = 600
+</code></pre>  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">## 数据类型</span><br><span class="line"></span><br><span class="line">- Numbers（数字）</span><br><span class="line">  - int（有符号整型）</span><br><span class="line">  - long（长整型[也可以代表八进制和十六进制]）</span><br><span class="line">  - float（浮点型）</span><br><span class="line">  - complex（复数）</span><br><span class="line">- String（字符串）</span><br><span class="line">- List（列表）</span><br><span class="line">- Tuple（元组）</span><br><span class="line">- Dictionary（字典）</span><br><span class="line"></span><br><span class="line">## 语法结构</span><br><span class="line"></span><br><span class="line">- 逻辑运算符</span><br><span class="line"></span><br><span class="line">    以下假设变量 a 为 10, b为 20:</span><br><span class="line"></span><br><span class="line">    | 运算符 | 逻辑表达式 | 描述                                                                    | 实例                    |</span><br><span class="line">    | ------ | ---------- | ----------------------------------------------------------------------- | ----------------------- |</span><br><span class="line">    | and    | x and y    | 布尔&quot;与&quot; - 如果 x 为 False，x and y 返回 False，否则它返回 y 的计算值。 | (a and b) 返回 20。     |</span><br><span class="line">    | or     | x or y     | 布尔&quot;或&quot; - 如果 x 是非 0，它返回 x 的值，否则它返回 y 的计算值。        | (a or b) 返回 10。      |</span><br><span class="line">    | not    | not x      | 布尔&quot;非&quot; - 如果 x 为 True，返回 False 。如果 x 为 False，它返回 True。  | not(a and b) 返回 False |</span><br><span class="line"></span><br><span class="line">    成员运算符</span><br><span class="line"></span><br><span class="line">    | 运算符 | 描述                                                  | 实例                                      |</span><br><span class="line">    | ------ | ----------------------------------------------------- | ----------------------------------------- |</span><br><span class="line">    | in     | 如果在指定的序列中找到值返回True，否则返回False。     | x 在 y序列中 , 如果x在y序列中返回True。   |</span><br><span class="line">    | not in | 如果在指定的序列中没有找到值返回True，否则返回False。 | x 不在 y序列中 , 如果x不在y序列中返回True |</span><br><span class="line"></span><br><span class="line">    身份运算符</span><br><span class="line"></span><br><span class="line">    身份运算符用于比较两个对象的存储单元</span><br><span class="line"></span><br><span class="line">    | 运算符 | 描述                                       | 实例                                                   |</span><br><span class="line">    | ------ | ------------------------------------------ | ------------------------------------------------------ |</span><br><span class="line">    | is     | is是判断两个标识符是不是引用自一个对象     | x is y, 如果 id(x) 等于 id(y) , is 返回结果 1          |</span><br><span class="line">    | is not | is not是判断两个标识符是不是引用自不同对象 | x is not y, 如果 id(x) 不等于 id(y). is not 返回结果 1 |</span><br><span class="line"></span><br><span class="line">- if</span><br><span class="line">- for</span><br><span class="line">- while</span><br><span class="line"></span><br><span class="line">## 变量、函数定义</span><br><span class="line"></span><br><span class="line">变量直接定义</span><br></pre></td></tr></table></figure>
+<p>  a = 3<br>  b = 2</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">函数定义使用def关键字，函数作用域使用缩进表示</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>def fun():<br>    pass<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">函数的参数可以赋以默认值，所以python中不需要函数重载</span><br></pre></td></tr></table></figure></p>
+<p>def fun(param1=”value1”,param2=”value2”):<br>    print(“params is {} and {}”.format(param1,param2))</p>
+<p>fun(param2=”传入的参数2”)</p>
+<p>fun(“传入参数一”,”传入参数二”)</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"># Python 简单爬虫基础</span><br><span class="line"></span><br><span class="line">- python 网络库 urllib</span><br><span class="line">  urllib 是 python 内置的 http 请求库，内置的主要是以下几个模块：</span><br><span class="line"></span><br><span class="line">        urllib.request :请求模块</span><br><span class="line">        urllib.error :异常处理模块</span><br><span class="line">        urllib.parse :url解析模块</span><br><span class="line">        urllib.robotparer :robot.txt解析模块</span><br></pre></td></tr></table></figure>
+<p>  import urllib.request<br>  response = urllib.request.urlopen(‘<a href="http://www.baidu.com&#39;" target="_blank" rel="noopener">http://www.baidu.com&#39;</a>)</p>
+<h1 id="response得到的是网页的内容，bytes类型的数据，需要用utf-8转为字符串格式"><a href="#response得到的是网页的内容，bytes类型的数据，需要用utf-8转为字符串格式" class="headerlink" title="response得到的是网页的内容，bytes类型的数据，需要用utf-8转为字符串格式"></a>response得到的是网页的内容，bytes类型的数据，需要用utf-8转为字符串格式</h1><p>  print(response.read().decode(‘utf-8’))</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>  import urllib.parse<br>  import urllib.request</p>
+<h1 id="传入的data参数需要bytes类型"><a href="#传入的data参数需要bytes类型" class="headerlink" title="传入的data参数需要bytes类型"></a>传入的data参数需要bytes类型</h1><p>  data = bytes(urllib.parse.urlencode({‘word’: ‘hello’}), encoding=’utf8’)<br>  response = urllib.request.urlopen(‘<a href="http://httpbin.org/post&#39;" target="_blank" rel="noopener">http://httpbin.org/post&#39;</a>, data=data)<br>  print(response.read())<br>  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure></p>
+<p>  import urllib.request<br>  import urllib.parse<br>  import urllib.error<br>  import socket</p>
+<p>  #url = ‘<a href="https://python.org/&#39;" target="_blank" rel="noopener">https://python.org/&#39;</a><br>  url = ‘<a href="http://httbin.org/post&#39;" target="_blank" rel="noopener">http://httbin.org/post&#39;</a></p>
+<p>  data = bytes(urllib.parse.urlencode({‘hello’:’world’}),encoding = ‘utf8’)</p>
+<p>  headers = {“User-Agent”:”Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/63.0.3239.132 Safari/537.36”}</p>
+<p>  req = urllib.request.Request(url,headers = headers,data = data,method = ‘POST’)<br>  try:<br>      res = urllib.request.urlopen(req,timeout = 1)<br>      print(res.read().decode(‘utf-8’))<br>      print(‘OJBK’)<br>  except urllib.error.URLError as e:<br>      if isinstance(e.reason,socket.timeout):<br>          print(‘TIMEOUT’)<br>  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br><span class="line">190</span><br><span class="line">191</span><br><span class="line">192</span><br><span class="line">193</span><br><span class="line">194</span><br><span class="line">195</span><br><span class="line">196</span><br><span class="line">197</span><br><span class="line">198</span><br><span class="line">199</span><br><span class="line">200</span><br><span class="line">201</span><br><span class="line">202</span><br><span class="line">203</span><br><span class="line">204</span><br><span class="line">205</span><br><span class="line">206</span><br><span class="line">207</span><br><span class="line">208</span><br><span class="line">209</span><br><span class="line">210</span><br><span class="line">211</span><br><span class="line">212</span><br><span class="line">213</span><br><span class="line">214</span><br><span class="line">215</span><br><span class="line">216</span><br><span class="line">217</span><br><span class="line">218</span><br><span class="line">219</span><br><span class="line">220</span><br><span class="line">221</span><br><span class="line">222</span><br><span class="line">223</span><br><span class="line">224</span><br><span class="line">225</span><br><span class="line">226</span><br><span class="line">227</span><br><span class="line">228</span><br><span class="line">229</span><br><span class="line">230</span><br><span class="line">231</span><br><span class="line">232</span><br><span class="line">233</span><br><span class="line">234</span><br><span class="line">235</span><br><span class="line">236</span><br><span class="line">237</span><br><span class="line">238</span><br><span class="line">239</span><br><span class="line">240</span><br><span class="line">241</span><br><span class="line">242</span><br><span class="line">243</span><br><span class="line">244</span><br><span class="line">245</span><br><span class="line">246</span><br><span class="line">247</span><br><span class="line">248</span><br><span class="line">249</span><br><span class="line">250</span><br><span class="line">251</span><br><span class="line">252</span><br><span class="line">253</span><br><span class="line">254</span><br><span class="line">255</span><br><span class="line">256</span><br><span class="line">257</span><br><span class="line">258</span><br><span class="line">259</span><br><span class="line">260</span><br><span class="line">261</span><br><span class="line">262</span><br><span class="line">263</span><br><span class="line">264</span><br><span class="line">265</span><br><span class="line">266</span><br><span class="line">267</span><br><span class="line">268</span><br><span class="line">269</span><br><span class="line">270</span><br><span class="line">271</span><br><span class="line">272</span><br><span class="line">273</span><br><span class="line">274</span><br><span class="line">275</span><br><span class="line">276</span><br><span class="line">277</span><br><span class="line">278</span><br><span class="line">279</span><br><span class="line">280</span><br><span class="line">281</span><br><span class="line">282</span><br><span class="line">283</span><br><span class="line">284</span><br><span class="line">285</span><br><span class="line">286</span><br><span class="line">287</span><br><span class="line">288</span><br><span class="line">289</span><br><span class="line">290</span><br><span class="line">291</span><br><span class="line">292</span><br><span class="line">293</span><br><span class="line">294</span><br><span class="line">295</span><br><span class="line">296</span><br><span class="line">297</span><br><span class="line">298</span><br><span class="line">299</span><br><span class="line">300</span><br><span class="line">301</span><br><span class="line">302</span><br><span class="line">303</span><br><span class="line">304</span><br><span class="line">305</span><br><span class="line">306</span><br><span class="line">307</span><br><span class="line">308</span><br><span class="line">309</span><br><span class="line">310</span><br><span class="line">311</span><br><span class="line">312</span><br><span class="line">313</span><br><span class="line">314</span><br><span class="line">315</span><br><span class="line">316</span><br><span class="line">317</span><br><span class="line">318</span><br><span class="line">319</span><br><span class="line">320</span><br><span class="line">321</span><br><span class="line">322</span><br><span class="line">323</span><br><span class="line">324</span><br><span class="line">325</span><br><span class="line">326</span><br><span class="line">327</span><br><span class="line">328</span><br><span class="line">329</span><br><span class="line">330</span><br><span class="line">331</span><br><span class="line">332</span><br><span class="line">333</span><br><span class="line">334</span><br><span class="line">335</span><br><span class="line">336</span><br><span class="line">337</span><br><span class="line">338</span><br><span class="line">339</span><br><span class="line">340</span><br><span class="line">341</span><br><span class="line">342</span><br><span class="line">343</span><br><span class="line">344</span><br><span class="line">345</span><br><span class="line">346</span><br><span class="line">347</span><br><span class="line">348</span><br><span class="line">349</span><br><span class="line">350</span><br><span class="line">351</span><br><span class="line">352</span><br><span class="line">353</span><br><span class="line">354</span><br><span class="line">355</span><br><span class="line">356</span><br><span class="line">357</span><br><span class="line">358</span><br><span class="line">359</span><br><span class="line">360</span><br><span class="line">361</span><br><span class="line">362</span><br><span class="line">363</span><br><span class="line">364</span><br><span class="line">365</span><br><span class="line">366</span><br><span class="line">367</span><br><span class="line">368</span><br><span class="line">369</span><br><span class="line">370</span><br><span class="line">371</span><br><span class="line">372</span><br><span class="line">373</span><br><span class="line">374</span><br><span class="line">375</span><br><span class="line">376</span><br><span class="line">377</span><br><span class="line">378</span><br><span class="line">379</span><br><span class="line">380</span><br><span class="line">381</span><br><span class="line">382</span><br><span class="line">383</span><br><span class="line">384</span><br><span class="line">385</span><br><span class="line">386</span><br><span class="line">387</span><br><span class="line">388</span><br><span class="line">389</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">## Python 网络库 requests</span><br><span class="line"></span><br><span class="line">  发送请求</span><br><span class="line">  使用 Requests 发送网络请求非常简单。</span><br><span class="line"></span><br><span class="line">  一开始要导入 Requests 模块：</span><br><span class="line"></span><br><span class="line">  &gt; &gt; &gt; import requests</span><br><span class="line">  &gt; &gt; &gt; 然后，尝试获取某个网页。本例子中，我们来获取 Github 的公共时间线：</span><br><span class="line"></span><br><span class="line">  &gt; &gt; &gt; r = requests.get(&apos;https://api.github.com/events&apos;)</span><br><span class="line">  &gt; &gt; &gt; 现在，我们有一个名为 r 的 Response 对象。我们可以从这个对象中获取所有我们想要的信息。</span><br><span class="line"></span><br><span class="line">  Requests 简便的 API 意味着所有 HTTP 请求类型都是显而易见的。例如，你可以这样发送一个 HTTP POST 请求：</span><br><span class="line"></span><br><span class="line">  &gt; &gt; &gt; r = requests.post(&apos;http://httpbin.org/post&apos;, data = &#123;&apos;key&apos;:&apos;value&apos;&#125;)</span><br><span class="line">  &gt; &gt; &gt; 漂亮，对吧？那么其他 HTTP 请求类型：PUT，DELETE，HEAD 以及 OPTIONS 又是如何的呢？都是一样的简单：</span><br><span class="line"></span><br><span class="line">  &gt; &gt; &gt; r = requests.put(&apos;http://httpbin.org/put&apos;, data = &#123;&apos;key&apos;:&apos;value&apos;&#125;)</span><br><span class="line">  &gt; &gt; &gt; r = requests.delete(&apos;http://httpbin.org/delete&apos;)</span><br><span class="line">  &gt; &gt; &gt; r = requests.head(&apos;http://httpbin.org/get&apos;)</span><br><span class="line">  &gt; &gt; &gt; r = requests.options(&apos;http://httpbin.org/get&apos;)</span><br><span class="line">  &gt; &gt; &gt; 都很不错吧，但这也仅是 Requests 的冰山一角呢。</span><br><span class="line"></span><br><span class="line">  传递 URL 参数</span><br><span class="line">  你也许经常想为 URL 的查询字符串(query string)传递某种数据。如果你是手工构建 URL，那么数据会以键/值对的形式置于 URL 中，跟在一个问号的后面。例如， httpbin.org/get?key=val。 Requests 允许你使用 params 关键字参数，以一个字符串字典来提供这些参数。举例来说，如果你想传递 key1=value1 和 key2=value2 到 httpbin.org/get ，那么你可以使用如下代码：</span><br><span class="line"></span><br><span class="line">  &gt; &gt; &gt; payload = &#123;&apos;key1&apos;: &apos;value1&apos;, &apos;key2&apos;: &apos;value2&apos;&#125;</span><br><span class="line">  &gt; &gt; &gt; r = requests.get(&quot;http://httpbin.org/get&quot;, params=payload)</span><br><span class="line">  &gt; &gt; &gt; 通过打印输出该 URL，你能看到 URL 已被正确编码：</span><br><span class="line"></span><br><span class="line">  &gt; &gt; &gt; print(r.url)</span><br><span class="line">  &gt; &gt; &gt; http://httpbin.org/get?key2=value2&amp;key1=value1</span><br><span class="line">  &gt; &gt; &gt; 注意字典里值为 None 的键都不会被添加到 URL 的查询字符串里。</span><br><span class="line"></span><br><span class="line">  你还可以将一个列表作为值传入：</span><br><span class="line"></span><br><span class="line">  &gt; &gt; &gt; payload = &#123;&apos;key1&apos;: &apos;value1&apos;, &apos;key2&apos;: [&apos;value2&apos;, &apos;value3&apos;]&#125;</span><br><span class="line"></span><br><span class="line">  &gt; &gt; &gt; r = requests.get(&apos;http://httpbin.org/get&apos;, params=payload)</span><br><span class="line">  &gt; &gt; &gt; print(r.url)</span><br><span class="line">  &gt; &gt; &gt; http://httpbin.org/get?key1=value1&amp;key2=value2&amp;key2=value3</span><br><span class="line">  &gt; &gt; &gt; 响应内容</span><br><span class="line">  &gt; &gt; &gt; 我们能读取服务器响应的内容。再次以 GitHub 时间线为例：</span><br><span class="line"></span><br><span class="line">  &gt; &gt; &gt; import requests</span><br><span class="line">  &gt; &gt; &gt; r = requests.get(&apos;https://api.github.com/events&apos;)</span><br><span class="line">  &gt; &gt; &gt; r.text</span><br><span class="line">  &gt; &gt; &gt; u&apos;[&#123;&quot;repository&quot;:&#123;&quot;open_issues&quot;:0,&quot;url&quot;:&quot;https://github.com/...</span><br><span class="line">  &gt; &gt; &gt; Requests 会自动解码来自服务器的内容。大多数 unicode 字符集都能被无缝地解码。</span><br><span class="line"></span><br><span class="line">  请求发出后，Requests 会基于 HTTP 头部对响应的编码作出有根据的推测。当你访问 r.text 之时，Requests 会使用其推测的文本编码。你可以找出 Requests 使用了什么编码，并且能够使用 r.encoding 属性来改变它：</span><br><span class="line"></span><br><span class="line">  &gt; &gt; &gt; r.encoding</span><br><span class="line">  &gt; &gt; &gt; &apos;utf-8&apos;</span><br><span class="line">  &gt; &gt; &gt; r.encoding = &apos;ISO-8859-1&apos;</span><br><span class="line">  &gt; &gt; &gt; 如果你改变了编码，每当你访问 r.text ，Request 都将会使用 r.encoding 的新值。你可能希望在使用特殊逻辑计算出文本的编码的情况下来修改编码。比如 HTTP 和 XML 自身可以指定编码。这样的话，你应该使用 r.content 来找到编码，然后设置 r.encoding 为相应的编码。这样就能使用正确的编码解析 r.text 了。</span><br><span class="line"></span><br><span class="line">  在你需要的情况下，Requests 也可以使用定制的编码。如果你创建了自己的编码，并使用 codecs 模块进行注册，你就可以轻松地使用这个解码器名称作为 r.encoding 的值， 然后由 Requests 来为你处理编码。</span><br><span class="line"></span><br><span class="line">  二进制响应内容</span><br><span class="line">  你也能以字节的方式访问请求响应体，对于非文本请求：</span><br><span class="line"></span><br><span class="line">  &gt; &gt; &gt; r.content</span><br><span class="line">  &gt; &gt; &gt; b&apos;[&#123;&quot;repository&quot;:&#123;&quot;open_issues&quot;:0,&quot;url&quot;:&quot;https://github.com/...</span><br><span class="line">  &gt; &gt; &gt; Requests 会自动为你解码 gzip 和 deflate 传输编码的响应数据。</span><br><span class="line"></span><br><span class="line">  例如，以请求返回的二进制数据创建一张图片，你可以使用如下代码：</span><br><span class="line"></span><br><span class="line">  &gt; &gt; &gt; from PIL import Image</span><br><span class="line">  &gt; &gt; &gt; from io import BytesIO</span><br><span class="line"></span><br><span class="line">  &gt; &gt; &gt; i = Image.open(BytesIO(r.content))</span><br><span class="line">  &gt; &gt; &gt; JSON 响应内容</span><br><span class="line">  &gt; &gt; &gt; Requests 中也有一个内置的 JSON 解码器，助你处理 JSON 数据：</span><br><span class="line"></span><br><span class="line">  &gt; &gt; &gt; import requests</span><br><span class="line"></span><br><span class="line">  &gt; &gt; &gt; r = requests.get(&apos;https://api.github.com/events&apos;)</span><br><span class="line">  &gt; &gt; &gt; r.json()</span><br><span class="line">  &gt; &gt; &gt; [&#123;u&apos;repository&apos;: &#123;u&apos;open_issues&apos;: 0, u&apos;url&apos;: &apos;https://github.com/...</span><br><span class="line">  &gt; &gt; &gt; 如果 JSON 解码失败， r.json() 就会抛出一个异常。例如，响应内容是 401 (Unauthorized)，尝试访问 r.json() 将会抛出 ValueError: No JSON object could be decoded 异常。</span><br><span class="line"></span><br><span class="line">  需要注意的是，成功调用 r.json() 并**不**意味着响应的成功。有的服务器会在失败的响应中包含一个 JSON 对象（比如 HTTP 500 的错误细节）。这种 JSON 会被解码返回。要检查请求是否成功，请使用 r.raise_for_status() 或者检查 r.status_code 是否和你的期望相同。</span><br><span class="line"></span><br><span class="line">  原始响应内容</span><br><span class="line">  在罕见的情况下，你可能想获取来自服务器的原始套接字响应，那么你可以访问 r.raw。 如果你确实想这么干，那请你确保在初始请求中设置了 stream=True。具体你可以这么做：</span><br><span class="line"></span><br><span class="line">  &gt; &gt; &gt; r = requests.get(&apos;https://api.github.com/events&apos;, stream=True)</span><br><span class="line">  &gt; &gt; &gt; r.raw</span><br><span class="line">  &gt; &gt; &gt; &lt;requests.packages.urllib3.response.HTTPResponse object at 0x101194810&gt;</span><br><span class="line">  &gt; &gt; &gt; r.raw.read(10)</span><br><span class="line">  &gt; &gt; &gt; &apos;\x1f\x8b\x08\x00\x00\x00\x00\x00\x00\x03&apos;</span><br><span class="line">  &gt; &gt; &gt; 但一般情况下，你应该以下面的模式将文本流保存到文件：</span><br><span class="line"></span><br><span class="line">  with open(filename, &apos;wb&apos;) as fd:</span><br><span class="line">  for chunk in r.iter_content(chunk_size):</span><br><span class="line">  fd.write(chunk)</span><br><span class="line">  使用 Response.iter_content 将会处理大量你直接使用 Response.raw 不得不处理的。 当流下载时，上面是优先推荐的获取内容方式。 Note that chunk_size can be freely adjusted to a number that may better fit your use cases.</span><br><span class="line"></span><br><span class="line">  定制请求头</span><br><span class="line">  如果你想为请求添加 HTTP 头部，只要简单地传递一个 dict 给 headers 参数就可以了。</span><br><span class="line"></span><br><span class="line">  例如，在前一个示例中我们没有指定 content-type:</span><br><span class="line"></span><br><span class="line">  &gt; &gt; &gt; url = &apos;https://api.github.com/some/endpoint&apos;</span><br><span class="line">  &gt; &gt; &gt; headers = &#123;&apos;user-agent&apos;: &apos;my-app/0.0.1&apos;&#125;</span><br><span class="line"></span><br><span class="line">  &gt; &gt; &gt; r = requests.get(url, headers=headers)</span><br><span class="line">  &gt; &gt; &gt; 注意: 定制 header 的优先级低于某些特定的信息源，例如：</span><br><span class="line"></span><br><span class="line">  如果在 .netrc 中设置了用户认证信息，使用 headers= 设置的授权就不会生效。而如果设置了 auth= 参数，`.netrc` 的设置就无效了。</span><br><span class="line">  如果被重定向到别的主机，授权 header 就会被删除。</span><br><span class="line">  代理授权 header 会被 URL 中提供的代理身份覆盖掉。</span><br><span class="line">  在我们能判断内容长度的情况下，header 的 Content-Length 会被改写。</span><br><span class="line">  更进一步讲，Requests 不会基于定制 header 的具体情况改变自己的行为。只不过在最后的请求中，所有的 header 信息都会被传递进去。</span><br><span class="line"></span><br><span class="line">  注意: 所有的 header 值必须是 string、bytestring 或者 unicode。尽管传递 unicode header 也是允许的，但不建议这样做。</span><br><span class="line"></span><br><span class="line">  更加复杂的 POST 请求</span><br><span class="line">  通常，你想要发送一些编码为表单形式的数据——非常像一个 HTML 表单。要实现这个，只需简单地传递一个字典给 data 参数。你的数据字典在发出请求时会自动编码为表单形式：</span><br><span class="line"></span><br><span class="line">  &gt; &gt; &gt; payload = &#123;&apos;key1&apos;: &apos;value1&apos;, &apos;key2&apos;: &apos;value2&apos;&#125;</span><br><span class="line"></span><br><span class="line">  &gt; &gt; &gt; r = requests.post(&quot;http://httpbin.org/post&quot;, data=payload)</span><br><span class="line">  &gt; &gt; &gt; print(r.text)</span><br><span class="line">  &gt; &gt; &gt; &#123;</span><br><span class="line">  &gt; &gt; &gt; ...</span><br><span class="line">  &gt; &gt; &gt; &quot;form&quot;: &#123;</span><br><span class="line"></span><br><span class="line">      &quot;key2&quot;: &quot;value2&quot;,</span><br><span class="line">      &quot;key1&quot;: &quot;value1&quot;</span><br><span class="line"></span><br><span class="line">  &#125;,</span><br><span class="line">  ...</span><br><span class="line">  &#125;</span><br><span class="line">  你还可以为 data 参数传入一个元组列表。在表单中多个元素使用同一 key 的时候，这种方式尤其有效：</span><br><span class="line"></span><br><span class="line">  &gt; &gt; &gt; payload = ((&apos;key1&apos;, &apos;value1&apos;), (&apos;key1&apos;, &apos;value2&apos;))</span><br><span class="line">  &gt; &gt; &gt; r = requests.post(&apos;http://httpbin.org/post&apos;, data=payload)</span><br><span class="line">  &gt; &gt; &gt; print(r.text)</span><br><span class="line">  &gt; &gt; &gt; &#123;</span><br><span class="line">  &gt; &gt; &gt; ...</span><br><span class="line">  &gt; &gt; &gt; &quot;form&quot;: &#123;</span><br><span class="line"></span><br><span class="line">      &quot;key1&quot;: [</span><br><span class="line">      &quot;value1&quot;,</span><br><span class="line">      &quot;value2&quot;</span><br><span class="line">      ]</span><br><span class="line"></span><br><span class="line">  &#125;,</span><br><span class="line">  ...</span><br><span class="line">  &#125;</span><br><span class="line">  很多时候你想要发送的数据并非编码为表单形式的。如果你传递一个 string 而不是一个 dict，那么数据会被直接发布出去。</span><br><span class="line"></span><br><span class="line">  例如，Github API v3 接受编码为 JSON 的 POST/PATCH 数据：</span><br><span class="line"></span><br><span class="line">  &gt; &gt; &gt; import json</span><br><span class="line"></span><br><span class="line">  &gt; &gt; &gt; url = &apos;https://api.github.com/some/endpoint&apos;</span><br><span class="line">  &gt; &gt; &gt; payload = &#123;&apos;some&apos;: &apos;data&apos;&#125;</span><br><span class="line"></span><br><span class="line">  &gt; &gt; &gt; r = requests.post(url, data=json.dumps(payload))</span><br><span class="line">  &gt; &gt; &gt; 此处除了可以自行对 dict 进行编码，你还可以使用 json 参数直接传递，然后它就会被自动编码。这是 2.4.2 版的新加功能：</span><br><span class="line"></span><br><span class="line">  &gt; &gt; &gt; url = &apos;https://api.github.com/some/endpoint&apos;</span><br><span class="line">  &gt; &gt; &gt; payload = &#123;&apos;some&apos;: &apos;data&apos;&#125;</span><br><span class="line"></span><br><span class="line">  &gt; &gt; &gt; r = requests.post(url, json=payload)</span><br><span class="line">  &gt; &gt; &gt; POST 一个多部分编码(Multipart-Encoded)的文件</span><br><span class="line">  &gt; &gt; &gt; Requests 使得上传多部分编码文件变得很简单：</span><br><span class="line"></span><br><span class="line">  &gt; &gt; &gt; url = &apos;http://httpbin.org/post&apos;</span><br><span class="line">  &gt; &gt; &gt; files = &#123;&apos;file&apos;: open(&apos;report.xls&apos;, &apos;rb&apos;)&#125;</span><br><span class="line"></span><br><span class="line">  &gt; &gt; &gt; r = requests.post(url, files=files)</span><br><span class="line">  &gt; &gt; &gt; r.text</span><br><span class="line">  &gt; &gt; &gt; &#123;</span><br><span class="line">  &gt; &gt; &gt; ...</span><br><span class="line">  &gt; &gt; &gt; &quot;files&quot;: &#123;</span><br><span class="line"></span><br><span class="line">      &quot;file&quot;: &quot;&lt;censored...binary...data&gt;&quot;</span><br><span class="line"></span><br><span class="line">  &#125;,</span><br><span class="line">  ...</span><br><span class="line">  &#125;</span><br><span class="line">  你可以显式地设置文件名，文件类型和请求头：</span><br><span class="line"></span><br><span class="line">  &gt; &gt; &gt; url = &apos;http://httpbin.org/post&apos;</span><br><span class="line">  &gt; &gt; &gt; files = &#123;&apos;file&apos;: (&apos;report.xls&apos;, open(&apos;report.xls&apos;, &apos;rb&apos;), &apos;application/vnd.ms-excel&apos;, &#123;&apos;Expires&apos;: &apos;0&apos;&#125;)&#125;</span><br><span class="line"></span><br><span class="line">  &gt; &gt; &gt; r = requests.post(url, files=files)</span><br><span class="line">  &gt; &gt; &gt; r.text</span><br><span class="line">  &gt; &gt; &gt; &#123;</span><br><span class="line">  &gt; &gt; &gt; ...</span><br><span class="line">  &gt; &gt; &gt; &quot;files&quot;: &#123;</span><br><span class="line"></span><br><span class="line">      &quot;file&quot;: &quot;&lt;censored...binary...data&gt;&quot;</span><br><span class="line"></span><br><span class="line">  &#125;,</span><br><span class="line">  ...</span><br><span class="line">  &#125;</span><br><span class="line">  如果你想，你也可以发送作为文件来接收的字符串：</span><br><span class="line"></span><br><span class="line">  &gt; &gt; &gt; url = &apos;http://httpbin.org/post&apos;</span><br><span class="line">  &gt; &gt; &gt; files = &#123;&apos;file&apos;: (&apos;report.csv&apos;, &apos;some,data,to,send\nanother,row,to,send\n&apos;)&#125;</span><br><span class="line"></span><br><span class="line">  &gt; &gt; &gt; r = requests.post(url, files=files)</span><br><span class="line">  &gt; &gt; &gt; r.text</span><br><span class="line">  &gt; &gt; &gt; &#123;</span><br><span class="line">  &gt; &gt; &gt; ...</span><br><span class="line">  &gt; &gt; &gt; &quot;files&quot;: &#123;</span><br><span class="line"></span><br><span class="line">      &quot;file&quot;: &quot;some,data,to,send\\nanother,row,to,send\\n&quot;</span><br><span class="line"></span><br><span class="line">  &#125;,</span><br><span class="line">  ...</span><br><span class="line">  &#125;</span><br><span class="line">  如果你发送一个非常大的文件作为 multipart/form-data 请求，你可能希望将请求做成数据流。默认下 requests 不支持, 但有个第三方包 requests-toolbelt 是支持的。你可以阅读 toolbelt 文档 来了解使用方法。</span><br><span class="line"></span><br><span class="line">  在一个请求中发送多文件参考 高级用法 一节。</span><br><span class="line"></span><br><span class="line">  警告</span><br><span class="line">  我们强烈建议你用二进制模式(binary mode)打开文件。这是因为 Requests 可能会试图为你提供 Content-Length header，在它这样做的时候，这个值会被设为文件的字节数（bytes）。如果用文本模式(text mode)打开文件，就可能会发生错误。</span><br><span class="line"></span><br><span class="line">  响应状态码</span><br><span class="line">  我们可以检测响应状态码：</span><br><span class="line"></span><br><span class="line">  &gt; &gt; &gt; r = requests.get(&apos;http://httpbin.org/get&apos;)</span><br><span class="line">  &gt; &gt; &gt; r.status_code</span><br><span class="line">  &gt; &gt; &gt; 200</span><br><span class="line">  &gt; &gt; &gt; 为方便引用，Requests 还附带了一个内置的状态码查询对象：</span><br><span class="line"></span><br><span class="line">  &gt; &gt; &gt; r.status_code == requests.codes.ok</span><br><span class="line">  &gt; &gt; &gt; True</span><br><span class="line">  &gt; &gt; &gt; 如果发送了一个错误请求(一个 4XX 客户端错误，或者 5XX 服务器错误响应)，我们可以通过 Response.raise_for_status() 来抛出异常：</span><br><span class="line"></span><br><span class="line">  &gt; &gt; &gt; bad_r = requests.get(&apos;http://httpbin.org/status/404&apos;)</span><br><span class="line">  &gt; &gt; &gt; bad_r.status_code</span><br><span class="line">  &gt; &gt; &gt; 404</span><br><span class="line"></span><br><span class="line">  &gt; &gt; &gt; bad_r.raise_for_status()</span><br><span class="line">  &gt; &gt; &gt; Traceback (most recent call last):</span><br><span class="line">  &gt; &gt; &gt; File &quot;requests/models.py&quot;, line 832, in raise_for_status</span><br><span class="line"></span><br><span class="line">      raise http_error</span><br><span class="line"></span><br><span class="line">  requests.exceptions.HTTPError: 404 Client Error</span><br><span class="line">  但是，由于我们的例子中 r 的 status_code 是 200 ，当我们调用 raise_for_status() 时，得到的是：</span><br><span class="line"></span><br><span class="line">  &gt; &gt; &gt; r.raise_for_status()</span><br><span class="line">  &gt; &gt; &gt; None</span><br><span class="line">  &gt; &gt; &gt; 一切都挺和谐哈。</span><br><span class="line"></span><br><span class="line">  响应头</span><br><span class="line">  我们可以查看以一个 Python 字典形式展示的服务器响应头：</span><br><span class="line"></span><br><span class="line">  &gt; &gt; &gt; r.headers</span><br><span class="line">  &gt; &gt; &gt; &#123;</span><br><span class="line"></span><br><span class="line">      &apos;content-encoding&apos;: &apos;gzip&apos;,</span><br><span class="line">      &apos;transfer-encoding&apos;: &apos;chunked&apos;,</span><br><span class="line">      &apos;connection&apos;: &apos;close&apos;,</span><br><span class="line">      &apos;server&apos;: &apos;nginx/1.0.4&apos;,</span><br><span class="line">      &apos;x-runtime&apos;: &apos;148ms&apos;,</span><br><span class="line">      &apos;etag&apos;: &apos;&quot;e1ca502697e5c9317743dc078f67693f&quot;&apos;,</span><br><span class="line">      &apos;content-type&apos;: &apos;application/json&apos;</span><br><span class="line"></span><br><span class="line">  &#125;</span><br><span class="line">  但是这个字典比较特殊：它是仅为 HTTP 头部而生的。根据 RFC 2616， HTTP 头部是大小写不敏感的。</span><br><span class="line"></span><br><span class="line">  因此，我们可以使用任意大写形式来访问这些响应头字段：</span><br><span class="line"></span><br><span class="line">  &gt; &gt; &gt; r.headers[&apos;Content-Type&apos;]</span><br><span class="line">  &gt; &gt; &gt; &apos;application/json&apos;</span><br><span class="line"></span><br><span class="line">  &gt; &gt; &gt; r.headers.get(&apos;content-type&apos;)</span><br><span class="line">  &gt; &gt; &gt; &apos;application/json&apos;</span><br><span class="line">  &gt; &gt; &gt; 它还有一个特殊点，那就是服务器可以多次接受同一 header，每次都使用不同的值。但 Requests 会将它们合并，这样它们就可以用一个映射来表示出来，参见 RFC 7230:</span><br><span class="line"></span><br><span class="line">  A recipient MAY combine multiple header fields with the same field name into one &quot;field-name: field-value&quot; pair, without changing the semantics of the message, by appending each subsequent field value to the combined field value in order, separated by a comma.</span><br><span class="line"></span><br><span class="line">  接收者可以合并多个相同名称的 header 栏位，把它们合为一个 &quot;field-name: field-value&quot; 配对，将每个后续的栏位值依次追加到合并的栏位值中，用逗号隔开即可，这样做不会改变信息的语义。</span><br><span class="line"></span><br><span class="line">  Cookie</span><br><span class="line">  如果某个响应中包含一些 cookie，你可以快速访问它们：</span><br><span class="line"></span><br><span class="line">  &gt; &gt; &gt; url = &apos;http://example.com/some/cookie/setting/url&apos;</span><br><span class="line">  &gt; &gt; &gt; r = requests.get(url)</span><br><span class="line"></span><br><span class="line">  &gt; &gt; &gt; r.cookies[&apos;example_cookie_name&apos;]</span><br><span class="line">  &gt; &gt; &gt; &apos;example_cookie_value&apos;</span><br><span class="line">  &gt; &gt; &gt; 要想发送你的 cookies 到服务器，可以使用 cookies 参数：</span><br><span class="line"></span><br><span class="line">  &gt; &gt; &gt; url = &apos;http://httpbin.org/cookies&apos;</span><br><span class="line">  &gt; &gt; &gt; cookies = dict(cookies_are=&apos;working&apos;)</span><br><span class="line"></span><br><span class="line">  &gt; &gt; &gt; r = requests.get(url, cookies=cookies)</span><br><span class="line">  &gt; &gt; &gt; r.text</span><br><span class="line">  &gt; &gt; &gt; &apos;&#123;&quot;cookies&quot;: &#123;&quot;cookies_are&quot;: &quot;working&quot;&#125;&#125;&apos;</span><br><span class="line">  &gt; &gt; &gt; Cookie 的返回对象为 RequestsCookieJar，它的行为和字典类似，但接口更为完整，适合跨域名跨路径使用。你还可以把 Cookie Jar 传到 Requests 中：</span><br><span class="line"></span><br><span class="line">  &gt; &gt; &gt; jar = requests.cookies.RequestsCookieJar()</span><br><span class="line">  &gt; &gt; &gt; jar.set(&apos;tasty_cookie&apos;, &apos;yum&apos;, domain=&apos;httpbin.org&apos;, path=&apos;/cookies&apos;)</span><br><span class="line">  &gt; &gt; &gt; jar.set(&apos;gross_cookie&apos;, &apos;blech&apos;, domain=&apos;httpbin.org&apos;, path=&apos;/elsewhere&apos;)</span><br><span class="line">  &gt; &gt; &gt; url = &apos;http://httpbin.org/cookies&apos;</span><br><span class="line">  &gt; &gt; &gt; r = requests.get(url, cookies=jar)</span><br><span class="line">  &gt; &gt; &gt; r.text</span><br><span class="line">  &gt; &gt; &gt; &apos;&#123;&quot;cookies&quot;: &#123;&quot;tasty_cookie&quot;: &quot;yum&quot;&#125;&#125;&apos;</span><br><span class="line">  &gt; &gt; &gt; 重定向与请求历史</span><br><span class="line">  &gt; &gt; &gt; 默认情况下，除了 HEAD, Requests 会自动处理所有重定向。</span><br><span class="line"></span><br><span class="line">  可以使用响应对象的 history 方法来追踪重定向。</span><br><span class="line"></span><br><span class="line">  Response.history 是一个 Response 对象的列表，为了完成请求而创建了这些对象。这个对象列表按照从最老到最近的请求进行排序。</span><br><span class="line"></span><br><span class="line">  例如，Github 将所有的 HTTP 请求重定向到 HTTPS：</span><br><span class="line"></span><br><span class="line">  &gt; &gt; &gt; r = requests.get(&apos;http://github.com&apos;)</span><br><span class="line"></span><br><span class="line">  &gt; &gt; &gt; r.url</span><br><span class="line">  &gt; &gt; &gt; &apos;https://github.com/&apos;</span><br><span class="line"></span><br><span class="line">  &gt; &gt; &gt; r.status_code</span><br><span class="line">  &gt; &gt; &gt; 200</span><br><span class="line"></span><br><span class="line">  &gt; &gt; &gt; r.history</span><br><span class="line">  &gt; &gt; &gt; [&lt;Response [301]&gt;]</span><br><span class="line">  &gt; &gt; &gt; 如果你使用的是 GET、OPTIONS、POST、PUT、PATCH 或者 DELETE，那么你可以通过 allow_redirects 参数禁用重定向处理：</span><br><span class="line"></span><br><span class="line">  &gt; &gt; &gt; r = requests.get(&apos;http://github.com&apos;, allow_redirects=False)</span><br><span class="line">  &gt; &gt; &gt; r.status_code</span><br><span class="line">  &gt; &gt; &gt; 301</span><br><span class="line">  &gt; &gt; &gt; r.history</span><br><span class="line">  &gt; &gt; &gt; []</span><br><span class="line">  &gt; &gt; &gt; 如果你使用了 HEAD，你也可以启用重定向：</span><br><span class="line"></span><br><span class="line">  &gt; &gt; &gt; r = requests.head(&apos;http://github.com&apos;, allow_redirects=True)</span><br><span class="line">  &gt; &gt; &gt; r.url</span><br><span class="line">  &gt; &gt; &gt; &apos;https://github.com/&apos;</span><br><span class="line">  &gt; &gt; &gt; r.history</span><br><span class="line">  &gt; &gt; &gt; [&lt;Response [301]&gt;]</span><br><span class="line">  &gt; &gt; &gt; 超时</span><br><span class="line">  &gt; &gt; &gt; 你可以告诉 requests 在经过以 timeout 参数设定的秒数时间之后停止等待响应。基本上所有的生产代码都应该使用这一参数。如果不使用，你的程序可能会永远失去响应：</span><br><span class="line"></span><br><span class="line">  &gt; &gt; &gt; requests.get(&apos;http://github.com&apos;, timeout=0.001)</span><br><span class="line">  &gt; &gt; &gt; Traceback (most recent call last):</span><br><span class="line">  &gt; &gt; &gt; File &quot;&lt;stdin&gt;&quot;, line 1, in &lt;module&gt;</span><br><span class="line">  &gt; &gt; &gt; requests.exceptions.Timeout: HTTPConnectionPool(host=&apos;github.com&apos;, port=80): Request timed out. (timeout=0.001)</span><br><span class="line">  &gt; &gt; &gt; 注意</span><br><span class="line">  &gt; &gt; &gt; timeout 仅对连接过程有效，与响应体的下载无关。 timeout 并不是整个下载响应的时间限制，而是如果服务器在 timeout 秒内没有应答，将会引发一个异常（更精确地说，是在 timeout 秒内没有从基础套接字上接收到任何字节的数据时）If no timeout is specified explicitly, requests do not time out.</span><br><span class="line"></span><br><span class="line">  错误与异常</span><br><span class="line">  遇到网络问题（如：DNS 查询失败、拒绝连接等）时，Requests 会抛出一个 ConnectionError 异常。</span><br><span class="line"></span><br><span class="line">  如果 HTTP 请求返回了不成功的状态码， Response.raise_for_status() 会抛出一个 HTTPError 异常。</span><br><span class="line"></span><br><span class="line">  若请求超时，则抛出一个 Timeout 异常。</span><br><span class="line"></span><br><span class="line">  若请求超过了设定的最大重定向次数，则会抛出一个 TooManyRedirects 异常。</span><br><span class="line"></span><br><span class="line">  所有 Requests 显式抛出的异常都继承自 requests.exceptions.RequestException 。</span><br><span class="line"></span><br><span class="line">## Python 网页解析库 bs4</span><br><span class="line"></span><br><span class="line">  下面的一段 HTML 代码将作为例子被多次用到.这是 爱丽丝梦游仙境的 的一段内容(以后内容中简称为 爱丽丝 的文档):</span><br><span class="line"></span><br><span class="line">  html_doc = &quot;&quot;&quot;</span><br><span class="line">  \&lt;html&gt;\&lt;head&gt;\&lt;title&gt;The Dormouse&apos;s story\&lt;/title&gt;\&lt;/head&gt;</span><br><span class="line">  \&lt;body&gt;</span><br><span class="line">  \&lt;p class=&quot;title&quot;&gt;\&lt;b&gt;The Dormouse&apos;s story\&lt;/b&gt;\&lt;/p&gt;</span><br><span class="line"></span><br><span class="line">  \&lt;p class=&quot;story&quot;&gt;Once upon a time there were three little sisters; and their names were</span><br><span class="line">  \&lt;a href=&quot;http://example.com/elsie&quot; class=&quot;sister&quot; id=&quot;link1&quot;&gt;Elsie\&lt;/a&gt;,</span><br><span class="line">  \&lt;a href=&quot;http://example.com/lacie&quot; class=&quot;sister&quot; id=&quot;link2&quot;&gt;Lacie\&lt;/a&gt; and</span><br><span class="line">  \&lt;a href=&quot;http://example.com/tillie&quot; class=&quot;sister&quot; id=&quot;link3&quot;&gt;Tillie\&lt;/a&gt;;</span><br><span class="line">  and they lived at the bottom of a well.\&lt;/p&gt;</span><br><span class="line"></span><br><span class="line">  \&lt;p class=&quot;story&quot;&gt;...\&lt;/p&gt;</span><br><span class="line">  &quot;&quot;&quot;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    使用BeautifulSoup解析这段代码,能够得到一个 BeautifulSoup 的对象,并能按照标准的缩进格式的结构输出:</span><br><span class="line"></span><br><span class="line">    from bs4 import BeautifulSoup</span><br><span class="line">    soup = BeautifulSoup(html_doc)</span><br><span class="line"></span><br><span class="line">    print(soup.prettify())</span><br></pre></td></tr></table></figure></p>
+<pre><code># &lt;html&gt;
+#  &lt;head&gt;
+#   &lt;title&gt;
+#    The Dormouse&apos;s story
+#   &lt;/title&gt;
+#  &lt;/head&gt;
+#  &lt;body&gt;
+#   &lt;p class=&quot;title&quot;&gt;
+#    &lt;b&gt;
+#     The Dormouse&apos;s story
+#    &lt;/b&gt;
+#   &lt;/p&gt;
+#   &lt;p class=&quot;story&quot;&gt;
+#    Once upon a time there were three little sisters; and their names were
+#    &lt;a class=&quot;sister&quot; href=&quot;http://example.com/elsie&quot; id=&quot;link1&quot;&gt;
+#     Elsie
+#    &lt;/a&gt;
+#    ,
+#    &lt;a class=&quot;sister&quot; href=&quot;http://example.com/lacie&quot; id=&quot;link2&quot;&gt;
+#     Lacie
+#    &lt;/a&gt;
+#    and
+#    &lt;a class=&quot;sister&quot; href=&quot;http://example.com/tillie&quot; id=&quot;link2&quot;&gt;
+#     Tillie
+#    &lt;/a&gt;
+#    ; and they lived at the bottom of a well.
+#   &lt;/p&gt;
+#   &lt;p class=&quot;story&quot;&gt;
+#    ...
+#   &lt;/p&gt;
+#  &lt;/body&gt;
+# &lt;/html&gt;
+
+几个简单的浏览结构化数据的方法:
+soup.title
+# &lt;title&gt;The Dormouse&apos;s story&lt;/title&gt;
+
+soup.title.name
+# u&apos;title&apos;
+
+soup.title.string
+# u&apos;The Dormouse&apos;s story&apos;
+
+soup.title.parent.name
+# u&apos;head&apos;
+
+soup.p
+# &lt;p class=&quot;title&quot;&gt;&lt;b&gt;The Dormouse&apos;s story&lt;/b&gt;&lt;/p&gt;
+
+soup.p[&apos;class&apos;]
+# u&apos;title&apos;
+
+soup.a
+# &lt;a class=&quot;sister&quot; href=&quot;http://example.com/elsie&quot; id=&quot;link1&quot;&gt;Elsie&lt;/a&gt;
+
+soup.find_all(&apos;a&apos;)
+# [&lt;a class=&quot;sister&quot; href=&quot;http://example.com/elsie&quot; id=&quot;link1&quot;&gt;Elsie&lt;/a&gt;,
+#  &lt;a class=&quot;sister&quot; href=&quot;http://example.com/lacie&quot; id=&quot;link2&quot;&gt;Lacie&lt;/a&gt;,
+#  &lt;a class=&quot;sister&quot; href=&quot;http://example.com/tillie&quot; id=&quot;link3&quot;&gt;Tillie&lt;/a&gt;]
+
+soup.find(id=&quot;link3&quot;)
+# &lt;a class=&quot;sister&quot; href=&quot;http://example.com/tillie&quot; id=&quot;link3&quot;&gt;Tillie&lt;/a&gt;
+
+从文档中找到所有&lt;a&gt;标签的链接:
+
+for link in soup.find_all(&apos;a&apos;):
+    print(link.get(&apos;href&apos;))
+    # http://example.com/elsie
+    # http://example.com/lacie
+    # http://example.com/tillie
+从文档中获取所有文字内容:
+
+print(soup.get_text())
+# The Dormouse&apos;s story
+#
+# The Dormouse&apos;s story
+#
+# Once upon a time there were three little sisters; and their names were
+# Elsie,
+# Lacie and
+# Tillie;
+# and they lived at the bottom of a well.
+#
+# ...
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">## Python 网页解析库 lxml</span><br><span class="line"></span><br><span class="line">菜鸟xpath</span><br><span class="line">&gt; http://www.runoob.com/xpath/xpath-tutorial.html</span><br></pre></td></tr></table></figure>
+</code></pre><p>#引入html解析库<br>from lxml import html</p>
+<p>#解析为dom树结构<br>htm = html.fromstring(html_doc)</p>
+<p>#利用xpath获取目标数据，返回的是一个list结果集<br>htm.xpath(xpath_str)<br><code>`</code></p>
+<h1 id="python-实战"><a href="#python-实战" class="headerlink" title="python 实战"></a>python 实战</h1>
+    </div>
+  </div>
+  
+    <div class="copy-right">
+      <div class="markdown-body">
+        <blockquote>
+        
+        
+          本文作者 : 对六 <br>
+        
+        原文链接 : <a href>http://duiliuliu.github.io/2018/03/13/python学习/</a><br>
+        版权声明 : 本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> 许可协议。转载请注明出处！
+        </blockquote>
+      </div>
+    </div>
+  
+  
+  
+    <div class="social-share" style="margin-top: -2rem" data-wechat-qrcode-title="<p>微信扫一扫</p>" data-wechat-qrcode-helper="<p>微信右上角, 扫一扫分享</p>" data-sites="douban, google, facebook, twitter">
+  <span style="color: #6b7487; font-size: 1.4rem;">分享到: </span>
+</div>
+<script src="https://cdn.bootcss.com/social-share.js/1.0.16/js/social-share.min.js" async></script>
+  
+
+  
+    <div id="reward">
+  
+    <p id="reward-meta">你我共勉！</p>
+  
+  <button id="reward-btn">
+    
+    <span>共勉</span>
+  </button>
+  <div id="reward-qrcode">
+    
+      <div class="reward-qrcode--container">
+        <img class="qrcode-img" src="/images/wechat.png" alt="微信">
+        <p class="qrcode-meta">微信</p>
+      </div>
+    
+      <div class="reward-qrcode--container">
+        <img class="qrcode-img" src="/images/alipay.png" alt="支付宝">
+        <p class="qrcode-meta">支付宝</p>
+      </div>
+    
+  </div>
+
+</div>
+
+<script>
+  (() => {
+    let button = document.querySelector('#reward-btn'),
+      qrcode = document.querySelector('#reward-qrcode'),
+      display = false;
+    
+    button.addEventListener('click', () => {
+      qrcode.style.display = display ? 'none' : 'block'
+      display = !display
+    }, false)
+  })()
+</script>
+  
+
+  <div class="article-footer">
+    <div class="article-meta pull-left">
+      <span>
+        
+          <i class="iconfont icon-06tags"></i>标签: 
+          
+          <span class="span--tag">
+            <a href="/tags/python/">
+              #python
+            </a>
+          </span>
+          
+        
+      </span>
+    </div>
+    <div class="article-meta pull-right">
+    </div>
+  </div>
+</div>
+
+
+  <aside id="sidebar">
+    <p id="sidebar-header"></p>
+    <ol id="sidebar-toc"></ol>
+    <img id="sidebar-icon">
+  </aside>
+  <script async>setTimeout(generateToc, 10);</script>
+
+
+  <nav class="post-navigation">
+    
+    
+      <div class="nav-next">
+        下一篇:
+        <a href="/2018/04/01/2018-04-01-python3网络爬虫开发实战_笔记/" target="_self">python3网络爬虫开发实战_笔记</a>
+        <i class="iconfont icon-next"></i>
+      </div>
+    
+  </nav>
+
+  
+    <a href="#comment" class="comment-anchor"></a>
+<div class="comment-title"><i class="iconfont icon-footprint"></i> 留下足迹 <i class="iconfont icon-footprint"></i></div>
+<div id="vcomments"></div>
+
+<script defer>
+  if( true ) {
+    let path = getRealPath()
+    new Valine({
+      el: "#vcomments",
+      appId: "VPNwETUGMJnwGnY6Pc7GaVna-gzGzoHsz",
+      appKey: "niJbsuSCKuploWnG8Qvbgb5P",
+      notify: false,
+      verify: false,
+      avatar: "robohash",
+      placeholder: "正确填写邮箱, 才能及时收到回复哦♪(^∇^*)",
+      path
+    });
+  }
+</script>
+   
+
+  
+    <script defer>
+const valineAPI = (() => {
+  try {
+    AV.init("VPNwETUGMJnwGnY6Pc7GaVna-gzGzoHsz", "niJbsuSCKuploWnG8Qvbgb5P");
+  } catch(error) {}
+  const isExist = (identity) => {
+    identity = identity || getRealPath();
+    let query = new AV.Query('Timer');
+    return new Promise((resolve, reject) => {
+      query.equalTo("identity", identity);
+      query.find().then(results => {
+        resolve(results.length > 0);
+      }, error => reject(error));
+    })
+  }
+
+  const _get = (identity) => {
+    let query = null;
+    if(identity && identity instanceof Array){
+      let querys = [];
+      for(let i = 0; i < identity.length; ++i) {
+        querys[i] = new AV.Query('Timer');
+        querys[i].equalTo('identity', identity[i]);
+      }
+      query = AV.Query.or.apply(null ,querys);
+    } else {
+      identity = identity || getRealPath();
+      query = new AV.Query("Timer");
+      query.equalTo("identity", identity);
+    }
+
+    return new Promise((resolve, reject) => {
+      query.find()
+      .then(results => resolve(results))
+      .catch(error => reject(error))
+    })
+  }
+
+  const create = (identity) => {
+    identity = identity || getRealPath();
+    return new Promise((resolve, reject) => {
+      let Todo = AV.Object.extend('Timer');
+      let todo = new Todo();
+      todo.set("times", 1);
+      todo.set("identity", identity);
+      todo.save().then(res => resolve(true), error => reject(error));
+    })
+  }
+
+  const update = (identity) => {
+    identity = identity || getRealPath();
+    return new Promise((resolve, reject) => {
+      let query = new AV.Query('Timer');
+      query.equalTo("identity", identity);
+      query.find().then(todos => {
+        todos.forEach(todo => {
+          todo.set("times", todo.attributes.times + 1);
+        });
+        return AV.Object.saveAll(todos);
+      }).then(todos => resolve(true), error => reject(error));
+    })
+  }
+
+  return {
+    isExist,
+    _get,
+    update,
+    create
+  }
+})()
+
+const calcAndWriteTimes = () => {
+  let isPost = true;
+
+  let timerAllDOM = document.querySelectorAll(".article-timer");
+
+  if(isPost) {
+    let identity = timerAllDOM[0].getAttribute("data-identity");
+    valineAPI.isExist(identity)
+    .then(exist => {
+      if(exist) {
+        return valineAPI.update(identity);
+      }
+      return new Promise(resolve => resolve(true));
+    })
+    .then( succuess => valineAPI._get(identity))
+    .then( result => timerAllDOM[0].innerText = result[0].attributes.times)
+    .catch(error => console.log(error.message))
+    return ;
+  }
+
+  let timerDOMCache = {};
+
+  for(let timerDOM of timerAllDOM) {
+    let identity = timerDOM.getAttribute("data-identity");
+    if(timerDOMCache.hasOwnProperty(identity)){
+      timerDOMCache[identity].dom.push(timerDOM);
+    }else{
+      timerDOMCache[identity] = {
+        dom: [timerDOM],
+        times: undefined
+      };
+    }
+  }
+
+  let identities = Object.keys(timerDOMCache);
+  valineAPI._get(identities).then(results => {
+    for(let result of results) {
+      let {identity, times} = result.attributes;
+      timerDOMCache[identity].times = times;
+      timerDOMCache[identity].dom.map(item => item.innerText = times);
+    }
+    for(let identity of identities) {
+      if(timerDOMCache[identity].times){
+        continue;
+      }
+      timerDOMCache[identity].dom.map(item => item.innerText = 1);
+      valineAPI.create(identity);
+    }
+  }).catch(error => console.log(error.message))
+}
+
+if(true){
+  calcAndWriteTimes();
+}
+</script>
+   
+
+</div>
+
+
+      <footer>
+  <p class="site-info">
+    博客已运行<span id="time-to-now"></span><span class="my-face">(●'◡'●)ﾉ♥</span>
+    <br>
+    Created By <a href="https://hexo.io/zh-cn/">Hexo</a> | Theme - <a href="https://github.com/dongyuanxin/theme-bmw">BMW</a>  
+    <br>
+    
+      <a href="https://www.google.com/analytics/" target="_blank">Google Analytics</a> 提供网站统计服务.  <br> 
+    
+  </p>
+</footer>
+
+
+
+<script>
+const timeToNowDOM = document.querySelector("#time-to-now");
+const startTimestamp = new Date(2018, 1, 10).getTime();
+
+const updateTimeStr = () => {
+  let offset = parseInt(
+      (new Date().getTime() - startTimestamp) / 1000,
+      10
+    ),
+    day = Math.floor(offset / 86400),
+    hour = Math.floor((offset % 86400) / 3600),
+    minute = Math.floor(((offset % 86400) % 3600) / 60),
+    second = Math.floor(((offset % 86400) % 3600) % 60);
+  timeToNowDOM.innerHTML =
+    day + "天" + hour + "小时" + minute + "分钟" + second + "秒";
+  setTimeout(updateTimeStr, 500);
+}
+
+setTimeout(updateTimeStr, 500);
+</script>
+
+
+      <div class="back-to-top hidden">
+  <span>
+    <i class="iconfont icon-60"></i><span></span>%
+  </span>
+</div>
+
+<script>
+const updateIconToTop = percent => {
+  let dom = document.querySelector(".back-to-top span span");
+  dom.innerText = percent;
+  if(percent < 1) {
+    document.querySelector(".back-to-top").className = "back-to-top hidden";
+  } else {
+    document.querySelector(".back-to-top").className = "back-to-top";
+  }
+}
+
+const handleScoll = () => {
+  let isRunning = false;
+  return () => {
+    if (isRunning) return;
+    isRunning = true;
+    window.requestAnimationFrame(timestamp => {
+      let scrollTop =
+          document.documentElement.scrollTop || document.body.scrollTop,
+        scrollHeight =
+          document.documentElement.scrollHeight ||
+          document.body.scrollHeight,
+        clientHeight =
+          document.documentElement.clientHeight ||
+          document.body.clientHeight;
+      isRunning = false;
+      if (scrollTop <= 1) {
+        updateIconToTop(0);
+        return;
+      }
+      if (scrollTop + clientHeight >= scrollHeight) {
+        updateIconToTop(100);
+      } else {
+        updateIconToTop(parseInt(
+          100 * scrollTop / (scrollHeight - clientHeight),
+          10
+        ));
+      }
+    });
+  };
+}
+
+const backToTop = () => {
+  let scrollTop =
+      document.documentElement.scrollTop || document.body.scrollTop,
+    delay = 10,
+    time = 200;
+  if (scrollTop <= 20) {
+    document.documentElement.scrollTop = 0;
+    document.body.scrollTop = 0;
+    return;
+  }
+  let step = Math.ceil(scrollTop * delay / time);
+  let timer = setInterval(() => {
+    scrollTop =
+      document.documentElement.scrollTop || document.body.scrollTop;
+    if (scrollTop - step <= 0) {
+      document.documentElement.scrollTop = 0;
+      document.body.scrollTop = 0;
+      clearInterval(timer);
+    } else {
+      document.documentElement.scrollTop = scrollTop - step;
+      document.body.scrollTop = scrollTop - step;
+    }
+  }, delay);
+}
+
+document.addEventListener("scroll", handleScoll(), false);
+
+document.querySelector(".back-to-top").addEventListener("click", backToTop, false);
+
+</script>
+
+    </div>
+
+    
+      <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML" async></script>
+<script>
+  (() => {
+    const mathjaxConfig = {
+      showProcessingMessages: false, //关闭js加载过程信息
+      messageStyle: "none", //不显示信息
+      jax: ["input/TeX", "output/HTML-CSS"],
+      tex2jax: {
+        inlineMath: [["$", "$"], ["\\(", "\\)"]], //行内公式选择符
+        displayMath: [["$$", "$$"], ["\\[", "\\]"]], //段内公式选择符
+        skipTags: ["script", "noscript", "style", "textarea", "pre", "code", "a"] //避开某些标签
+      },
+      "HTML-CSS": {
+        availableFonts: ["STIX", "TeX"], //可选字体
+        showMathMenu: false //关闭右击菜单显示
+      }
+    }
+
+    let mathjaxInterval = setInterval(() => {
+      if(!window.MathJax){
+        return;
+      }
+      window.MathJax.Hub.Config(mathjaxConfig)
+      window.MathJax.Hub.Queue(["Typeset", MathJax.Hub, document.getElementById('app')])
+
+      clearInterval(mathjaxInterval)
+    }, 10)    
+  })()
+</script>
+    
+
+    <script src="https://cdn.bootcss.com/fancybox/3.5.2/jquery.fancybox.min.js" async></script>
+<script async>
+  let fancyTimer = setInterval(function(){
+    if(!window.$){
+      return;
+    }
+    $(document).ready(function() {
+      $(".post img").each(function () {
+        if($(this).parent().get(0).tagName.toLowerCase() === "a") {
+          return;
+        }
+        // $(this).attr("data-fancybox", "gallery"); // if you add 'data-fancybox', img will display after showed
+        var element = document.createElement("a");
+        $(element).attr("data-fancybox", "gallery");
+        $(element).attr("href", $(this).attr("src"));
+        $(this).wrap(element);
+      });
+      
+      clearInterval(fancyTimer);
+    });
+  }, 10);
+</script>
+
+    
+  </body>
+
+</html>
