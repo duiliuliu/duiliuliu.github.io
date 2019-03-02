@@ -8,7 +8,8 @@
         <category>项目</category>
       </categories>
       <tags>
-        <tag>项目 问题</tag>
+        <tag>项目</tag>
+        <tag>问题</tag>
       </tags>
   </entry>
   <entry>
@@ -19,7 +20,8 @@
         <category>Java</category>
       </categories>
       <tags>
-        <tag>Java joda</tag>
+        <tag>Java</tag>
+        <tag>joda</tag>
       </tags>
   </entry>
   <entry>
@@ -30,7 +32,8 @@
         <category>Java</category>
       </categories>
       <tags>
-        <tag>Java mybatis</tag>
+        <tag>Java</tag>
+        <tag>mybatis</tag>
       </tags>
   </entry>
   <entry>
@@ -41,7 +44,8 @@
         <category>工具</category>
       </categories>
       <tags>
-        <tag>gitlab CI/CD 自动化</tag>
+        <tag>gitlab CI/CD</tag>
+        <tag>自动化</tag>
       </tags>
   </entry>
   <entry>
@@ -52,7 +56,8 @@
         <category>存储</category>
       </categories>
       <tags>
-        <tag>搜索引擎 elasticserach</tag>
+        <tag>搜索引擎</tag>
+        <tag>elasticserach</tag>
       </tags>
   </entry>
   <entry>
@@ -72,9 +77,13 @@
     <content type="text"><![CDATA[jest与enzyme对react项目自动化测试 基于jest和enzyme的特性，我们对一个react项目，可以进行以下几类测试。 组件UI测试snapshot可以测试到组件的渲染结果是否符合预期，预期就是指你上一次录入保存的结果，toMatchSnapshot方法会去帮你对比这次将要生成的结构与上次的区别 12345678910111213it(&apos;use arrowPointAtCenter&apos;, () =&gt; &#123; const wrapper = render( &lt;div&gt; &lt;Tooltip placement=&quot;topLeft&quot; title=&quot;Prompt Text&quot;&gt; &lt;Button&gt;Align edge / 边缘对齐&lt;/Button&gt; &lt;/Tooltip&gt; &lt;Tooltip placement=&quot;topLeft&quot; title=&quot;Prompt Text&quot; arrowPointAtCenter&gt; &lt;Button&gt;Arrow points to center / 箭头指向中心&lt;/Button&gt; &lt;/Tooltip&gt; &lt;/div&gt; ); expect(toJson(wrapper)).toMatchSnapshot();&#125;) dom交互测试: jest+enzymeenzyme有3种渲染方式：render、mount、shallow render采用的是第三方库Cheerio的渲染，渲染结果是普通的html结构，对于snapshot使用render比较合适。 shallow和mount对组件的渲染结果不是html的dom树，而是react树，如果你chrome装了react devtool插件，他的渲染结果就是react devtool tab下查看的组件结构，而render函数的结果是element tab下查看的结果。 这些只是渲染结果上的差别，更大的差别是shallow和mount的结果是个被封装的ReactWrapper，可以进行多种操作，譬如find()、parents()、children()等选择器进行元素查找；state()、props()进行数据查找，setState()、setprops()操作数据；simulate()模拟事件触发。 shallow只渲染当前组件，只能能对当前组件做断言；mount会渲染当前组件以及所有子组件，对所有子组件也可以做上述操作。一般交互测试都会关心到子组件，我使用的都是mount。但是mount耗时更长，内存啥的也都占用的更多，如果没必要操作和断言子组件，可以使用shallow。 api .find(selector): 查找当前包装器的呈现树中与提供的选择器匹配的每个节点。.get(index)：返回指定位置的子组件的DOM节点.at(index)：返回指定位置的子组件.first()：返回第一个子组件.last()：返回最后一个子组件.type()：返回当前组件的类型.text()：返回当前组件的文本内容.html()：返回当前组件的HTML代码形式.props()：返回根组件的所有属性.prop(key)：返回根组件的指定属性.state([key])：返回根组件的状态.setState(nextState)：设置根组件的状态.setProps(nextProps)：设置根组件的属性 shallowshallow方法就是官方的shallow rendering的封装。 Shallow renders the current node and returns a shallow wrapper around it. NOTE: can only be called on wrapper of a single node. 1234567891011121314151617181920function Bar() &#123; return ( &lt;div&gt; &lt;div className=&quot;in-bar&quot; /&gt; &lt;/div&gt; );&#125;function Foo() &#123; return ( &lt;div&gt; &lt;Bar /&gt; &lt;/div&gt; );&#125;const wrapper = shallow(&lt;Foo /&gt;);expect(wrapper.find(&apos;.in-bar&apos;)).to.have.length(0);expect(wrapper.find(Bar)).to.have.length(1);expect(wrapper.find(Bar).shallow().find(&apos;.in-bar&apos;)).to.have.length(1); renderrender方法将React组件渲染成静态的HTML字符串，然后分析这段HTML代码的结构，返回一个对象。它跟shallow方法非常像，主要的不同是采用了第三方HTML解析库Cheerio，它返回的是一个Cheerio实例对象。 12345678import &#123;render&#125; from &apos;enzyme&apos;;describe(&apos;Enzyme Render&apos;, function () &#123; it(&apos;Todo item should not have todo-done class&apos;, function () &#123; let app = render(&lt;App/&gt;); expect(app.find(&apos;.todo-done&apos;).length).to.equal(0); &#125;);&#125;); mount A method that re-mounts the component. This can be used to simulate a component going through an unmount/mount lifecycle. mount方法用于将react组件加载为真实的dom节点。 语法: function mount(node, options) { return new _ReactWrapper2‘default’;} 12345678910import &#123;mount&#125; from &apos;enzyme&apos;;describe(&apos;Enzyme Mount&apos;, function () &#123; it(&apos;Delete Todo&apos;, function () &#123; let app = mount(&lt;App/&gt;); let todoLength = app.find(&apos;li&apos;).length; app.find(&apos;button.delete&apos;).at(0).simulate(&apos;click&apos;); expect(app.find(&apos;li&apos;).length).to.equal(todoLength - 1); &#125;);&#125;); 上面代码中，find方法返回一个对象，包含了所有符合条件的子组件。在它的基础上，at方法返回指定位置的子组件，simulate方法就在这个组件上触发某种行为。 对于交互事件的测试使用simulate进行模拟事件 12345678910111213141516171819202122232425class Foo extends React.Component &#123; constructor(props) &#123; super(props); this.state = &#123; count: 0 &#125;; &#125; render() &#123; const &#123; count &#125; = this.state; return ( &lt;div&gt; &lt;div className=&#123;`clicks-$&#123;count&#125;`&#125;&gt; &#123;count&#125; clicks &lt;/div&gt; &lt;a href=&quot;url&quot; onClick=&#123;() =&gt; &#123; this.setState(&#123; count: count + 1 &#125;); &#125;&#125;&gt; Increment &lt;/a&gt; &lt;/div&gt; ); &#125;&#125;const wrapper = mount(&lt;Foo /&gt;);expect(wrapper.find(&apos;.clicks-0&apos;).length).to.equal(1);wrapper.find(&apos;a&apos;).simulate(&apos;click&apos;);expect(wrapper.find(&apos;.clicks-1&apos;).length).to.equal(1); 也可以对相应的组件属性的事件显示触发 1234567891011121314151617it(&quot;named &apos;SnackBar&apos; exists&quot;, () =&gt; &#123; const event = &#123; keyCode: 1 &#125;; enzymeWrapper .find(&quot;Button[label=&apos;DOWNLOAD&apos;]&quot;) .props() .onClick(event); enzymeWrapper .find(&quot;ConfirmDialog&quot;) .props() .onClickConfirm(); enzymeWrapper .find(&quot;Snackbar&quot;) .props() .onRequestClose(); &#125;); 上述代码测试了点击download按钮后会弹出一个dialog，其中有确定按钮(onClickConfirm)与取消按钮(onClickCancel),点击确定后，文件download之后会有message的反馈。]]></content>
       <categories>
         <category>JavaScript</category>
+        <category>测试</category>
       </categories>
       <tags>
-        <tag>测试 jest enzyme React</tag>
+        <tag>测试</tag>
+        <tag>jest</tag>
+        <tag>enzyme</tag>
+        <tag>React</tag>
       </tags>
   </entry>
   <entry>
@@ -83,9 +92,13 @@
     <content type="text"><![CDATA[react单元测试框架Jest入门示例 ##前段测试框架jest mathers 匹配器 相等toBe(value)： 比较数字、字符串toEqual(value)： 比较对象、数组toBeNull() 仅当expect返回对象为 null时toBeUndefined() 仅当返回为 undefinedtoBeDefined 和上面的刚好相反，对象如果有定义时 123456789101112131415it(&quot;should 3 plus 3 is 6&quot;, =&gt; &#123; expect(3+3).toBe(6);&#125;)test(&apos;two plus two&apos;, () =&gt; &#123; const value = 2 + 2; expect(value).toBeGreaterThan(3); expect(value).toBeGreaterThanOrEqual(3.5); expect(value).toBeLessThan(5); expect(value).toBeLessThanOrEqual(4.5); // toBe and toEqual are equivalent for numbers expect(value).toBe(4); expect(value).toEqual(4);&#125;); 需要注意的是对于float类型的浮点数计算的时候，需要使用toBeCloseTo而不是 toEqual ，因为避免细微的四舍五入引起额外的问题 12345test(&apos;adding floating point numbers&apos;, () =&gt; &#123; const value = 0.1 + 0.2; //expect(value).toBe(0.3); This won&apos;t work because of rounding error expect(value).toBeCloseTo(0.3); // This works.&#125;); 12345678test(&apos;null&apos;, () =&gt; &#123; const n = null; expect(n).toBeNull(); expect(n).toBeDefined(); expect(n).not.toBeUndefined(); expect(n).not.toBeTruthy(); expect(n).toBeFalsy();&#125;); 包含toHaveProperty(keyPath, value)： 是否有对应的属性toContain(item)： 是否包含对应的值，括号里写上数组、字符串toMatch(regexpOrString)： 括号里写上正则 1234567891011const shoppingList = [ &apos;diapers&apos;, &apos;kleenex&apos;, &apos;trash bags&apos;, &apos;paper towels&apos;, &apos;beer&apos;,];test(&apos;the shopping list has beer on it&apos;, () =&gt; &#123; expect(shoppingList).toContain(&apos;beer&apos;);&#125;); 逻辑toBeTruthy()toBeFalsy()在JavaScript中，有六个falsy值：false，0，’’，null， undefined，和NaN。其他一切都是Truthy。 toBeGreaterThan(number)： 大于toBeLessThan(number)： 小于 取反 not 1234567test(&apos;adding positive numbers is not zero&apos;, () =&gt; &#123; for (let a = 1; a &lt; 10; a++) &#123; for (let b = 1; b &lt; 10; b++) &#123; expect(a + b).not.toBe(0); &#125; &#125;&#125;); 字符型匹配使用toMatch匹配规则，支持正则表达式匹配 1234567test(&apos;there is no I in team&apos;, () =&gt; &#123; expect(&apos;team&apos;).not.toMatch(/I/);&#125;);test(&apos;but there is a &quot;stop&quot; in Christoph&apos;, () =&gt; &#123; expect(&apos;Christoph&apos;).toMatch(/stop/);&#125;); 异常匹配可以用toThrow测试function是否会抛出特定的异常信息 123456789101112function compileAndroidCode() &#123; throw new ConfigError(&apos;you are using the wrong JDK&apos;);&#125;test(&apos;compiling android goes as expected&apos;, () =&gt; &#123; expect(compileAndroidCode).toThrow(); expect(compileAndroidCode).toThrow(ConfigError); // You can also use the exact error message or a regexp expect(compileAndroidCode).toThrow(&apos;you are using the wrong JDK&apos;); expect(compileAndroidCode).toThrow(/JDK/);&#125;); 其他.toBeCalledWith().toHaveBeenCalledWith() 使用.toHaveBeenCalledWith以确保模拟函数被调用的具体参数。 1234567test(&apos;registration applies correctly to orange La Croix&apos;, () =&gt; &#123; const beverage = new LaCroix(&apos;orange&apos;); register(beverage); const f = jest.fn(); applyToAll(f); expect(f).toHaveBeenCalledWith(beverage);&#125;); .toBeCalledTimes(number).toHaveBeenCalledTimes(number).toBeCalled().toHaveBeenCalled().toHaveReturned() 如果你有一个模拟函数，你可以.toHaveReturned用来测试模拟函数成功返回（即，没有抛出错误）至少一次。 1234567test(&apos;drinks returns&apos;, () =&gt; &#123; const drink = jest.fn(() =&gt; true); drink(); expect(drink).toHaveReturned();&#125;); .toHaveReturnedWith(value) 使用.toHaveReturnedWith以确保模拟函数返回的特定值。 12345678test(&apos;drink returns La Croix&apos;, () =&gt; &#123; const beverage = &#123;name: &apos;La Croix&apos;&#125;; const drink = jest.fn(beverage =&gt; beverage.name); drink(beverage); expect(drink).toHaveReturnedWith(&apos;La Croix&apos;);&#125;); 测试函数 同步函数 12345678\\s.jsconst sum = (a,b) =&gt; a + b;\\_test_/s.test.jsimport * as s from &apos;../s&apos;test(&quot;should sum(2,2) is 4&quot;,()=&gt;&#123; except(s.sum(2,2)).toBe(4);&#125;) 异步函数对于异步函数，比如 ajax 请求，测试写法同样容易 待测试文件：client.js 1234567891011121314151617181920212223\\client.jsexport const get = (url, headers = &#123;&#125;) =&gt; &#123; return fetch(url, &#123; method: &apos;GET&apos;, headers: &#123; ...getHeaders(), ...headers &#125; &#125;).then(parseResponse)&#125;\\_test_/client.test.jsimport * as client from &apos;../s&apos;test(&apos;fetch by get method&apos;, async () =&gt; &#123; expect.assertions(1) // 测试使用了一个免费的在线 JSON API const url = &apos;https://jsonip.com/&apos; const data = await get(url) const &#123; about &#125; = data expect(about).toBe(&apos;/about&apos;)&#125;) 测试的生命周期 afterAll(fn, timeout): 当前文件中的所有测试执行完成后执行 fn, 如果 fn 是 promise，jest 会等待 timeout 毫秒，默认 5000 afterEach(fn, timeout): 每个 test 执行完后执行 fn，timeout 含义同上 beforeAll(fn, timeout): 同 afterAll，不同之处在于在所有测试开始前执行 beforeEach(fn, timeout): 同 afterEach，不同之处在于在每个测试开始前执行 1234567891011121314151617181920212223BeforeAll(() =&gt; &#123; console.log(&apos;before all tests to excute !&apos;)&#125;)BeforeEach(() =&gt; &#123;c onsole.log(&apos;before each test !&apos;)&#125;)AfterAll(() =&gt; &#123; console.log(&apos;after all tests to excute !&apos;)&#125;)AfterEach(() =&gt; &#123; console.log(&apos;after each test !&apos;)&#125;)Test(&apos;test lifecycle 01&apos;, () =&gt; &#123; expect(1 + 2).toBe(3)&#125;)Test(&apos;test lifecycle 03&apos;, () =&gt; &#123; expect(2 + 2).toBe(4)&#125;)]]></content>
       <categories>
         <category>JavaScript</category>
+        <category>jest</category>
+        <category>React</category>
       </categories>
       <tags>
-        <tag>测试 jest React</tag>
+        <tag>测试</tag>
+        <tag>jest</tag>
+        <tag>React</tag>
       </tags>
   </entry>
   <entry>
@@ -118,7 +131,7 @@
         <category>JavaScript</category>
       </categories>
       <tags>
-        <tag>笔记 javascript</tag>
+        <tag>javascript</tag>
       </tags>
   </entry>
   <entry>
@@ -140,7 +153,8 @@
         <category>工具</category>
       </categories>
       <tags>
-        <tag>浏览器 工具</tag>
+        <tag>浏览器</tag>
+        <tag>工具</tag>
       </tags>
   </entry>
   <entry>
@@ -151,7 +165,8 @@
         <category>python</category>
       </categories>
       <tags>
-        <tag>python 爬虫 笔记</tag>
+        <tag>python</tag>
+        <tag>爬虫</tag>
       </tags>
   </entry>
   <entry>
