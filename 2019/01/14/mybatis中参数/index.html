@@ -26,12 +26,12 @@
   
   
   
-  <title>Duiliuliu</title>
+  <title>mybatis中参数 | Duiliuliu</title>
 
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
   
-    <meta name="keywords" content="Hexo, theme-bmw">
+    <meta name="keywords" content="Java,Java mybatis,">
   
 
   <script>
@@ -187,771 +187,187 @@
 </script>
 
       
-<div class="container home-index">
-  
-  <div class="post">
-    <h1 class="article-title">
-      <a href="/2019/01/20/更新过程中的查询/">
-        <span>更新过程中的查询</span>
-      </a>
-    </h1>
-    <!-- PC端文章信息 -->
-    <div class="article-top-meta pc-view">
-      <span>
-        发布时间 : 2019-01-20
-      </span>
-    </div>
-    <!-- 移动端文章信息 -->
-    <div class="article-top-meta mobile-view">
-      <span>
-        发布 : 2019-01-20
-      </span>
-      
-        <span>
-        分类 :
-          <a href="/categories/项目/">
-            项目
-          </a>
-        </span>
-      
-      
-        <span>
-          浏览 : <span class="article-timer" data-identity="更新过程中的查询"></span>
-        </span>
-      
-    </div>
-    
-      <div id="更新过程中的查询" style="margin: 4rem 2px -1rem"></div>
-<script async>
-  (function(){
-    let playerTimer = setInterval(function(){
-      if(!window.APlayer){
-        return
-      }
 
-      new APlayer({
-        container: document.getElementById('更新过程中的查询'),
-        theme: '#e96900',
-        listFolded: false,
-        audio: [{"name":"Wonderful U","artist":"出色的你","url":"http://122.228.252.148/amobile.music.tc.qq.com/C4000046g8Z62PJcgW.m4a?guid=8905546682&vkey=8C8DE3445827CB305052472C048D19948CBF55E4AF0CF8C6E32DBDA306A0CFB326B184448785C5B037771FA3F57AB57E81C27EC5C1249F60&uin=0&fromtag=66","cover":"https://y.gtimg.cn/music/photo_new/T002R300x300M000000V9yae4XbyxL.jpg?max_age=2592000"}]
-      });
-      
-      clearInterval(playerTimer)
-    }, 10);
+
+
+
+
+
+
+
+<div class="container post-index">
+
+  
+
+<div class="post">
+  <h1 class="article-title">
+    <span>mybatis中参数</span>
+  </h1>
+  <div class="article-top-meta">
+    <span>
+      发布 : 
+      2019-01-14
+    </span>
+    
+      <span>
+        分类 : 
+          <a href="/categories/Java/">
+            Java
+          </a>
+      </span>
+    
+    
+      <span>
+        浏览 : <span class="article-timer" data-identity="mybatis中参数"></span>
+      </span>
+    
+  </div>
+
+  
+
+  <div class="article-content">
+    <div class="markdown-body">
+      <h1 id="mybatis-中-与"><a href="#mybatis-中-与" class="headerlink" title="mybatis 中#与\$"></a>mybatis 中#与\$</h1><p>这两个都为字符串替换，用来替换变量拼接 SQL.</p>
+<p>一般能用#的就别用$.</p>
+<p>MyBatis排序时使用order by 动态参数时需要注意，用$而不是#</p>
+<h2 id="将传入的数据当做一个字符串处理"><a href="#将传入的数据当做一个字符串处理" class="headerlink" title="#将传入的数据当做一个字符串处理"></a>#将传入的数据当做一个字符串处理</h2><p>#将传入的数据都当成一个字符串，会对自动传入的数据加一个双引号。</p>
+<p>如：<br><code>order by #user_id#</code>，如果传入的值是 111,那么解析成 sql 时的值为 <code>order by &quot;111&quot;</code>, 如果传入的值是 id，则解析成的 sql 为 <code>order by &quot;id&quot;</code>.</p>
+<p>#方式能够很大程度防止sql注入。
+　　</p>
+<h2 id="将传入的数据直接显示生成在-SQL-中"><a href="#将传入的数据直接显示生成在-SQL-中" class="headerlink" title="\$将传入的数据直接显示生成在 SQL 中"></a>\$将传入的数据直接显示生成在 SQL 中</h2><p>\$将传入的数据直接显示生成在sql中。<br>如：<br><code>order by $user_id$</code>，如果传入的值是111,那么解析成sql时的值为<code>order by user_id</code>,  如果传入的值是id，则解析成的sql为<code>order by id</code>.</p>
+<p>#方式能够很大程度防止sql注入。
+　　
+　　</p>
+    </div>
+  </div>
+  
+    <div class="copy-right">
+      <div class="markdown-body">
+        <blockquote>
+        
+        
+          本文作者 : 对六 <br>
+        
+        原文链接 : <a href>http://duiliuliu.github.io/2019/01/14/mybatis中参数/</a><br>
+        版权声明 : 本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> 许可协议。转载请注明出处！
+        </blockquote>
+      </div>
+    </div>
+  
+  
+  
+    <div class="social-share" style="margin-top: -2rem" data-wechat-qrcode-title="<p>微信扫一扫</p>" data-wechat-qrcode-helper="<p>微信右上角, 扫一扫分享</p>" data-sites="douban, google, facebook, twitter">
+  <span style="color: #6b7487; font-size: 1.4rem;">分享到: </span>
+</div>
+<script src="https://cdn.bootcss.com/social-share.js/1.0.16/js/social-share.min.js" async></script>
+  
+
+  
+    <div id="reward">
+  
+    <p id="reward-meta">你我共勉！</p>
+  
+  <button id="reward-btn">
+    
+    <span>共勉</span>
+  </button>
+  <div id="reward-qrcode">
+    
+      <div class="reward-qrcode--container">
+        <img class="qrcode-img" src="/images/wechat.png" alt="微信">
+        <p class="qrcode-meta">微信</p>
+      </div>
+    
+      <div class="reward-qrcode--container">
+        <img class="qrcode-img" src="/images/alipay.png" alt="支付宝">
+        <p class="qrcode-meta">支付宝</p>
+      </div>
+    
+  </div>
+
+</div>
+
+<script>
+  (() => {
+    let button = document.querySelector('#reward-btn'),
+      qrcode = document.querySelector('#reward-qrcode'),
+      display = false;
+    
+    button.addEventListener('click', () => {
+      qrcode.style.display = display ? 'none' : 'block'
+      display = !display
+    }, false)
   })()
 </script>
-    
-    <!-- 文章简介 -->
-    <div class="article-content">
-      <div class="markdown-body article-content--inner" v-html="mdToHtml(psg.summary)">
-        <blockquote>
-<p>记载项目过程中的思考</p>
-</blockquote>
-      </div>
-    </div>
-    <div class="article-footer">
-      <div class="article-meta pull-left">
-        <!-- 分类pc端可见 -->
-        <span class="pc-view">
-          
-            <i class="iconfont icon-tag"></i>分类:
-            <a href="/categories/项目/">
-              项目
-            </a>
-          </span>
-          
-        <span>
-          
-            <i class="iconfont icon-06tags"></i>标签:
-            
-              <span class="span--tag">
-                <a href="/tags/项目-问题/">
-                  #项目 问题
-                </a>
-              </span>
-            
-                    
-        </span>
-      </div>
-      
-        <div class="article-meta pull-right">
-          <span class="pc-view">
-            <i class="iconfont icon-view"></i>浏览: <span class="article-timer" data-identity="更新过程中的查询"></span>
-          </span>
-        </div>
-      
-    </div>
-  </div>
-  
-  <div class="post">
-    <h1 class="article-title">
-      <a href="/2019/01/15/Java时间格式化/">
-        <span>Java 时间格式化</span>
-      </a>
-    </h1>
-    <!-- PC端文章信息 -->
-    <div class="article-top-meta pc-view">
-      <span>
-        发布时间 : 2019-01-15
-      </span>
-    </div>
-    <!-- 移动端文章信息 -->
-    <div class="article-top-meta mobile-view">
-      <span>
-        发布 : 2019-01-15
-      </span>
-      
-        <span>
-        分类 :
-          <a href="/categories/Java/">
-            Java
-          </a>
-        </span>
-      
-      
-        <span>
-          浏览 : <span class="article-timer" data-identity="Java时间格式化"></span>
-        </span>
-      
-    </div>
-    
-    <!-- 文章简介 -->
-    <div class="article-content">
-      <div class="markdown-body article-content--inner" v-html="mdToHtml(psg.summary)">
-        <blockquote>
-<p>对于Java中simpleDateFormat类，在多线程使用中会有隐患，这儿我们推荐使用joda time库，简洁好用无隐患</p>
-</blockquote>
-      </div>
-    </div>
-    <div class="article-footer">
-      <div class="article-meta pull-left">
-        <!-- 分类pc端可见 -->
-        <span class="pc-view">
-          
-            <i class="iconfont icon-tag"></i>分类:
-            <a href="/categories/Java/">
-              Java
-            </a>
-          </span>
-          
-        <span>
-          
-            <i class="iconfont icon-06tags"></i>标签:
-            
-              <span class="span--tag">
-                <a href="/tags/Java-joda/">
-                  #Java joda
-                </a>
-              </span>
-            
-                    
-        </span>
-      </div>
-      
-        <div class="article-meta pull-right">
-          <span class="pc-view">
-            <i class="iconfont icon-view"></i>浏览: <span class="article-timer" data-identity="Java时间格式化"></span>
-          </span>
-        </div>
-      
-    </div>
-  </div>
-  
-  <div class="post">
-    <h1 class="article-title">
-      <a href="/2019/01/14/mybatis中参数/">
-        <span>mybatis中参数</span>
-      </a>
-    </h1>
-    <!-- PC端文章信息 -->
-    <div class="article-top-meta pc-view">
-      <span>
-        发布时间 : 2019-01-14
-      </span>
-    </div>
-    <!-- 移动端文章信息 -->
-    <div class="article-top-meta mobile-view">
-      <span>
-        发布 : 2019-01-14
-      </span>
-      
-        <span>
-        分类 :
-          <a href="/categories/Java/">
-            Java
-          </a>
-        </span>
-      
-      
-        <span>
-          浏览 : <span class="article-timer" data-identity="mybatis中参数"></span>
-        </span>
-      
-    </div>
-    
-    <!-- 文章简介 -->
-    <div class="article-content">
-      <div class="markdown-body article-content--inner" v-html="mdToHtml(psg.summary)">
-        
-      </div>
-    </div>
-    <div class="article-footer">
-      <div class="article-meta pull-left">
-        <!-- 分类pc端可见 -->
-        <span class="pc-view">
-          
-            <i class="iconfont icon-tag"></i>分类:
-            <a href="/categories/Java/">
-              Java
-            </a>
-          </span>
-          
-        <span>
-          
-            <i class="iconfont icon-06tags"></i>标签:
-            
-              <span class="span--tag">
-                <a href="/tags/Java-mybatis/">
-                  #Java mybatis
-                </a>
-              </span>
-            
-                    
-        </span>
-      </div>
-      
-        <div class="article-meta pull-right">
-          <span class="pc-view">
-            <i class="iconfont icon-view"></i>浏览: <span class="article-timer" data-identity="mybatis中参数"></span>
-          </span>
-        </div>
-      
-    </div>
-  </div>
-  
-  <div class="post">
-    <h1 class="article-title">
-      <a href="/2019/01/08/gitlabci自动化打包上传UDF/">
-        <span>gitlabci自动化打包上传UDF</span>
-      </a>
-    </h1>
-    <!-- PC端文章信息 -->
-    <div class="article-top-meta pc-view">
-      <span>
-        发布时间 : 2019-01-08
-      </span>
-    </div>
-    <!-- 移动端文章信息 -->
-    <div class="article-top-meta mobile-view">
-      <span>
-        发布 : 2019-01-08
-      </span>
-      
-        <span>
-        分类 :
-          <a href="/categories/工具/">
-            工具
-          </a>
-        </span>
-      
-      
-        <span>
-          浏览 : <span class="article-timer" data-identity="gitlabci自动化打包上传UDF"></span>
-        </span>
-      
-    </div>
-    
-    <!-- 文章简介 -->
-    <div class="article-content">
-      <div class="markdown-body article-content--inner" v-html="mdToHtml(psg.summary)">
-        <p><img src="/images/飞往杭州.png" alt="飞往杭州"></p>
-<blockquote>
-<p>gitlab-cicd工具，将提交的代码自动化打包并上传到服务器，需要配置docker</p>
-</blockquote>
-      </div>
-    </div>
-    <div class="article-footer">
-      <div class="article-meta pull-left">
-        <!-- 分类pc端可见 -->
-        <span class="pc-view">
-          
-            <i class="iconfont icon-tag"></i>分类:
-            <a href="/categories/工具/">
-              工具
-            </a>
-          </span>
-          
-        <span>
-          
-            <i class="iconfont icon-06tags"></i>标签:
-            
-              <span class="span--tag">
-                <a href="/tags/gitlab-CI-CD-自动化/">
-                  #gitlab CI/CD 自动化
-                </a>
-              </span>
-            
-                    
-        </span>
-      </div>
-      
-        <div class="article-meta pull-right">
-          <span class="pc-view">
-            <i class="iconfont icon-view"></i>浏览: <span class="article-timer" data-identity="gitlabci自动化打包上传UDF"></span>
-          </span>
-        </div>
-      
-    </div>
-  </div>
-  
-  <div class="post">
-    <h1 class="article-title">
-      <a href="/2018/07/25/2018-07-25-elasticsearch入门/">
-        <span>elasticsearch入门</span>
-      </a>
-    </h1>
-    <!-- PC端文章信息 -->
-    <div class="article-top-meta pc-view">
-      <span>
-        发布时间 : 2018-07-25
-      </span>
-    </div>
-    <!-- 移动端文章信息 -->
-    <div class="article-top-meta mobile-view">
-      <span>
-        发布 : 2018-07-25
-      </span>
-      
-        <span>
-        分类 :
-          <a href="/categories/存储/">
-            存储
-          </a>
-        </span>
-      
-      
-        <span>
-          浏览 : <span class="article-timer" data-identity="2018-07-25-elasticsearch入门"></span>
-        </span>
-      
-    </div>
-    
-    <!-- 文章简介 -->
-    <div class="article-content">
-      <div class="markdown-body article-content--inner" v-html="mdToHtml(psg.summary)">
-        <blockquote>
-<p>本文仅是记录入门</p>
-</blockquote>
-      </div>
-    </div>
-    <div class="article-footer">
-      <div class="article-meta pull-left">
-        <!-- 分类pc端可见 -->
-        <span class="pc-view">
-          
-            <i class="iconfont icon-tag"></i>分类:
-            <a href="/categories/存储/">
-              存储
-            </a>
-          </span>
-          
-        <span>
-          
-            <i class="iconfont icon-06tags"></i>标签:
-            
-              <span class="span--tag">
-                <a href="/tags/搜索引擎-elasticserach/">
-                  #搜索引擎 elasticserach
-                </a>
-              </span>
-            
-                    
-        </span>
-      </div>
-      
-        <div class="article-meta pull-right">
-          <span class="pc-view">
-            <i class="iconfont icon-view"></i>浏览: <span class="article-timer" data-identity="2018-07-25-elasticsearch入门"></span>
-          </span>
-        </div>
-      
-    </div>
-  </div>
-  
-  <div class="post">
-    <h1 class="article-title">
-      <a href="/2018/07/23/Springboot中使用线程池/">
-        <span>Springboot 中使用线程池</span>
-      </a>
-    </h1>
-    <!-- PC端文章信息 -->
-    <div class="article-top-meta pc-view">
-      <span>
-        发布时间 : 2018-07-23
-      </span>
-    </div>
-    <!-- 移动端文章信息 -->
-    <div class="article-top-meta mobile-view">
-      <span>
-        发布 : 2018-07-23
-      </span>
-      
-        <span>
-        分类 :
-          <a href="/categories/SpringBoot/">
-            SpringBoot
-          </a>
-        </span>
-      
-      
-        <span>
-          浏览 : <span class="article-timer" data-identity="Springboot中使用线程池"></span>
-        </span>
-      
-    </div>
-    
-    <!-- 文章简介 -->
-    <div class="article-content">
-      <div class="markdown-body article-content--inner" v-html="mdToHtml(psg.summary)">
-        <blockquote>
-<p>在spring boot项目中需要使用多线程去请求数据封装为excel二进制返回，做博文以记录</p>
-</blockquote>
-      </div>
-    </div>
-    <div class="article-footer">
-      <div class="article-meta pull-left">
-        <!-- 分类pc端可见 -->
-        <span class="pc-view">
-          
-            <i class="iconfont icon-tag"></i>分类:
-            <a href="/categories/SpringBoot/">
-              SpringBoot
-            </a>
-          </span>
-          
-        <span>
-          
-            <i class="iconfont icon-06tags"></i>标签:
-            
-              <span class="span--tag">
-                <a href="/tags/SpringBoot/">
-                  #SpringBoot
-                </a>
-              </span>
-            
-                    
-        </span>
-      </div>
-      
-        <div class="article-meta pull-right">
-          <span class="pc-view">
-            <i class="iconfont icon-view"></i>浏览: <span class="article-timer" data-identity="Springboot中使用线程池"></span>
-          </span>
-        </div>
-      
-    </div>
-  </div>
-  
-  <div class="post">
-    <h1 class="article-title">
-      <a href="/2018/07/07/2018-07-07-jest与enzyme对react项目自动化测试/">
-        <span>jest与enzyme对react项目自动化测试</span>
-      </a>
-    </h1>
-    <!-- PC端文章信息 -->
-    <div class="article-top-meta pc-view">
-      <span>
-        发布时间 : 2018-07-07
-      </span>
-    </div>
-    <!-- 移动端文章信息 -->
-    <div class="article-top-meta mobile-view">
-      <span>
-        发布 : 2018-07-07
-      </span>
-      
-        <span>
-        分类 :
-          <a href="/categories/JavaScript/">
-            JavaScript
-          </a>
-        </span>
-      
-      
-        <span>
-          浏览 : <span class="article-timer" data-identity="2018-07-07-jest与enzyme对react项目自动化测试"></span>
-        </span>
-      
-    </div>
-    
-    <!-- 文章简介 -->
-    <div class="article-content">
-      <div class="markdown-body article-content--inner" v-html="mdToHtml(psg.summary)">
-        
-      </div>
-    </div>
-    <div class="article-footer">
-      <div class="article-meta pull-left">
-        <!-- 分类pc端可见 -->
-        <span class="pc-view">
-          
-            <i class="iconfont icon-tag"></i>分类:
-            <a href="/categories/JavaScript/">
-              JavaScript
-            </a>
-          </span>
-          
-        <span>
-          
-            <i class="iconfont icon-06tags"></i>标签:
-            
-              <span class="span--tag">
-                <a href="/tags/测试-jest-enzyme-React/">
-                  #测试 jest enzyme React
-                </a>
-              </span>
-            
-                    
-        </span>
-      </div>
-      
-        <div class="article-meta pull-right">
-          <span class="pc-view">
-            <i class="iconfont icon-view"></i>浏览: <span class="article-timer" data-identity="2018-07-07-jest与enzyme对react项目自动化测试"></span>
-          </span>
-        </div>
-      
-    </div>
-  </div>
-  
-  <div class="post">
-    <h1 class="article-title">
-      <a href="/2018/07/01/2018-06-31-自动化测试jest/">
-        <span>自动化测试jest</span>
-      </a>
-    </h1>
-    <!-- PC端文章信息 -->
-    <div class="article-top-meta pc-view">
-      <span>
-        发布时间 : 2018-07-01
-      </span>
-    </div>
-    <!-- 移动端文章信息 -->
-    <div class="article-top-meta mobile-view">
-      <span>
-        发布 : 2018-07-01
-      </span>
-      
-        <span>
-        分类 :
-          <a href="/categories/JavaScript/">
-            JavaScript
-          </a>
-        </span>
-      
-      
-        <span>
-          浏览 : <span class="article-timer" data-identity="2018-06-31-自动化测试jest"></span>
-        </span>
-      
-    </div>
-    
-    <!-- 文章简介 -->
-    <div class="article-content">
-      <div class="markdown-body article-content--inner" v-html="mdToHtml(psg.summary)">
-        <blockquote>
-<p>react单元测试框架Jest入门示例</p>
-</blockquote>
-      </div>
-    </div>
-    <div class="article-footer">
-      <div class="article-meta pull-left">
-        <!-- 分类pc端可见 -->
-        <span class="pc-view">
-          
-            <i class="iconfont icon-tag"></i>分类:
-            <a href="/categories/JavaScript/">
-              JavaScript
-            </a>
-          </span>
-          
-        <span>
-          
-            <i class="iconfont icon-06tags"></i>标签:
-            
-              <span class="span--tag">
-                <a href="/tags/测试-jest-React/">
-                  #测试 jest React
-                </a>
-              </span>
-            
-                    
-        </span>
-      </div>
-      
-        <div class="article-meta pull-right">
-          <span class="pc-view">
-            <i class="iconfont icon-view"></i>浏览: <span class="article-timer" data-identity="2018-06-31-自动化测试jest"></span>
-          </span>
-        </div>
-      
-    </div>
-  </div>
-  
-  <div class="post">
-    <h1 class="article-title">
-      <a href="/2018/06/26/2018-06-26-javascript-export用法/">
-        <span>javascript-export、import用法</span>
-      </a>
-    </h1>
-    <!-- PC端文章信息 -->
-    <div class="article-top-meta pc-view">
-      <span>
-        发布时间 : 2018-06-26
-      </span>
-    </div>
-    <!-- 移动端文章信息 -->
-    <div class="article-top-meta mobile-view">
-      <span>
-        发布 : 2018-06-26
-      </span>
-      
-        <span>
-        分类 :
-          <a href="/categories/JavaScript/">
-            JavaScript
-          </a>
-        </span>
-      
-      
-        <span>
-          浏览 : <span class="article-timer" data-identity="2018-06-26-javascript-export用法"></span>
-        </span>
-      
-    </div>
-    
-    <!-- 文章简介 -->
-    <div class="article-content">
-      <div class="markdown-body article-content--inner" v-html="mdToHtml(psg.summary)">
-        <blockquote>
-<p>export语句用于在创建JavaScript模块时，从模块中导出函数、对象或原始值，以便其他程序可以通过 import 语句使用它们。</p>
-<p>import语句用于导入由另一个模块导出的绑定。无论是否声明了 strict mode ，导入的模块都运行在严格模式下。import语句不能在嵌入式脚本中使用。</p>
-</blockquote>
-      </div>
-    </div>
-    <div class="article-footer">
-      <div class="article-meta pull-left">
-        <!-- 分类pc端可见 -->
-        <span class="pc-view">
-          
-            <i class="iconfont icon-tag"></i>分类:
-            <a href="/categories/JavaScript/">
-              JavaScript
-            </a>
-          </span>
-          
-        <span>
-          
-            <i class="iconfont icon-06tags"></i>标签:
-            
-              <span class="span--tag">
-                <a href="/tags/JavaScript/">
-                  #JavaScript
-                </a>
-              </span>
-            
-                    
-        </span>
-      </div>
-      
-        <div class="article-meta pull-right">
-          <span class="pc-view">
-            <i class="iconfont icon-view"></i>浏览: <span class="article-timer" data-identity="2018-06-26-javascript-export用法"></span>
-          </span>
-        </div>
-      
-    </div>
-  </div>
-  
-  <div class="post">
-    <h1 class="article-title">
-      <a href="/2018/06/12/2018-06-12-Ubantu 搭建FTP文件服务/">
-        <span>Ubantu 搭建FTP文件服务</span>
-      </a>
-    </h1>
-    <!-- PC端文章信息 -->
-    <div class="article-top-meta pc-view">
-      <span>
-        发布时间 : 2018-06-12
-      </span>
-    </div>
-    <!-- 移动端文章信息 -->
-    <div class="article-top-meta mobile-view">
-      <span>
-        发布 : 2018-06-12
-      </span>
-      
-        <span>
-        分类 :
-          <a href="/categories/Linux/">
-            Linux
-          </a>
-        </span>
-      
-      
-        <span>
-          浏览 : <span class="article-timer" data-identity="2018-06-12-Ubantu 搭建FTP文件服务"></span>
-        </span>
-      
-    </div>
-    
-    <!-- 文章简介 -->
-    <div class="article-content">
-      <div class="markdown-body article-content--inner" v-html="mdToHtml(psg.summary)">
-        
-      </div>
-    </div>
-    <div class="article-footer">
-      <div class="article-meta pull-left">
-        <!-- 分类pc端可见 -->
-        <span class="pc-view">
-          
-            <i class="iconfont icon-tag"></i>分类:
-            <a href="/categories/Linux/">
-              Linux
-            </a>
-          </span>
-          
-        <span>
-          
-            <i class="iconfont icon-06tags"></i>标签:
-            
-              <span class="span--tag">
-                <a href="/tags/Linux-ftp/">
-                  #Linux ftp
-                </a>
-              </span>
-            
-                    
-        </span>
-      </div>
-      
-        <div class="article-meta pull-right">
-          <span class="pc-view">
-            <i class="iconfont icon-view"></i>浏览: <span class="article-timer" data-identity="2018-06-12-Ubantu 搭建FTP文件服务"></span>
-          </span>
-        </div>
-      
-    </div>
-  </div>
   
 
-  <nav class="page-navigation">
+  <div class="article-footer">
+    <div class="article-meta pull-left">
+      <span>
+        
+          <i class="iconfont icon-06tags"></i>标签: 
+          
+          <span class="span--tag">
+            <a href="/tags/Java-mybatis/">
+              #Java mybatis
+            </a>
+          </span>
+          
+        
+      </span>
+    </div>
+    <div class="article-meta pull-right">
+    </div>
+  </div>
+</div>
+
+
+  <aside id="sidebar">
+    <p id="sidebar-header"></p>
+    <ol id="sidebar-toc"></ol>
+    <img id="sidebar-icon">
+  </aside>
+  <script async>setTimeout(generateToc, 10);</script>
+
+
+  <nav class="post-navigation">
+    
+      <div class="nav-pre">
+        <i class="iconfont icon-prev"></i>
+        上一篇:
+        <a href="/2019/01/08/gitlabci自动化打包上传UDF/" target="_self">gitlabci自动化打包上传UDF</a>
+      </div>
     
     
-      <a href="/page/2/">下一页</a>
+      <div class="nav-next">
+        下一篇:
+        <a href="/2019/01/15/Java时间格式化/" target="_self">Java 时间格式化</a>
+        <i class="iconfont icon-next"></i>
+      </div>
     
   </nav>
+
+  
+    <a href="#comment" class="comment-anchor"></a>
+<div class="comment-title"><i class="iconfont icon-footprint"></i> 留下足迹 <i class="iconfont icon-footprint"></i></div>
+<div id="vcomments"></div>
+
+<script defer>
+  if( true ) {
+    let path = getRealPath()
+    new Valine({
+      el: "#vcomments",
+      appId: "VPNwETUGMJnwGnY6Pc7GaVna-gzGzoHsz",
+      appKey: "niJbsuSCKuploWnG8Qvbgb5P",
+      notify: false,
+      verify: false,
+      avatar: "robohash",
+      placeholder: "正确填写邮箱, 才能及时收到回复哦♪(^∇^*)",
+      path
+    });
+  }
+</script>
+   
 
   
     <script defer>
@@ -1026,7 +442,7 @@ const valineAPI = (() => {
 })()
 
 const calcAndWriteTimes = () => {
-  let isPost = false;
+  let isPost = true;
 
   let timerAllDOM = document.querySelectorAll(".article-timer");
 
@@ -1081,6 +497,7 @@ if(true){
 }
 </script>
    
+
 </div>
 
 
