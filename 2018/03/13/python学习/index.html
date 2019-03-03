@@ -237,18 +237,18 @@ var egg = " \
   <div class="article-content">
     <div class="markdown-body">
       <h2 id="Python-基础"><a href="#Python-基础" class="headerlink" title="Python 基础"></a>Python 基础</h2><p>python 是一门比较流行的高级编程语言， 是一门解释型语言</p>
-<pre><code>- 解释型
-  解释性语言通常把源程序编译成中间代码，然后用解释器把中间代码一条条翻译成目标机器代码，一条条执行。
-
-  Python的工作过程：先把代码编译成字节码，在对字节码解释执行。字节码在python虚拟机程序里对应的是PyCodeObject对象，pyc文件是字节码在磁盘上的表现形式。
-- 编译型
-  编译性语言写的程序在被执行之前，需要一个专门的编译过程，把程序编译成为机器语言的文件，比如exe文件，以后要运行的话就不用重新翻译了，直接使用编译的结果就行了（exe文件），因为翻译只做了一次，运行时不需要翻译，所以编译型语言的程序执行效率高
-
-  Java则是编译型语言。编译为字节码文件(.class)，然后会经jvm平台编译为目标机器代码
-
-- 字节码    易跨平台迁移
-- 机器码    运行快速
-</code></pre><h2 id="Python-简明约定"><a href="#Python-简明约定" class="headerlink" title="Python 简明约定"></a>Python 简明约定</h2><ul>
+<ul>
+<li><p>解释型<br>解释性语言通常把源程序编译成中间代码，然后用解释器把中间代码一条条翻译成目标机器代码，一条条执行。</p>
+<p>Python的工作过程：先把代码编译成字节码，在对字节码解释执行。字节码在python虚拟机程序里对应的是PyCodeObject对象，pyc文件是字节码在磁盘上的表现形式。</p>
+</li>
+<li><p>编译型<br>编译性语言写的程序在被执行之前，需要一个专门的编译过程，把程序编译成为机器语言的文件，比如exe文件，以后要运行的话就不用重新翻译了，直接使用编译的结果就行了（exe文件），因为翻译只做了一次，运行时不需要翻译，所以编译型语言的程序执行效率高</p>
+<p>Java则是编译型语言。编译为字节码文件(.class)，然后会经jvm平台编译为目标机器代码</p>
+</li>
+<li><p>字节码    易跨平台迁移</p>
+</li>
+<li>机器码    运行快速</li>
+</ul>
+<h3 id="Python-简明约定"><a href="#Python-简明约定" class="headerlink" title="Python 简明约定"></a>Python 简明约定</h3><ul>
 <li>编码<ul>
 <li>通常使用 UDF-8 编码</li>
 <li>Python2 遗留的习惯， 文件头部加入 # -*- coding=utf-8 -*-</li>
@@ -260,183 +260,492 @@ var egg = " \
 <li>行宽<br>每行代码一般不应过长，太长可能是设计有缺陷</li>
 <li>引号<br>单引号和双引号都可以用来表示一个字符串<br>一般字典 key 使用单引号</li>
 <li><p>空行<br>模块级函数和类定义之间空两行；<br>类成员函数之间空一行；</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">class A:</span><br><span class="line"></span><br><span class="line">    def __init__(self):</span><br><span class="line">        pass</span><br><span class="line"></span><br><span class="line">    def hello(self):</span><br><span class="line">        pass</span><br></pre></td></tr></table></figure>
-<pre><code>def main():
-    pass
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">- import 语句</span><br><span class="line">  import 语句应该分行书写</span><br></pre></td></tr></table></figure>
-</code></pre></li>
-</ul>
-<h1 id="正确的写法"><a href="#正确的写法" class="headerlink" title="正确的写法"></a>正确的写法</h1><p>import os<br>import sys</p>
-<h1 id="不推荐的写法"><a href="#不推荐的写法" class="headerlink" title="不推荐的写法"></a>不推荐的写法</h1><p>import sys,os</p>
-<h1 id="正确的写法-1"><a href="#正确的写法-1" class="headerlink" title="正确的写法"></a>正确的写法</h1><p>from subprocess import Popen, PIPE</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">import 语句应该使用 absolute import</span><br></pre></td></tr></table></figure>
-<h1 id="正确的写法-2"><a href="#正确的写法-2" class="headerlink" title="正确的写法"></a>正确的写法</h1><p>from foo.bar import Bar</p>
-<h1 id="不推荐的写法-1"><a href="#不推荐的写法-1" class="headerlink" title="不推荐的写法"></a>不推荐的写法</h1><p>from ..bar import Bar</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">- 空格</span><br><span class="line">  运算符前后空格</span><br></pre></td></tr></table></figure>
-<h1 id="正确的写法-3"><a href="#正确的写法-3" class="headerlink" title="正确的写法"></a>正确的写法</h1><p>i = i + 1<br>submitted += 1<br>x = x <em> 2 - 1<br>hypot2 = x </em> x + y <em> y<br>c = (a + b) </em> (a - b)</p>
-<h1 id="不推荐的写法-2"><a href="#不推荐的写法-2" class="headerlink" title="不推荐的写法"></a>不推荐的写法</h1><p>i=i+1<br>submitted +=1<br>x = x<em>2 - 1<br>hypot2 = x</em>x + y<em>y<br>c = (a+b) </em> (a-b)</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">- 换行</span><br><span class="line">  使用反斜杠\换行，二元运算符+ .等应出现在行末；长字符串也可以用此法换行</span><br></pre></td></tr></table></figure>
-<p>session.query(MyTable).\</p>
-<pre><code>filter_by(id=1).\
-one()
-</code></pre><p>print ‘Hello, ‘\</p>
-<pre><code>&apos;%s %s!&apos; %\
-(&apos;Harry&apos;, &apos;Potter&apos;)
-</code></pre><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">- docstring(文档注释)</span><br><span class="line">  一般公共模块、函数、类、方法，都应该写 docstring</span><br><span class="line"></span><br><span class="line">- 注释</span><br><span class="line"></span><br><span class="line">  - “#”号后空一格，段落件用空行分开</span><br></pre></td></tr></table></figure>
-<pre><code># 块注释
-# 块注释
-#
-# 块注释
-# 块注释
-</code></pre>  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">- 文档注释 文档注释以 &quot;&quot;&quot; 开头和结尾, 首行不换行, 如有多行, 末行必需换行</span><br></pre></td></tr></table></figure>
-<h1 id="coding-utf-8"><a href="#coding-utf-8" class="headerlink" title="-- coding: utf-8 --"></a>-<em>- coding: utf-8 -</em>-</h1><p>  “””Example docstrings.</p>
-<p>  This module demonstrates documentation as specified by the <code>Google Python
-  Style Guide</code>_. Docstrings may extend over multiple lines. Sections are created<br>  with a section header and a colon followed by a block of indented text.</p>
-<p>  Example:</p>
-<pre><code>Examples can be given using either the ``Example`` or ``Examples``
-sections. Sections support any reStructuredText formatting, including
-literal blocks::
-
-    $ python example_google.py
-</code></pre><p>  Section breaks are created by resuming unindented text. Section breaks<br>  are also implicitly created anytime a new section starts.<br>  “””</p>
-  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">- 命名规范</span><br><span class="line"></span><br><span class="line">  - 模块</span><br><span class="line">    模块名一般小写</span><br></pre></td></tr></table></figure>
-<pre><code># 正确的模块名
-import decoder
-import html_parser
-
-# 不推荐的模块名
-import Decoder
-</code></pre>  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">- 类名</span><br><span class="line">  类名使用驼峰(CamelCase)命名风格，首字母大写，私有类可用一个下划线开头</span><br></pre></td></tr></table></figure>
-<pre><code>class Farm():
-    pass
-
-class AnimalFarm(Farm):
-    pass
-
-class _PrivateFarm(Farm):
-    pass
-</code></pre>  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">  将相关的类和顶级函数放在同一个模块里. 不像 Java, 没必要限制一个类一个模块.</span><br><span class="line"></span><br><span class="line">- 函数</span><br><span class="line">  函数名一律小写，如有多个单词，用下划线隔开</span><br></pre></td></tr></table></figure>
-<pre><code>def run():
-    pass
-
-def run_with_env():
-    pass
-</code></pre>  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">- 变量名</span><br><span class="line">  变量名尽量小写, 如有多个单词，用下划线隔开</span><br></pre></td></tr></table></figure>
-<pre><code>if __name__ == &apos;__main__&apos;:
-    count = 0
-    school_name = &apos;&apos;
-</code></pre>  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">- 常量</span><br><span class="line">  常量采用全大写，如有多个单词，使用下划线隔开</span><br></pre></td></tr></table></figure>
-<pre><code>MAX_CLIENT = 100
-MAX_CONNECTION = 1000
-CONNECTION_TIMEOUT = 600
-</code></pre>  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">## 数据类型</span><br><span class="line"></span><br><span class="line">- Numbers（数字）</span><br><span class="line">  - int（有符号整型）</span><br><span class="line">  - long（长整型[也可以代表八进制和十六进制]）</span><br><span class="line">  - float（浮点型）</span><br><span class="line">  - complex（复数）</span><br><span class="line">- String（字符串）</span><br><span class="line">- List（列表）</span><br><span class="line">- Tuple（元组）</span><br><span class="line">- Dictionary（字典）</span><br><span class="line"></span><br><span class="line">## 语法结构</span><br><span class="line"></span><br><span class="line">- 逻辑运算符</span><br><span class="line"></span><br><span class="line">    以下假设变量 a 为 10, b为 20:</span><br><span class="line"></span><br><span class="line">    | 运算符 | 逻辑表达式 | 描述                                                                    | 实例                    |</span><br><span class="line">    | ------ | ---------- | ----------------------------------------------------------------------- | ----------------------- |</span><br><span class="line">    | and    | x and y    | 布尔&quot;与&quot; - 如果 x 为 False，x and y 返回 False，否则它返回 y 的计算值。 | (a and b) 返回 20。     |</span><br><span class="line">    | or     | x or y     | 布尔&quot;或&quot; - 如果 x 是非 0，它返回 x 的值，否则它返回 y 的计算值。        | (a or b) 返回 10。      |</span><br><span class="line">    | not    | not x      | 布尔&quot;非&quot; - 如果 x 为 True，返回 False 。如果 x 为 False，它返回 True。  | not(a and b) 返回 False |</span><br><span class="line"></span><br><span class="line">    成员运算符</span><br><span class="line"></span><br><span class="line">    | 运算符 | 描述                                                  | 实例                                      |</span><br><span class="line">    | ------ | ----------------------------------------------------- | ----------------------------------------- |</span><br><span class="line">    | in     | 如果在指定的序列中找到值返回True，否则返回False。     | x 在 y序列中 , 如果x在y序列中返回True。   |</span><br><span class="line">    | not in | 如果在指定的序列中没有找到值返回True，否则返回False。 | x 不在 y序列中 , 如果x不在y序列中返回True |</span><br><span class="line"></span><br><span class="line">    身份运算符</span><br><span class="line"></span><br><span class="line">    身份运算符用于比较两个对象的存储单元</span><br><span class="line"></span><br><span class="line">    | 运算符 | 描述                                       | 实例                                                   |</span><br><span class="line">    | ------ | ------------------------------------------ | ------------------------------------------------------ |</span><br><span class="line">    | is     | is是判断两个标识符是不是引用自一个对象     | x is y, 如果 id(x) 等于 id(y) , is 返回结果 1          |</span><br><span class="line">    | is not | is not是判断两个标识符是不是引用自不同对象 | x is not y, 如果 id(x) 不等于 id(y). is not 返回结果 1 |</span><br><span class="line"></span><br><span class="line">- if</span><br><span class="line">- for</span><br><span class="line">- while</span><br><span class="line"></span><br><span class="line">## 变量、函数定义</span><br><span class="line"></span><br><span class="line">变量直接定义</span><br></pre></td></tr></table></figure>
-<p>  a = 3<br>  b = 2</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">函数定义使用def关键字，函数作用域使用缩进表示</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">class A:</span><br><span class="line"></span><br><span class="line">    def __init__(self):</span><br><span class="line">        pass</span><br><span class="line"></span><br><span class="line">    def hello(self):</span><br><span class="line">        pass</span><br><span class="line"></span><br><span class="line">def main():</span><br><span class="line">    pass</span><br></pre></td></tr></table></figure>
 </li>
 </ul>
-<p>def fun():<br>    pass<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">函数的参数可以赋以默认值，所以python中不需要函数重载</span><br></pre></td></tr></table></figure></p>
-<p>def fun(param1=”value1”,param2=”value2”):<br>    print(“params is {} and {}”.format(param1,param2))</p>
-<p>fun(param2=”传入的参数2”)</p>
-<p>fun(“传入参数一”,”传入参数二”)</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"># Python 简单爬虫基础</span><br><span class="line"></span><br><span class="line">- python 网络库 urllib</span><br><span class="line">  urllib 是 python 内置的 http 请求库，内置的主要是以下几个模块：</span><br><span class="line"></span><br><span class="line">        urllib.request :请求模块</span><br><span class="line">        urllib.error :异常处理模块</span><br><span class="line">        urllib.parse :url解析模块</span><br><span class="line">        urllib.robotparer :robot.txt解析模块</span><br></pre></td></tr></table></figure>
-<p>  import urllib.request<br>  response = urllib.request.urlopen(‘<a href="http://www.baidu.com&#39;" target="_blank" rel="noopener">http://www.baidu.com&#39;</a>)</p>
-<h1 id="response得到的是网页的内容，bytes类型的数据，需要用utf-8转为字符串格式"><a href="#response得到的是网页的内容，bytes类型的数据，需要用utf-8转为字符串格式" class="headerlink" title="response得到的是网页的内容，bytes类型的数据，需要用utf-8转为字符串格式"></a>response得到的是网页的内容，bytes类型的数据，需要用utf-8转为字符串格式</h1><p>  print(response.read().decode(‘utf-8’))</p>
-  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<p>  import urllib.parse<br>  import urllib.request</p>
-<h1 id="传入的data参数需要bytes类型"><a href="#传入的data参数需要bytes类型" class="headerlink" title="传入的data参数需要bytes类型"></a>传入的data参数需要bytes类型</h1><p>  data = bytes(urllib.parse.urlencode({‘word’: ‘hello’}), encoding=’utf8’)<br>  response = urllib.request.urlopen(‘<a href="http://httpbin.org/post&#39;" target="_blank" rel="noopener">http://httpbin.org/post&#39;</a>, data=data)<br>  print(response.read())<br>  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure></p>
-<p>  import urllib.request<br>  import urllib.parse<br>  import urllib.error<br>  import socket</p>
-<p>  #url = ‘<a href="https://python.org/&#39;" target="_blank" rel="noopener">https://python.org/&#39;</a><br>  url = ‘<a href="http://httbin.org/post&#39;" target="_blank" rel="noopener">http://httbin.org/post&#39;</a></p>
-<p>  data = bytes(urllib.parse.urlencode({‘hello’:’world’}),encoding = ‘utf8’)</p>
-<p>  headers = {“User-Agent”:”Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/63.0.3239.132 Safari/537.36”}</p>
-<p>  req = urllib.request.Request(url,headers = headers,data = data,method = ‘POST’)<br>  try:<br>      res = urllib.request.urlopen(req,timeout = 1)<br>      print(res.read().decode(‘utf-8’))<br>      print(‘OJBK’)<br>  except urllib.error.URLError as e:<br>      if isinstance(e.reason,socket.timeout):<br>          print(‘TIMEOUT’)<br>  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br><span class="line">190</span><br><span class="line">191</span><br><span class="line">192</span><br><span class="line">193</span><br><span class="line">194</span><br><span class="line">195</span><br><span class="line">196</span><br><span class="line">197</span><br><span class="line">198</span><br><span class="line">199</span><br><span class="line">200</span><br><span class="line">201</span><br><span class="line">202</span><br><span class="line">203</span><br><span class="line">204</span><br><span class="line">205</span><br><span class="line">206</span><br><span class="line">207</span><br><span class="line">208</span><br><span class="line">209</span><br><span class="line">210</span><br><span class="line">211</span><br><span class="line">212</span><br><span class="line">213</span><br><span class="line">214</span><br><span class="line">215</span><br><span class="line">216</span><br><span class="line">217</span><br><span class="line">218</span><br><span class="line">219</span><br><span class="line">220</span><br><span class="line">221</span><br><span class="line">222</span><br><span class="line">223</span><br><span class="line">224</span><br><span class="line">225</span><br><span class="line">226</span><br><span class="line">227</span><br><span class="line">228</span><br><span class="line">229</span><br><span class="line">230</span><br><span class="line">231</span><br><span class="line">232</span><br><span class="line">233</span><br><span class="line">234</span><br><span class="line">235</span><br><span class="line">236</span><br><span class="line">237</span><br><span class="line">238</span><br><span class="line">239</span><br><span class="line">240</span><br><span class="line">241</span><br><span class="line">242</span><br><span class="line">243</span><br><span class="line">244</span><br><span class="line">245</span><br><span class="line">246</span><br><span class="line">247</span><br><span class="line">248</span><br><span class="line">249</span><br><span class="line">250</span><br><span class="line">251</span><br><span class="line">252</span><br><span class="line">253</span><br><span class="line">254</span><br><span class="line">255</span><br><span class="line">256</span><br><span class="line">257</span><br><span class="line">258</span><br><span class="line">259</span><br><span class="line">260</span><br><span class="line">261</span><br><span class="line">262</span><br><span class="line">263</span><br><span class="line">264</span><br><span class="line">265</span><br><span class="line">266</span><br><span class="line">267</span><br><span class="line">268</span><br><span class="line">269</span><br><span class="line">270</span><br><span class="line">271</span><br><span class="line">272</span><br><span class="line">273</span><br><span class="line">274</span><br><span class="line">275</span><br><span class="line">276</span><br><span class="line">277</span><br><span class="line">278</span><br><span class="line">279</span><br><span class="line">280</span><br><span class="line">281</span><br><span class="line">282</span><br><span class="line">283</span><br><span class="line">284</span><br><span class="line">285</span><br><span class="line">286</span><br><span class="line">287</span><br><span class="line">288</span><br><span class="line">289</span><br><span class="line">290</span><br><span class="line">291</span><br><span class="line">292</span><br><span class="line">293</span><br><span class="line">294</span><br><span class="line">295</span><br><span class="line">296</span><br><span class="line">297</span><br><span class="line">298</span><br><span class="line">299</span><br><span class="line">300</span><br><span class="line">301</span><br><span class="line">302</span><br><span class="line">303</span><br><span class="line">304</span><br><span class="line">305</span><br><span class="line">306</span><br><span class="line">307</span><br><span class="line">308</span><br><span class="line">309</span><br><span class="line">310</span><br><span class="line">311</span><br><span class="line">312</span><br><span class="line">313</span><br><span class="line">314</span><br><span class="line">315</span><br><span class="line">316</span><br><span class="line">317</span><br><span class="line">318</span><br><span class="line">319</span><br><span class="line">320</span><br><span class="line">321</span><br><span class="line">322</span><br><span class="line">323</span><br><span class="line">324</span><br><span class="line">325</span><br><span class="line">326</span><br><span class="line">327</span><br><span class="line">328</span><br><span class="line">329</span><br><span class="line">330</span><br><span class="line">331</span><br><span class="line">332</span><br><span class="line">333</span><br><span class="line">334</span><br><span class="line">335</span><br><span class="line">336</span><br><span class="line">337</span><br><span class="line">338</span><br><span class="line">339</span><br><span class="line">340</span><br><span class="line">341</span><br><span class="line">342</span><br><span class="line">343</span><br><span class="line">344</span><br><span class="line">345</span><br><span class="line">346</span><br><span class="line">347</span><br><span class="line">348</span><br><span class="line">349</span><br><span class="line">350</span><br><span class="line">351</span><br><span class="line">352</span><br><span class="line">353</span><br><span class="line">354</span><br><span class="line">355</span><br><span class="line">356</span><br><span class="line">357</span><br><span class="line">358</span><br><span class="line">359</span><br><span class="line">360</span><br><span class="line">361</span><br><span class="line">362</span><br><span class="line">363</span><br><span class="line">364</span><br><span class="line">365</span><br><span class="line">366</span><br><span class="line">367</span><br><span class="line">368</span><br><span class="line">369</span><br><span class="line">370</span><br><span class="line">371</span><br><span class="line">372</span><br><span class="line">373</span><br><span class="line">374</span><br><span class="line">375</span><br><span class="line">376</span><br><span class="line">377</span><br><span class="line">378</span><br><span class="line">379</span><br><span class="line">380</span><br><span class="line">381</span><br><span class="line">382</span><br><span class="line">383</span><br><span class="line">384</span><br><span class="line">385</span><br><span class="line">386</span><br><span class="line">387</span><br><span class="line">388</span><br><span class="line">389</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">## Python 网络库 requests</span><br><span class="line"></span><br><span class="line">  发送请求</span><br><span class="line">  使用 Requests 发送网络请求非常简单。</span><br><span class="line"></span><br><span class="line">  一开始要导入 Requests 模块：</span><br><span class="line"></span><br><span class="line">  &gt; &gt; &gt; import requests</span><br><span class="line">  &gt; &gt; &gt; 然后，尝试获取某个网页。本例子中，我们来获取 Github 的公共时间线：</span><br><span class="line"></span><br><span class="line">  &gt; &gt; &gt; r = requests.get(&apos;https://api.github.com/events&apos;)</span><br><span class="line">  &gt; &gt; &gt; 现在，我们有一个名为 r 的 Response 对象。我们可以从这个对象中获取所有我们想要的信息。</span><br><span class="line"></span><br><span class="line">  Requests 简便的 API 意味着所有 HTTP 请求类型都是显而易见的。例如，你可以这样发送一个 HTTP POST 请求：</span><br><span class="line"></span><br><span class="line">  &gt; &gt; &gt; r = requests.post(&apos;http://httpbin.org/post&apos;, data = &#123;&apos;key&apos;:&apos;value&apos;&#125;)</span><br><span class="line">  &gt; &gt; &gt; 漂亮，对吧？那么其他 HTTP 请求类型：PUT，DELETE，HEAD 以及 OPTIONS 又是如何的呢？都是一样的简单：</span><br><span class="line"></span><br><span class="line">  &gt; &gt; &gt; r = requests.put(&apos;http://httpbin.org/put&apos;, data = &#123;&apos;key&apos;:&apos;value&apos;&#125;)</span><br><span class="line">  &gt; &gt; &gt; r = requests.delete(&apos;http://httpbin.org/delete&apos;)</span><br><span class="line">  &gt; &gt; &gt; r = requests.head(&apos;http://httpbin.org/get&apos;)</span><br><span class="line">  &gt; &gt; &gt; r = requests.options(&apos;http://httpbin.org/get&apos;)</span><br><span class="line">  &gt; &gt; &gt; 都很不错吧，但这也仅是 Requests 的冰山一角呢。</span><br><span class="line"></span><br><span class="line">  传递 URL 参数</span><br><span class="line">  你也许经常想为 URL 的查询字符串(query string)传递某种数据。如果你是手工构建 URL，那么数据会以键/值对的形式置于 URL 中，跟在一个问号的后面。例如， httpbin.org/get?key=val。 Requests 允许你使用 params 关键字参数，以一个字符串字典来提供这些参数。举例来说，如果你想传递 key1=value1 和 key2=value2 到 httpbin.org/get ，那么你可以使用如下代码：</span><br><span class="line"></span><br><span class="line">  &gt; &gt; &gt; payload = &#123;&apos;key1&apos;: &apos;value1&apos;, &apos;key2&apos;: &apos;value2&apos;&#125;</span><br><span class="line">  &gt; &gt; &gt; r = requests.get(&quot;http://httpbin.org/get&quot;, params=payload)</span><br><span class="line">  &gt; &gt; &gt; 通过打印输出该 URL，你能看到 URL 已被正确编码：</span><br><span class="line"></span><br><span class="line">  &gt; &gt; &gt; print(r.url)</span><br><span class="line">  &gt; &gt; &gt; http://httpbin.org/get?key2=value2&amp;key1=value1</span><br><span class="line">  &gt; &gt; &gt; 注意字典里值为 None 的键都不会被添加到 URL 的查询字符串里。</span><br><span class="line"></span><br><span class="line">  你还可以将一个列表作为值传入：</span><br><span class="line"></span><br><span class="line">  &gt; &gt; &gt; payload = &#123;&apos;key1&apos;: &apos;value1&apos;, &apos;key2&apos;: [&apos;value2&apos;, &apos;value3&apos;]&#125;</span><br><span class="line"></span><br><span class="line">  &gt; &gt; &gt; r = requests.get(&apos;http://httpbin.org/get&apos;, params=payload)</span><br><span class="line">  &gt; &gt; &gt; print(r.url)</span><br><span class="line">  &gt; &gt; &gt; http://httpbin.org/get?key1=value1&amp;key2=value2&amp;key2=value3</span><br><span class="line">  &gt; &gt; &gt; 响应内容</span><br><span class="line">  &gt; &gt; &gt; 我们能读取服务器响应的内容。再次以 GitHub 时间线为例：</span><br><span class="line"></span><br><span class="line">  &gt; &gt; &gt; import requests</span><br><span class="line">  &gt; &gt; &gt; r = requests.get(&apos;https://api.github.com/events&apos;)</span><br><span class="line">  &gt; &gt; &gt; r.text</span><br><span class="line">  &gt; &gt; &gt; u&apos;[&#123;&quot;repository&quot;:&#123;&quot;open_issues&quot;:0,&quot;url&quot;:&quot;https://github.com/...</span><br><span class="line">  &gt; &gt; &gt; Requests 会自动解码来自服务器的内容。大多数 unicode 字符集都能被无缝地解码。</span><br><span class="line"></span><br><span class="line">  请求发出后，Requests 会基于 HTTP 头部对响应的编码作出有根据的推测。当你访问 r.text 之时，Requests 会使用其推测的文本编码。你可以找出 Requests 使用了什么编码，并且能够使用 r.encoding 属性来改变它：</span><br><span class="line"></span><br><span class="line">  &gt; &gt; &gt; r.encoding</span><br><span class="line">  &gt; &gt; &gt; &apos;utf-8&apos;</span><br><span class="line">  &gt; &gt; &gt; r.encoding = &apos;ISO-8859-1&apos;</span><br><span class="line">  &gt; &gt; &gt; 如果你改变了编码，每当你访问 r.text ，Request 都将会使用 r.encoding 的新值。你可能希望在使用特殊逻辑计算出文本的编码的情况下来修改编码。比如 HTTP 和 XML 自身可以指定编码。这样的话，你应该使用 r.content 来找到编码，然后设置 r.encoding 为相应的编码。这样就能使用正确的编码解析 r.text 了。</span><br><span class="line"></span><br><span class="line">  在你需要的情况下，Requests 也可以使用定制的编码。如果你创建了自己的编码，并使用 codecs 模块进行注册，你就可以轻松地使用这个解码器名称作为 r.encoding 的值， 然后由 Requests 来为你处理编码。</span><br><span class="line"></span><br><span class="line">  二进制响应内容</span><br><span class="line">  你也能以字节的方式访问请求响应体，对于非文本请求：</span><br><span class="line"></span><br><span class="line">  &gt; &gt; &gt; r.content</span><br><span class="line">  &gt; &gt; &gt; b&apos;[&#123;&quot;repository&quot;:&#123;&quot;open_issues&quot;:0,&quot;url&quot;:&quot;https://github.com/...</span><br><span class="line">  &gt; &gt; &gt; Requests 会自动为你解码 gzip 和 deflate 传输编码的响应数据。</span><br><span class="line"></span><br><span class="line">  例如，以请求返回的二进制数据创建一张图片，你可以使用如下代码：</span><br><span class="line"></span><br><span class="line">  &gt; &gt; &gt; from PIL import Image</span><br><span class="line">  &gt; &gt; &gt; from io import BytesIO</span><br><span class="line"></span><br><span class="line">  &gt; &gt; &gt; i = Image.open(BytesIO(r.content))</span><br><span class="line">  &gt; &gt; &gt; JSON 响应内容</span><br><span class="line">  &gt; &gt; &gt; Requests 中也有一个内置的 JSON 解码器，助你处理 JSON 数据：</span><br><span class="line"></span><br><span class="line">  &gt; &gt; &gt; import requests</span><br><span class="line"></span><br><span class="line">  &gt; &gt; &gt; r = requests.get(&apos;https://api.github.com/events&apos;)</span><br><span class="line">  &gt; &gt; &gt; r.json()</span><br><span class="line">  &gt; &gt; &gt; [&#123;u&apos;repository&apos;: &#123;u&apos;open_issues&apos;: 0, u&apos;url&apos;: &apos;https://github.com/...</span><br><span class="line">  &gt; &gt; &gt; 如果 JSON 解码失败， r.json() 就会抛出一个异常。例如，响应内容是 401 (Unauthorized)，尝试访问 r.json() 将会抛出 ValueError: No JSON object could be decoded 异常。</span><br><span class="line"></span><br><span class="line">  需要注意的是，成功调用 r.json() 并**不**意味着响应的成功。有的服务器会在失败的响应中包含一个 JSON 对象（比如 HTTP 500 的错误细节）。这种 JSON 会被解码返回。要检查请求是否成功，请使用 r.raise_for_status() 或者检查 r.status_code 是否和你的期望相同。</span><br><span class="line"></span><br><span class="line">  原始响应内容</span><br><span class="line">  在罕见的情况下，你可能想获取来自服务器的原始套接字响应，那么你可以访问 r.raw。 如果你确实想这么干，那请你确保在初始请求中设置了 stream=True。具体你可以这么做：</span><br><span class="line"></span><br><span class="line">  &gt; &gt; &gt; r = requests.get(&apos;https://api.github.com/events&apos;, stream=True)</span><br><span class="line">  &gt; &gt; &gt; r.raw</span><br><span class="line">  &gt; &gt; &gt; &lt;requests.packages.urllib3.response.HTTPResponse object at 0x101194810&gt;</span><br><span class="line">  &gt; &gt; &gt; r.raw.read(10)</span><br><span class="line">  &gt; &gt; &gt; &apos;\x1f\x8b\x08\x00\x00\x00\x00\x00\x00\x03&apos;</span><br><span class="line">  &gt; &gt; &gt; 但一般情况下，你应该以下面的模式将文本流保存到文件：</span><br><span class="line"></span><br><span class="line">  with open(filename, &apos;wb&apos;) as fd:</span><br><span class="line">  for chunk in r.iter_content(chunk_size):</span><br><span class="line">  fd.write(chunk)</span><br><span class="line">  使用 Response.iter_content 将会处理大量你直接使用 Response.raw 不得不处理的。 当流下载时，上面是优先推荐的获取内容方式。 Note that chunk_size can be freely adjusted to a number that may better fit your use cases.</span><br><span class="line"></span><br><span class="line">  定制请求头</span><br><span class="line">  如果你想为请求添加 HTTP 头部，只要简单地传递一个 dict 给 headers 参数就可以了。</span><br><span class="line"></span><br><span class="line">  例如，在前一个示例中我们没有指定 content-type:</span><br><span class="line"></span><br><span class="line">  &gt; &gt; &gt; url = &apos;https://api.github.com/some/endpoint&apos;</span><br><span class="line">  &gt; &gt; &gt; headers = &#123;&apos;user-agent&apos;: &apos;my-app/0.0.1&apos;&#125;</span><br><span class="line"></span><br><span class="line">  &gt; &gt; &gt; r = requests.get(url, headers=headers)</span><br><span class="line">  &gt; &gt; &gt; 注意: 定制 header 的优先级低于某些特定的信息源，例如：</span><br><span class="line"></span><br><span class="line">  如果在 .netrc 中设置了用户认证信息，使用 headers= 设置的授权就不会生效。而如果设置了 auth= 参数，`.netrc` 的设置就无效了。</span><br><span class="line">  如果被重定向到别的主机，授权 header 就会被删除。</span><br><span class="line">  代理授权 header 会被 URL 中提供的代理身份覆盖掉。</span><br><span class="line">  在我们能判断内容长度的情况下，header 的 Content-Length 会被改写。</span><br><span class="line">  更进一步讲，Requests 不会基于定制 header 的具体情况改变自己的行为。只不过在最后的请求中，所有的 header 信息都会被传递进去。</span><br><span class="line"></span><br><span class="line">  注意: 所有的 header 值必须是 string、bytestring 或者 unicode。尽管传递 unicode header 也是允许的，但不建议这样做。</span><br><span class="line"></span><br><span class="line">  更加复杂的 POST 请求</span><br><span class="line">  通常，你想要发送一些编码为表单形式的数据——非常像一个 HTML 表单。要实现这个，只需简单地传递一个字典给 data 参数。你的数据字典在发出请求时会自动编码为表单形式：</span><br><span class="line"></span><br><span class="line">  &gt; &gt; &gt; payload = &#123;&apos;key1&apos;: &apos;value1&apos;, &apos;key2&apos;: &apos;value2&apos;&#125;</span><br><span class="line"></span><br><span class="line">  &gt; &gt; &gt; r = requests.post(&quot;http://httpbin.org/post&quot;, data=payload)</span><br><span class="line">  &gt; &gt; &gt; print(r.text)</span><br><span class="line">  &gt; &gt; &gt; &#123;</span><br><span class="line">  &gt; &gt; &gt; ...</span><br><span class="line">  &gt; &gt; &gt; &quot;form&quot;: &#123;</span><br><span class="line"></span><br><span class="line">      &quot;key2&quot;: &quot;value2&quot;,</span><br><span class="line">      &quot;key1&quot;: &quot;value1&quot;</span><br><span class="line"></span><br><span class="line">  &#125;,</span><br><span class="line">  ...</span><br><span class="line">  &#125;</span><br><span class="line">  你还可以为 data 参数传入一个元组列表。在表单中多个元素使用同一 key 的时候，这种方式尤其有效：</span><br><span class="line"></span><br><span class="line">  &gt; &gt; &gt; payload = ((&apos;key1&apos;, &apos;value1&apos;), (&apos;key1&apos;, &apos;value2&apos;))</span><br><span class="line">  &gt; &gt; &gt; r = requests.post(&apos;http://httpbin.org/post&apos;, data=payload)</span><br><span class="line">  &gt; &gt; &gt; print(r.text)</span><br><span class="line">  &gt; &gt; &gt; &#123;</span><br><span class="line">  &gt; &gt; &gt; ...</span><br><span class="line">  &gt; &gt; &gt; &quot;form&quot;: &#123;</span><br><span class="line"></span><br><span class="line">      &quot;key1&quot;: [</span><br><span class="line">      &quot;value1&quot;,</span><br><span class="line">      &quot;value2&quot;</span><br><span class="line">      ]</span><br><span class="line"></span><br><span class="line">  &#125;,</span><br><span class="line">  ...</span><br><span class="line">  &#125;</span><br><span class="line">  很多时候你想要发送的数据并非编码为表单形式的。如果你传递一个 string 而不是一个 dict，那么数据会被直接发布出去。</span><br><span class="line"></span><br><span class="line">  例如，Github API v3 接受编码为 JSON 的 POST/PATCH 数据：</span><br><span class="line"></span><br><span class="line">  &gt; &gt; &gt; import json</span><br><span class="line"></span><br><span class="line">  &gt; &gt; &gt; url = &apos;https://api.github.com/some/endpoint&apos;</span><br><span class="line">  &gt; &gt; &gt; payload = &#123;&apos;some&apos;: &apos;data&apos;&#125;</span><br><span class="line"></span><br><span class="line">  &gt; &gt; &gt; r = requests.post(url, data=json.dumps(payload))</span><br><span class="line">  &gt; &gt; &gt; 此处除了可以自行对 dict 进行编码，你还可以使用 json 参数直接传递，然后它就会被自动编码。这是 2.4.2 版的新加功能：</span><br><span class="line"></span><br><span class="line">  &gt; &gt; &gt; url = &apos;https://api.github.com/some/endpoint&apos;</span><br><span class="line">  &gt; &gt; &gt; payload = &#123;&apos;some&apos;: &apos;data&apos;&#125;</span><br><span class="line"></span><br><span class="line">  &gt; &gt; &gt; r = requests.post(url, json=payload)</span><br><span class="line">  &gt; &gt; &gt; POST 一个多部分编码(Multipart-Encoded)的文件</span><br><span class="line">  &gt; &gt; &gt; Requests 使得上传多部分编码文件变得很简单：</span><br><span class="line"></span><br><span class="line">  &gt; &gt; &gt; url = &apos;http://httpbin.org/post&apos;</span><br><span class="line">  &gt; &gt; &gt; files = &#123;&apos;file&apos;: open(&apos;report.xls&apos;, &apos;rb&apos;)&#125;</span><br><span class="line"></span><br><span class="line">  &gt; &gt; &gt; r = requests.post(url, files=files)</span><br><span class="line">  &gt; &gt; &gt; r.text</span><br><span class="line">  &gt; &gt; &gt; &#123;</span><br><span class="line">  &gt; &gt; &gt; ...</span><br><span class="line">  &gt; &gt; &gt; &quot;files&quot;: &#123;</span><br><span class="line"></span><br><span class="line">      &quot;file&quot;: &quot;&lt;censored...binary...data&gt;&quot;</span><br><span class="line"></span><br><span class="line">  &#125;,</span><br><span class="line">  ...</span><br><span class="line">  &#125;</span><br><span class="line">  你可以显式地设置文件名，文件类型和请求头：</span><br><span class="line"></span><br><span class="line">  &gt; &gt; &gt; url = &apos;http://httpbin.org/post&apos;</span><br><span class="line">  &gt; &gt; &gt; files = &#123;&apos;file&apos;: (&apos;report.xls&apos;, open(&apos;report.xls&apos;, &apos;rb&apos;), &apos;application/vnd.ms-excel&apos;, &#123;&apos;Expires&apos;: &apos;0&apos;&#125;)&#125;</span><br><span class="line"></span><br><span class="line">  &gt; &gt; &gt; r = requests.post(url, files=files)</span><br><span class="line">  &gt; &gt; &gt; r.text</span><br><span class="line">  &gt; &gt; &gt; &#123;</span><br><span class="line">  &gt; &gt; &gt; ...</span><br><span class="line">  &gt; &gt; &gt; &quot;files&quot;: &#123;</span><br><span class="line"></span><br><span class="line">      &quot;file&quot;: &quot;&lt;censored...binary...data&gt;&quot;</span><br><span class="line"></span><br><span class="line">  &#125;,</span><br><span class="line">  ...</span><br><span class="line">  &#125;</span><br><span class="line">  如果你想，你也可以发送作为文件来接收的字符串：</span><br><span class="line"></span><br><span class="line">  &gt; &gt; &gt; url = &apos;http://httpbin.org/post&apos;</span><br><span class="line">  &gt; &gt; &gt; files = &#123;&apos;file&apos;: (&apos;report.csv&apos;, &apos;some,data,to,send\nanother,row,to,send\n&apos;)&#125;</span><br><span class="line"></span><br><span class="line">  &gt; &gt; &gt; r = requests.post(url, files=files)</span><br><span class="line">  &gt; &gt; &gt; r.text</span><br><span class="line">  &gt; &gt; &gt; &#123;</span><br><span class="line">  &gt; &gt; &gt; ...</span><br><span class="line">  &gt; &gt; &gt; &quot;files&quot;: &#123;</span><br><span class="line"></span><br><span class="line">      &quot;file&quot;: &quot;some,data,to,send\\nanother,row,to,send\\n&quot;</span><br><span class="line"></span><br><span class="line">  &#125;,</span><br><span class="line">  ...</span><br><span class="line">  &#125;</span><br><span class="line">  如果你发送一个非常大的文件作为 multipart/form-data 请求，你可能希望将请求做成数据流。默认下 requests 不支持, 但有个第三方包 requests-toolbelt 是支持的。你可以阅读 toolbelt 文档 来了解使用方法。</span><br><span class="line"></span><br><span class="line">  在一个请求中发送多文件参考 高级用法 一节。</span><br><span class="line"></span><br><span class="line">  警告</span><br><span class="line">  我们强烈建议你用二进制模式(binary mode)打开文件。这是因为 Requests 可能会试图为你提供 Content-Length header，在它这样做的时候，这个值会被设为文件的字节数（bytes）。如果用文本模式(text mode)打开文件，就可能会发生错误。</span><br><span class="line"></span><br><span class="line">  响应状态码</span><br><span class="line">  我们可以检测响应状态码：</span><br><span class="line"></span><br><span class="line">  &gt; &gt; &gt; r = requests.get(&apos;http://httpbin.org/get&apos;)</span><br><span class="line">  &gt; &gt; &gt; r.status_code</span><br><span class="line">  &gt; &gt; &gt; 200</span><br><span class="line">  &gt; &gt; &gt; 为方便引用，Requests 还附带了一个内置的状态码查询对象：</span><br><span class="line"></span><br><span class="line">  &gt; &gt; &gt; r.status_code == requests.codes.ok</span><br><span class="line">  &gt; &gt; &gt; True</span><br><span class="line">  &gt; &gt; &gt; 如果发送了一个错误请求(一个 4XX 客户端错误，或者 5XX 服务器错误响应)，我们可以通过 Response.raise_for_status() 来抛出异常：</span><br><span class="line"></span><br><span class="line">  &gt; &gt; &gt; bad_r = requests.get(&apos;http://httpbin.org/status/404&apos;)</span><br><span class="line">  &gt; &gt; &gt; bad_r.status_code</span><br><span class="line">  &gt; &gt; &gt; 404</span><br><span class="line"></span><br><span class="line">  &gt; &gt; &gt; bad_r.raise_for_status()</span><br><span class="line">  &gt; &gt; &gt; Traceback (most recent call last):</span><br><span class="line">  &gt; &gt; &gt; File &quot;requests/models.py&quot;, line 832, in raise_for_status</span><br><span class="line"></span><br><span class="line">      raise http_error</span><br><span class="line"></span><br><span class="line">  requests.exceptions.HTTPError: 404 Client Error</span><br><span class="line">  但是，由于我们的例子中 r 的 status_code 是 200 ，当我们调用 raise_for_status() 时，得到的是：</span><br><span class="line"></span><br><span class="line">  &gt; &gt; &gt; r.raise_for_status()</span><br><span class="line">  &gt; &gt; &gt; None</span><br><span class="line">  &gt; &gt; &gt; 一切都挺和谐哈。</span><br><span class="line"></span><br><span class="line">  响应头</span><br><span class="line">  我们可以查看以一个 Python 字典形式展示的服务器响应头：</span><br><span class="line"></span><br><span class="line">  &gt; &gt; &gt; r.headers</span><br><span class="line">  &gt; &gt; &gt; &#123;</span><br><span class="line"></span><br><span class="line">      &apos;content-encoding&apos;: &apos;gzip&apos;,</span><br><span class="line">      &apos;transfer-encoding&apos;: &apos;chunked&apos;,</span><br><span class="line">      &apos;connection&apos;: &apos;close&apos;,</span><br><span class="line">      &apos;server&apos;: &apos;nginx/1.0.4&apos;,</span><br><span class="line">      &apos;x-runtime&apos;: &apos;148ms&apos;,</span><br><span class="line">      &apos;etag&apos;: &apos;&quot;e1ca502697e5c9317743dc078f67693f&quot;&apos;,</span><br><span class="line">      &apos;content-type&apos;: &apos;application/json&apos;</span><br><span class="line"></span><br><span class="line">  &#125;</span><br><span class="line">  但是这个字典比较特殊：它是仅为 HTTP 头部而生的。根据 RFC 2616， HTTP 头部是大小写不敏感的。</span><br><span class="line"></span><br><span class="line">  因此，我们可以使用任意大写形式来访问这些响应头字段：</span><br><span class="line"></span><br><span class="line">  &gt; &gt; &gt; r.headers[&apos;Content-Type&apos;]</span><br><span class="line">  &gt; &gt; &gt; &apos;application/json&apos;</span><br><span class="line"></span><br><span class="line">  &gt; &gt; &gt; r.headers.get(&apos;content-type&apos;)</span><br><span class="line">  &gt; &gt; &gt; &apos;application/json&apos;</span><br><span class="line">  &gt; &gt; &gt; 它还有一个特殊点，那就是服务器可以多次接受同一 header，每次都使用不同的值。但 Requests 会将它们合并，这样它们就可以用一个映射来表示出来，参见 RFC 7230:</span><br><span class="line"></span><br><span class="line">  A recipient MAY combine multiple header fields with the same field name into one &quot;field-name: field-value&quot; pair, without changing the semantics of the message, by appending each subsequent field value to the combined field value in order, separated by a comma.</span><br><span class="line"></span><br><span class="line">  接收者可以合并多个相同名称的 header 栏位，把它们合为一个 &quot;field-name: field-value&quot; 配对，将每个后续的栏位值依次追加到合并的栏位值中，用逗号隔开即可，这样做不会改变信息的语义。</span><br><span class="line"></span><br><span class="line">  Cookie</span><br><span class="line">  如果某个响应中包含一些 cookie，你可以快速访问它们：</span><br><span class="line"></span><br><span class="line">  &gt; &gt; &gt; url = &apos;http://example.com/some/cookie/setting/url&apos;</span><br><span class="line">  &gt; &gt; &gt; r = requests.get(url)</span><br><span class="line"></span><br><span class="line">  &gt; &gt; &gt; r.cookies[&apos;example_cookie_name&apos;]</span><br><span class="line">  &gt; &gt; &gt; &apos;example_cookie_value&apos;</span><br><span class="line">  &gt; &gt; &gt; 要想发送你的 cookies 到服务器，可以使用 cookies 参数：</span><br><span class="line"></span><br><span class="line">  &gt; &gt; &gt; url = &apos;http://httpbin.org/cookies&apos;</span><br><span class="line">  &gt; &gt; &gt; cookies = dict(cookies_are=&apos;working&apos;)</span><br><span class="line"></span><br><span class="line">  &gt; &gt; &gt; r = requests.get(url, cookies=cookies)</span><br><span class="line">  &gt; &gt; &gt; r.text</span><br><span class="line">  &gt; &gt; &gt; &apos;&#123;&quot;cookies&quot;: &#123;&quot;cookies_are&quot;: &quot;working&quot;&#125;&#125;&apos;</span><br><span class="line">  &gt; &gt; &gt; Cookie 的返回对象为 RequestsCookieJar，它的行为和字典类似，但接口更为完整，适合跨域名跨路径使用。你还可以把 Cookie Jar 传到 Requests 中：</span><br><span class="line"></span><br><span class="line">  &gt; &gt; &gt; jar = requests.cookies.RequestsCookieJar()</span><br><span class="line">  &gt; &gt; &gt; jar.set(&apos;tasty_cookie&apos;, &apos;yum&apos;, domain=&apos;httpbin.org&apos;, path=&apos;/cookies&apos;)</span><br><span class="line">  &gt; &gt; &gt; jar.set(&apos;gross_cookie&apos;, &apos;blech&apos;, domain=&apos;httpbin.org&apos;, path=&apos;/elsewhere&apos;)</span><br><span class="line">  &gt; &gt; &gt; url = &apos;http://httpbin.org/cookies&apos;</span><br><span class="line">  &gt; &gt; &gt; r = requests.get(url, cookies=jar)</span><br><span class="line">  &gt; &gt; &gt; r.text</span><br><span class="line">  &gt; &gt; &gt; &apos;&#123;&quot;cookies&quot;: &#123;&quot;tasty_cookie&quot;: &quot;yum&quot;&#125;&#125;&apos;</span><br><span class="line">  &gt; &gt; &gt; 重定向与请求历史</span><br><span class="line">  &gt; &gt; &gt; 默认情况下，除了 HEAD, Requests 会自动处理所有重定向。</span><br><span class="line"></span><br><span class="line">  可以使用响应对象的 history 方法来追踪重定向。</span><br><span class="line"></span><br><span class="line">  Response.history 是一个 Response 对象的列表，为了完成请求而创建了这些对象。这个对象列表按照从最老到最近的请求进行排序。</span><br><span class="line"></span><br><span class="line">  例如，Github 将所有的 HTTP 请求重定向到 HTTPS：</span><br><span class="line"></span><br><span class="line">  &gt; &gt; &gt; r = requests.get(&apos;http://github.com&apos;)</span><br><span class="line"></span><br><span class="line">  &gt; &gt; &gt; r.url</span><br><span class="line">  &gt; &gt; &gt; &apos;https://github.com/&apos;</span><br><span class="line"></span><br><span class="line">  &gt; &gt; &gt; r.status_code</span><br><span class="line">  &gt; &gt; &gt; 200</span><br><span class="line"></span><br><span class="line">  &gt; &gt; &gt; r.history</span><br><span class="line">  &gt; &gt; &gt; [&lt;Response [301]&gt;]</span><br><span class="line">  &gt; &gt; &gt; 如果你使用的是 GET、OPTIONS、POST、PUT、PATCH 或者 DELETE，那么你可以通过 allow_redirects 参数禁用重定向处理：</span><br><span class="line"></span><br><span class="line">  &gt; &gt; &gt; r = requests.get(&apos;http://github.com&apos;, allow_redirects=False)</span><br><span class="line">  &gt; &gt; &gt; r.status_code</span><br><span class="line">  &gt; &gt; &gt; 301</span><br><span class="line">  &gt; &gt; &gt; r.history</span><br><span class="line">  &gt; &gt; &gt; []</span><br><span class="line">  &gt; &gt; &gt; 如果你使用了 HEAD，你也可以启用重定向：</span><br><span class="line"></span><br><span class="line">  &gt; &gt; &gt; r = requests.head(&apos;http://github.com&apos;, allow_redirects=True)</span><br><span class="line">  &gt; &gt; &gt; r.url</span><br><span class="line">  &gt; &gt; &gt; &apos;https://github.com/&apos;</span><br><span class="line">  &gt; &gt; &gt; r.history</span><br><span class="line">  &gt; &gt; &gt; [&lt;Response [301]&gt;]</span><br><span class="line">  &gt; &gt; &gt; 超时</span><br><span class="line">  &gt; &gt; &gt; 你可以告诉 requests 在经过以 timeout 参数设定的秒数时间之后停止等待响应。基本上所有的生产代码都应该使用这一参数。如果不使用，你的程序可能会永远失去响应：</span><br><span class="line"></span><br><span class="line">  &gt; &gt; &gt; requests.get(&apos;http://github.com&apos;, timeout=0.001)</span><br><span class="line">  &gt; &gt; &gt; Traceback (most recent call last):</span><br><span class="line">  &gt; &gt; &gt; File &quot;&lt;stdin&gt;&quot;, line 1, in &lt;module&gt;</span><br><span class="line">  &gt; &gt; &gt; requests.exceptions.Timeout: HTTPConnectionPool(host=&apos;github.com&apos;, port=80): Request timed out. (timeout=0.001)</span><br><span class="line">  &gt; &gt; &gt; 注意</span><br><span class="line">  &gt; &gt; &gt; timeout 仅对连接过程有效，与响应体的下载无关。 timeout 并不是整个下载响应的时间限制，而是如果服务器在 timeout 秒内没有应答，将会引发一个异常（更精确地说，是在 timeout 秒内没有从基础套接字上接收到任何字节的数据时）If no timeout is specified explicitly, requests do not time out.</span><br><span class="line"></span><br><span class="line">  错误与异常</span><br><span class="line">  遇到网络问题（如：DNS 查询失败、拒绝连接等）时，Requests 会抛出一个 ConnectionError 异常。</span><br><span class="line"></span><br><span class="line">  如果 HTTP 请求返回了不成功的状态码， Response.raise_for_status() 会抛出一个 HTTPError 异常。</span><br><span class="line"></span><br><span class="line">  若请求超时，则抛出一个 Timeout 异常。</span><br><span class="line"></span><br><span class="line">  若请求超过了设定的最大重定向次数，则会抛出一个 TooManyRedirects 异常。</span><br><span class="line"></span><br><span class="line">  所有 Requests 显式抛出的异常都继承自 requests.exceptions.RequestException 。</span><br><span class="line"></span><br><span class="line">## Python 网页解析库 bs4</span><br><span class="line"></span><br><span class="line">  下面的一段 HTML 代码将作为例子被多次用到.这是 爱丽丝梦游仙境的 的一段内容(以后内容中简称为 爱丽丝 的文档):</span><br><span class="line"></span><br><span class="line">  html_doc = &quot;&quot;&quot;</span><br><span class="line">  \&lt;html&gt;\&lt;head&gt;\&lt;title&gt;The Dormouse&apos;s story\&lt;/title&gt;\&lt;/head&gt;</span><br><span class="line">  \&lt;body&gt;</span><br><span class="line">  \&lt;p class=&quot;title&quot;&gt;\&lt;b&gt;The Dormouse&apos;s story\&lt;/b&gt;\&lt;/p&gt;</span><br><span class="line"></span><br><span class="line">  \&lt;p class=&quot;story&quot;&gt;Once upon a time there were three little sisters; and their names were</span><br><span class="line">  \&lt;a href=&quot;http://example.com/elsie&quot; class=&quot;sister&quot; id=&quot;link1&quot;&gt;Elsie\&lt;/a&gt;,</span><br><span class="line">  \&lt;a href=&quot;http://example.com/lacie&quot; class=&quot;sister&quot; id=&quot;link2&quot;&gt;Lacie\&lt;/a&gt; and</span><br><span class="line">  \&lt;a href=&quot;http://example.com/tillie&quot; class=&quot;sister&quot; id=&quot;link3&quot;&gt;Tillie\&lt;/a&gt;;</span><br><span class="line">  and they lived at the bottom of a well.\&lt;/p&gt;</span><br><span class="line"></span><br><span class="line">  \&lt;p class=&quot;story&quot;&gt;...\&lt;/p&gt;</span><br><span class="line">  &quot;&quot;&quot;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    使用BeautifulSoup解析这段代码,能够得到一个 BeautifulSoup 的对象,并能按照标准的缩进格式的结构输出:</span><br><span class="line"></span><br><span class="line">    from bs4 import BeautifulSoup</span><br><span class="line">    soup = BeautifulSoup(html_doc)</span><br><span class="line"></span><br><span class="line">    print(soup.prettify())</span><br></pre></td></tr></table></figure></p>
-<pre><code># &lt;html&gt;
-#  &lt;head&gt;
-#   &lt;title&gt;
-#    The Dormouse&apos;s story
-#   &lt;/title&gt;
-#  &lt;/head&gt;
-#  &lt;body&gt;
-#   &lt;p class=&quot;title&quot;&gt;
-#    &lt;b&gt;
-#     The Dormouse&apos;s story
-#    &lt;/b&gt;
-#   &lt;/p&gt;
-#   &lt;p class=&quot;story&quot;&gt;
-#    Once upon a time there were three little sisters; and their names were
-#    &lt;a class=&quot;sister&quot; href=&quot;http://example.com/elsie&quot; id=&quot;link1&quot;&gt;
-#     Elsie
-#    &lt;/a&gt;
-#    ,
-#    &lt;a class=&quot;sister&quot; href=&quot;http://example.com/lacie&quot; id=&quot;link2&quot;&gt;
-#     Lacie
-#    &lt;/a&gt;
-#    and
-#    &lt;a class=&quot;sister&quot; href=&quot;http://example.com/tillie&quot; id=&quot;link2&quot;&gt;
-#     Tillie
-#    &lt;/a&gt;
-#    ; and they lived at the bottom of a well.
-#   &lt;/p&gt;
-#   &lt;p class=&quot;story&quot;&gt;
-#    ...
-#   &lt;/p&gt;
-#  &lt;/body&gt;
-# &lt;/html&gt;
+</li>
+<li><p>import 语句<br>import 语句应该分行书写</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"># 正确的写法</span><br><span class="line">import os</span><br><span class="line">import sys</span><br><span class="line"></span><br><span class="line"># 不推荐的写法</span><br><span class="line">import sys,os</span><br><span class="line"></span><br><span class="line"># 正确的写法</span><br><span class="line">from subprocess import Popen, PIPE</span><br></pre></td></tr></table></figure>
+<p>import 语句应该使用 absolute import</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"># 正确的写法</span><br><span class="line">from foo.bar import Bar</span><br><span class="line"></span><br><span class="line"># 不推荐的写法</span><br><span class="line">from ..bar import Bar</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>空格<br>运算符前后空格</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"># 正确的写法</span><br><span class="line">i = i + 1</span><br><span class="line">submitted += 1</span><br><span class="line">x = x * 2 - 1</span><br><span class="line">hypot2 = x * x + y * y</span><br><span class="line">c = (a + b) * (a - b)</span><br><span class="line"></span><br><span class="line"># 不推荐的写法</span><br><span class="line">i=i+1</span><br><span class="line">submitted +=1</span><br><span class="line">x = x*2 - 1</span><br><span class="line">hypot2 = x*x + y*y</span><br><span class="line">c = (a+b) * (a-b)</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>换行<br>使用反斜杠\换行，二元运算符+ .等应出现在行末；长字符串也可以用此法换行</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">session.query(MyTable).\</span><br><span class="line">    filter_by(id=1).\</span><br><span class="line">    one()</span><br><span class="line"></span><br><span class="line">print &apos;Hello, &apos;\</span><br><span class="line">    &apos;%s %s!&apos; %\</span><br><span class="line">    (&apos;Harry&apos;, &apos;Potter&apos;)</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>docstring(文档注释)<br>一般公共模块、函数、类、方法，都应该写 docstring</p>
+</li>
+<li><p>注释</p>
+<ul>
+<li><p>“#”号后空一格，段落件用空行分开</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"># 块注释</span><br><span class="line"># 块注释</span><br><span class="line">#</span><br><span class="line"># 块注释</span><br><span class="line"># 块注释</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>文档注释 文档注释以 “”” 开头和结尾, 首行不换行, 如有多行, 末行必需换行</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"># -*- coding: utf-8 -*-</span><br><span class="line">&quot;&quot;&quot;Example docstrings.</span><br><span class="line"></span><br><span class="line">This module demonstrates documentation as specified by the `Google Python</span><br><span class="line">Style Guide`_. Docstrings may extend over multiple lines. Sections are created</span><br><span class="line">with a section header and a colon followed by a block of indented text.</span><br><span class="line"></span><br><span class="line">Example:</span><br><span class="line">    Examples can be given using either the ``Example`` or ``Examples``</span><br><span class="line">    sections. Sections support any reStructuredText formatting, including</span><br><span class="line">    literal blocks::</span><br><span class="line"></span><br><span class="line">        $ python example_google.py</span><br><span class="line"></span><br><span class="line">Section breaks are created by resuming unindented text. Section breaks</span><br><span class="line">are also implicitly created anytime a new section starts.</span><br><span class="line">&quot;&quot;&quot;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+<li><p>命名规范</p>
+<ul>
+<li><p>模块<br>模块名一般小写</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"># 正确的模块名</span><br><span class="line">import decoder</span><br><span class="line">import html_parser</span><br><span class="line"></span><br><span class="line"># 不推荐的模块名</span><br><span class="line">import Decoder</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>类名<br>类名使用驼峰(CamelCase)命名风格，首字母大写，私有类可用一个下划线开头</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">class Farm():</span><br><span class="line">    pass</span><br><span class="line"></span><br><span class="line">class AnimalFarm(Farm):</span><br><span class="line">    pass</span><br><span class="line"></span><br><span class="line">class _PrivateFarm(Farm):</span><br><span class="line">    pass</span><br></pre></td></tr></table></figure>
+<p>将相关的类和顶级函数放在同一个模块里. 不像 Java, 没必要限制一个类一个模块.</p>
+</li>
+<li><p>函数<br>函数名一律小写，如有多个单词，用下划线隔开</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">def run():</span><br><span class="line">    pass</span><br><span class="line"></span><br><span class="line">def run_with_env():</span><br><span class="line">    pass</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>变量名<br>变量名尽量小写, 如有多个单词，用下划线隔开</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">if __name__ == &apos;__main__&apos;:</span><br><span class="line">    count = 0</span><br><span class="line">    school_name = &apos;&apos;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>常量<br>常量采用全大写，如有多个单词，使用下划线隔开</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">MAX_CLIENT = 100</span><br><span class="line">MAX_CONNECTION = 1000</span><br><span class="line">CONNECTION_TIMEOUT = 600</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="数据类型"><a href="#数据类型" class="headerlink" title="数据类型"></a>数据类型</h3><ul>
+<li>Numbers（数字）<ul>
+<li>int（有符号整型）</li>
+<li>long（长整型[也可以代表八进制和十六进制]）</li>
+<li>float（浮点型）</li>
+<li>complex（复数）</li>
+</ul>
+</li>
+<li>String（字符串）</li>
+<li>List（列表）</li>
+<li>Tuple（元组）</li>
+<li>Dictionary（字典）</li>
+</ul>
+<h3 id="语法结构"><a href="#语法结构" class="headerlink" title="语法结构"></a>语法结构</h3><ul>
+<li><p>逻辑运算符</p>
+<p>以下假设变量 a 为 10, b为 20:</p>
+</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>运算符</th>
+<th>逻辑表达式</th>
+<th>描述</th>
+<th>实例</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>and</td>
+<td>x and y</td>
+<td>布尔”与” - 如果 x 为 False，x and y 返回 False，否则它返回 y 的计算值。</td>
+<td>(a and b) 返回 20。</td>
+</tr>
+<tr>
+<td>or</td>
+<td>x or y</td>
+<td>布尔”或” - 如果 x 是非 0，它返回 x 的值，否则它返回 y 的计算值。</td>
+<td>(a or b) 返回 10。</td>
+</tr>
+<tr>
+<td>not</td>
+<td>not x</td>
+<td>布尔”非” - 如果 x 为 True，返回 False 。如果 x 为 False，它返回 True。</td>
+<td>not(a and b) 返回 False</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>成员运算符</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>运算符</th>
+<th>描述</th>
+<th>实例</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>in</td>
+<td>如果在指定的序列中找到值返回True，否则返回False。</td>
+<td>x 在 y序列中 , 如果x在y序列中返回True。</td>
+</tr>
+<tr>
+<td>not in</td>
+<td>如果在指定的序列中没有找到值返回True，否则返回False。</td>
+<td>x 不在 y序列中 , 如果x不在y序列中返回True</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li><p>身份运算符</p>
+<p>身份运算符用于比较两个对象的存储单元</p>
+</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>运算符</th>
+<th>描述</th>
+<th>实例</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>is</td>
+<td>is是判断两个标识符是不是引用自一个对象</td>
+<td>x is y, 如果 id(x) 等于 id(y) , is 返回结果 1</td>
+</tr>
+<tr>
+<td>is not</td>
+<td>is not是判断两个标识符是不是引用自不同对象</td>
+<td>x is not y, 如果 id(x) 不等于 id(y). is not 返回结果 1</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>if<br>分支语句，在python中没有switch语句</li>
+<li>for<br>循环语句<br>for x in Array : do</li>
+<li>while<br>特殊的是可以在最后添加else语句</li>
+</ul>
+<h3 id="变量、函数定义"><a href="#变量、函数定义" class="headerlink" title="变量、函数定义"></a>变量、函数定义</h3><p>变量直接定义</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">a = 3</span><br><span class="line">b = 2</span><br></pre></td></tr></table></figure>
+<p>函数定义使用def关键字，函数作用域使用缩进表示</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">def fun():</span><br><span class="line">    pass</span><br></pre></td></tr></table></figure>
+<p>函数的参数可以赋以默认值，所以python中不需要函数重载</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">def fun(param1=&quot;value1&quot;,param2=&quot;value2&quot;):</span><br><span class="line">    print(&quot;params is &#123;&#125; and &#123;&#125;&quot;.format(param1,param2))</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">fun(param2=&quot;传入的参数2&quot;)</span><br><span class="line"></span><br><span class="line">fun(&quot;传入参数一&quot;,&quot;传入参数二&quot;)</span><br></pre></td></tr></table></figure>
+<h2 id="Python-简单爬虫基础"><a href="#Python-简单爬虫基础" class="headerlink" title="Python 简单爬虫基础"></a>Python 简单爬虫基础</h2><ul>
+<li><p>python 网络库 urllib<br>urllib 是 python 内置的 http 请求库，内置的主要是以下几个模块：</p>
+<pre><code>urllib.request :请求模块
+urllib.error :异常处理模块
+urllib.parse :url解析模块
+urllib.robotparer :robot.txt解析模块
+</code></pre><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">import urllib.request</span><br><span class="line">response = urllib.request.urlopen(&apos;http://www.baidu.com&apos;)</span><br><span class="line"># response得到的是网页的内容，bytes类型的数据，需要用utf-8转为字符串格式</span><br><span class="line">print(response.read().decode(&apos;utf-8&apos;))</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">import urllib.parse</span><br><span class="line">import urllib.request</span><br><span class="line"># 传入的data参数需要bytes类型</span><br><span class="line">data = bytes(urllib.parse.urlencode(&#123;&apos;word&apos;: &apos;hello&apos;&#125;), encoding=&apos;utf8&apos;)</span><br><span class="line">response = urllib.request.urlopen(&apos;http://httpbin.org/post&apos;, data=data)</span><br><span class="line">print(response.read())</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">import urllib.request</span><br><span class="line">import urllib.parse</span><br><span class="line">import urllib.error</span><br><span class="line">import socket</span><br><span class="line"></span><br><span class="line">#url = &apos;https://python.org/&apos;</span><br><span class="line">url = &apos;http://httbin.org/post&apos;</span><br><span class="line"></span><br><span class="line">data = bytes(urllib.parse.urlencode(&#123;&apos;hello&apos;:&apos;world&apos;&#125;),encoding = &apos;utf8&apos;)</span><br><span class="line"></span><br><span class="line">headers = &#123;&quot;User-Agent&quot;:&quot;Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/63.0.3239.132 Safari/537.36&quot;&#125;</span><br><span class="line"></span><br><span class="line">req = urllib.request.Request(url,headers = headers,data = data,method = &apos;POST&apos;)</span><br><span class="line">try:</span><br><span class="line">    res = urllib.request.urlopen(req,timeout = 1)</span><br><span class="line">    print(res.read().decode(&apos;utf-8&apos;))</span><br><span class="line">    print(&apos;OJBK&apos;)</span><br><span class="line">except urllib.error.URLError as e:</span><br><span class="line">    if isinstance(e.reason,socket.timeout):</span><br><span class="line">        print(&apos;TIMEOUT&apos;)</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="Python-网络库-requests"><a href="#Python-网络库-requests" class="headerlink" title="Python 网络库 requests"></a>Python 网络库 requests</h3><p>  发送请求<br>  使用 Requests 发送网络请求非常简单。</p>
+<p>  一开始要导入 Requests 模块：</p>
+<pre><code>&gt;&gt;&gt; import requests
+&gt;&gt;&gt; 然后，尝试获取某个网页。本例子中，我们来获取 Github 的公共时间线：
 
-几个简单的浏览结构化数据的方法:
-soup.title
-# &lt;title&gt;The Dormouse&apos;s story&lt;/title&gt;
+&gt;&gt;&gt; r = requests.get(&apos;https://api.github.com/events&apos;)
+&gt;&gt;&gt; 现在，我们有一个名为 r 的 Response 对象。我们可以从这个对象中获取所有我们想要的信息。
+</code></pre><p>  Requests 简便的 API 意味着所有 HTTP 请求类型都是显而易见的。例如，你可以这样发送一个 HTTP POST 请求：</p>
+<pre><code>&gt;&gt;&gt; r = requests.post(&apos;http://httpbin.org/post&apos;, data = {&apos;key&apos;:&apos;value&apos;})
+&gt;&gt;&gt; 漂亮，对吧？那么其他 HTTP 请求类型：PUT，DELETE，HEAD 以及 OPTIONS 又是如何的呢？都是一样的简单：
 
-soup.title.name
-# u&apos;title&apos;
+&gt;&gt;&gt; r = requests.put(&apos;http://httpbin.org/put&apos;, data = {&apos;key&apos;:&apos;value&apos;})
+&gt;&gt;&gt; r = requests.delete(&apos;http://httpbin.org/delete&apos;)
+&gt;&gt;&gt; r = requests.head(&apos;http://httpbin.org/get&apos;)
+&gt;&gt;&gt; r = requests.options(&apos;http://httpbin.org/get&apos;)
+&gt;&gt;&gt; 都很不错吧，但这也仅是 Requests 的冰山一角呢。
+</code></pre><p>  传递 URL 参数<br>  你也许经常想为 URL 的查询字符串(query string)传递某种数据。如果你是手工构建 URL，那么数据会以键/值对的形式置于 URL 中，跟在一个问号的后面。例如， httpbin.org/get?key=val。 Requests 允许你使用 params 关键字参数，以一个字符串字典来提供这些参数。举例来说，如果你想传递 key1=value1 和 key2=value2 到 httpbin.org/get ，那么你可以使用如下代码：</p>
+<pre><code>&gt;&gt;&gt; payload = {&apos;key1&apos;: &apos;value1&apos;, &apos;key2&apos;: &apos;value2&apos;}
+&gt;&gt;&gt; r = requests.get(&quot;http://httpbin.org/get&quot;, params=payload)
+&gt;&gt;&gt; 通过打印输出该 URL，你能看到 URL 已被正确编码：
 
-soup.title.string
-# u&apos;The Dormouse&apos;s story&apos;
+&gt;&gt;&gt; print(r.url)
+&gt;&gt;&gt; http://httpbin.org/get?key2=value2&amp;key1=value1
+&gt;&gt;&gt; 注意字典里值为 None 的键都不会被添加到 URL 的查询字符串里。
+</code></pre><p>  你还可以将一个列表作为值传入：</p>
+<pre><code>&gt;&gt;&gt; payload = {&apos;key1&apos;: &apos;value1&apos;, &apos;key2&apos;: [&apos;value2&apos;, &apos;value3&apos;]}
 
-soup.title.parent.name
-# u&apos;head&apos;
+&gt;&gt;&gt; r = requests.get(&apos;http://httpbin.org/get&apos;, params=payload)
+&gt;&gt;&gt; print(r.url)
+&gt;&gt;&gt; http://httpbin.org/get?key1=value1&amp;key2=value2&amp;key2=value3
+&gt;&gt;&gt; 响应内容
+&gt;&gt;&gt; 我们能读取服务器响应的内容。再次以 GitHub 时间线为例：
 
-soup.p
-# &lt;p class=&quot;title&quot;&gt;&lt;b&gt;The Dormouse&apos;s story&lt;/b&gt;&lt;/p&gt;
+&gt;&gt;&gt; import requests
+&gt;&gt;&gt; r = requests.get(&apos;https://api.github.com/events&apos;)
+&gt;&gt;&gt; r.text
+&gt;&gt;&gt; u&apos;[{&quot;repository&quot;:{&quot;open_issues&quot;:0,&quot;url&quot;:&quot;https://github.com/...
+&gt;&gt;&gt; Requests 会自动解码来自服务器的内容。大多数 unicode 字符集都能被无缝地解码。
+</code></pre><p>  请求发出后，Requests 会基于 HTTP 头部对响应的编码作出有根据的推测。当你访问 r.text 之时，Requests 会使用其推测的文本编码。你可以找出 Requests 使用了什么编码，并且能够使用 r.encoding 属性来改变它：</p>
+<pre><code>&gt;&gt;&gt; r.encoding
+&gt;&gt;&gt; &apos;utf-8&apos;
+&gt;&gt;&gt; r.encoding = &apos;ISO-8859-1&apos;
+&gt;&gt;&gt; 如果你改变了编码，每当你访问 r.text ，Request 都将会使用 r.encoding 的新值。你可能希望在使用特殊逻辑计算出文本的编码的情况下来修改编码。比如 HTTP 和 XML 自身可以指定编码。这样的话，你应该使用 r.content 来找到编码，然后设置 r.encoding 为相应的编码。这样就能使用正确的编码解析 r.text 了。
+</code></pre><p>  在你需要的情况下，Requests 也可以使用定制的编码。如果你创建了自己的编码，并使用 codecs 模块进行注册，你就可以轻松地使用这个解码器名称作为 r.encoding 的值， 然后由 Requests 来为你处理编码。</p>
+<p>  二进制响应内容<br>  你也能以字节的方式访问请求响应体，对于非文本请求：</p>
+<pre><code>&gt;&gt;&gt; r.content
+&gt;&gt;&gt; b&apos;[{&quot;repository&quot;:{&quot;open_issues&quot;:0,&quot;url&quot;:&quot;https://github.com/...
+&gt;&gt;&gt; Requests 会自动为你解码 gzip 和 deflate 传输编码的响应数据。
+</code></pre><p>  例如，以请求返回的二进制数据创建一张图片，你可以使用如下代码：</p>
+<pre><code>&gt;&gt;&gt; from PIL import Image
+&gt;&gt;&gt; from io import BytesIO
 
-soup.p[&apos;class&apos;]
-# u&apos;title&apos;
+&gt;&gt;&gt; i = Image.open(BytesIO(r.content))
+&gt;&gt;&gt; JSON 响应内容
+&gt;&gt;&gt; Requests 中也有一个内置的 JSON 解码器，助你处理 JSON 数据：
 
-soup.a
-# &lt;a class=&quot;sister&quot; href=&quot;http://example.com/elsie&quot; id=&quot;link1&quot;&gt;Elsie&lt;/a&gt;
+&gt;&gt;&gt; import requests
 
-soup.find_all(&apos;a&apos;)
-# [&lt;a class=&quot;sister&quot; href=&quot;http://example.com/elsie&quot; id=&quot;link1&quot;&gt;Elsie&lt;/a&gt;,
-#  &lt;a class=&quot;sister&quot; href=&quot;http://example.com/lacie&quot; id=&quot;link2&quot;&gt;Lacie&lt;/a&gt;,
-#  &lt;a class=&quot;sister&quot; href=&quot;http://example.com/tillie&quot; id=&quot;link3&quot;&gt;Tillie&lt;/a&gt;]
+&gt;&gt;&gt; r = requests.get(&apos;https://api.github.com/events&apos;)
+&gt;&gt;&gt; r.json()
+&gt;&gt;&gt; [{u&apos;repository&apos;: {u&apos;open_issues&apos;: 0, u&apos;url&apos;: &apos;https://github.com/...
+&gt;&gt;&gt; 如果 JSON 解码失败， r.json() 就会抛出一个异常。例如，响应内容是 401 (Unauthorized)，尝试访问 r.json() 将会抛出 ValueError: No JSON object could be decoded 异常。
+</code></pre><p>  需要注意的是，成功调用 r.json() 并<strong>不</strong>意味着响应的成功。有的服务器会在失败的响应中包含一个 JSON 对象（比如 HTTP 500 的错误细节）。这种 JSON 会被解码返回。要检查请求是否成功，请使用 r.raise_for_status() 或者检查 r.status_code 是否和你的期望相同。</p>
+<p>  原始响应内容<br>  在罕见的情况下，你可能想获取来自服务器的原始套接字响应，那么你可以访问 r.raw。 如果你确实想这么干，那请你确保在初始请求中设置了 stream=True。具体你可以这么做：</p>
+<pre><code>&gt;&gt;&gt; r = requests.get(&apos;https://api.github.com/events&apos;, stream=True)
+&gt;&gt;&gt; r.raw
+&gt;&gt;&gt; &lt;requests.packages.urllib3.response.HTTPResponse object at 0x101194810&gt;
+&gt;&gt;&gt; r.raw.read(10)
+&gt;&gt;&gt; &apos;\x1f\x8b\x08\x00\x00\x00\x00\x00\x00\x03&apos;
+&gt;&gt;&gt; 但一般情况下，你应该以下面的模式将文本流保存到文件：
 
-soup.find(id=&quot;link3&quot;)
-# &lt;a class=&quot;sister&quot; href=&quot;http://example.com/tillie&quot; id=&quot;link3&quot;&gt;Tillie&lt;/a&gt;
+with open(filename, &apos;wb&apos;) as fd:
+  for chunk in r.iter_content(chunk_size):
+    fd.write(chunk)
+</code></pre><p>  使用 Response.iter_content 将会处理大量你直接使用 Response.raw 不得不处理的。 当流下载时，上面是优先推荐的获取内容方式。 Note that chunk_size can be freely adjusted to a number that may better fit your use cases.</p>
+<p>  定制请求头<br>  如果你想为请求添加 HTTP 头部，只要简单地传递一个 dict 给 headers 参数就可以了。</p>
+<p>  例如，在前一个示例中我们没有指定 content-type:</p>
+<pre><code>&gt;&gt;&gt; url = &apos;https://api.github.com/some/endpoint&apos;
+&gt;&gt;&gt; headers = {&apos;user-agent&apos;: &apos;my-app/0.0.1&apos;}
 
-从文档中找到所有&lt;a&gt;标签的链接:
+&gt;&gt;&gt; r = requests.get(url, headers=headers)
+&gt;&gt;&gt; 注意: 定制 header 的优先级低于某些特定的信息源，
+</code></pre><p>  如果在 .netrc 中设置了用户认证信息，使用 headers= 设置的授权就不会生效。而如果设置了 auth= 参数，<code>.netrc</code> 的设置就无效了。<br>  如果被重定向到别的主机，授权 header 就会被删除。<br>  代理授权 header 会被 URL 中提供的代理身份覆盖掉。<br>  在我们能判断内容长度的情况下，header 的 Content-Length 会被改写。<br>  更进一步讲，Requests 不会基于定制 header 的具体情况改变自己的行为。只不过在最后的请求中，所有的 header 信息都会被传递进去。</p>
+<p>  注意: 所有的 header 值必须是 string、bytestring 或者 unicode。尽管传递 unicode header 也是允许的，但不建议这样做。</p>
+<p>  更加复杂的 POST 请求<br>  通常，你想要发送一些编码为表单形式的数据——非常像一个 HTML 表单。要实现这个，只需简单地传递一个字典给 data 参数。你的数据字典在发出请求时会自动编码为表单形式：</p>
+<pre><code>&gt;&gt;&gt; payload = {&apos;key1&apos;: &apos;value1&apos;, &apos;key2&apos;: &apos;value2&apos;}
 
-for link in soup.find_all(&apos;a&apos;):
-    print(link.get(&apos;href&apos;))
-    # http://example.com/elsie
-    # http://example.com/lacie
-    # http://example.com/tillie
-从文档中获取所有文字内容:
+&gt;&gt;&gt; r = requests.post(&quot;http://httpbin.org/post&quot;, data=payload)
+&gt;&gt;&gt; print(r.text)
+&gt;&gt;&gt; {
+&gt;&gt;&gt; ...
+&gt;&gt;&gt; &quot;form&quot;: {
 
-print(soup.get_text())
-# The Dormouse&apos;s story
-#
-# The Dormouse&apos;s story
-#
-# Once upon a time there were three little sisters; and their names were
-# Elsie,
-# Lacie and
-# Tillie;
-# and they lived at the bottom of a well.
-#
-# ...
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">## Python 网页解析库 lxml</span><br><span class="line"></span><br><span class="line">菜鸟xpath</span><br><span class="line">&gt; http://www.runoob.com/xpath/xpath-tutorial.html</span><br></pre></td></tr></table></figure>
-</code></pre><p>#引入html解析库<br>from lxml import html</p>
-<p>#解析为dom树结构<br>htm = html.fromstring(html_doc)</p>
-<p>#利用xpath获取目标数据，返回的是一个list结果集<br>htm.xpath(xpath_str)<br><code>`</code></p>
+    &quot;key2&quot;: &quot;value2&quot;,
+    &quot;key1&quot;: &quot;value1&quot;
+
+},
+...
+}
+</code></pre><p>  你还可以为 data 参数传入一个元组列表。在表单中多个元素使用同一 key 的时候，这种方式尤其有效：</p>
+<pre><code>&gt;&gt;&gt; payload = ((&apos;key1&apos;, &apos;value1&apos;), (&apos;key1&apos;, &apos;value2&apos;))
+&gt;&gt;&gt; r = requests.post(&apos;http://httpbin.org/post&apos;, data=payload)
+&gt;&gt;&gt; print(r.text)
+&gt;&gt;&gt; {
+&gt;&gt;&gt; ...
+&gt;&gt;&gt; &quot;form&quot;: {
+
+    &quot;key1&quot;: [
+    &quot;value1&quot;,
+    &quot;value2&quot;
+    ]
+
+},
+...
+}
+</code></pre><p>  很多时候你想要发送的数据并非编码为表单形式的。如果你传递一个 string 而不是一个 dict，那么数据会被直接发布出去。</p>
+<p>  例如，Github API v3 接受编码为 JSON 的 POST/PATCH 数据：</p>
+<pre><code>&gt;&gt;&gt; import json
+
+&gt;&gt;&gt; url = &apos;https://api.github.com/some/endpoint&apos;
+&gt;&gt;&gt; payload = {&apos;some&apos;: &apos;data&apos;}
+
+&gt;&gt;&gt; r = requests.post(url, data=json.dumps(payload))
+&gt;&gt;&gt; 此处除了可以自行对 dict 进行编码，你还可以使用 json 参数直接传递，然后它就会被自动编码。这是 2.4.2 版的新加功能：
+
+&gt;&gt;&gt; url = &apos;https://api.github.com/some/endpoint&apos;
+&gt;&gt;&gt; payload = {&apos;some&apos;: &apos;data&apos;}
+
+&gt;&gt;&gt; r = requests.post(url, json=payload)
+&gt;&gt;&gt; POST 一个多部分编码(Multipart-Encoded)的文件
+&gt;&gt;&gt; Requests 使得上传多部分编码文件变得很简单：
+
+&gt;&gt;&gt; url = &apos;http://httpbin.org/post&apos;
+&gt;&gt;&gt; files = {&apos;file&apos;: open(&apos;report.xls&apos;, &apos;rb&apos;)}
+
+&gt;&gt;&gt; r = requests.post(url, files=files)
+&gt;&gt;&gt; r.text
+&gt;&gt;&gt; {
+&gt;&gt;&gt; ...
+&gt;&gt;&gt; &quot;files&quot;: {
+
+    &quot;file&quot;: &quot;&lt;censored...binary...data&gt;&quot;
+
+},
+...
+}
+</code></pre><p>  你可以显式地设置文件名，文件类型和请求头：</p>
+<pre><code>&gt;&gt;&gt; url = &apos;http://httpbin.org/post&apos;
+&gt;&gt;&gt; files = {&apos;file&apos;: (&apos;report.xls&apos;, open(&apos;report.xls&apos;, &apos;rb&apos;), &apos;application/vnd.ms-excel&apos;, {&apos;Expires&apos;: &apos;0&apos;})}
+
+&gt;&gt;&gt; r = requests.post(url, files=files)
+&gt;&gt;&gt; r.text
+&gt;&gt;&gt; {
+&gt;&gt;&gt; ...
+&gt;&gt;&gt; &quot;files&quot;: {
+
+    &quot;file&quot;: &quot;&lt;censored...binary...data&gt;&quot;
+
+},
+...
+}
+</code></pre><p>  如果你想，你也可以发送作为文件来接收的字符串：</p>
+<pre><code>&gt;&gt;&gt; url = &apos;http://httpbin.org/post&apos;
+&gt;&gt;&gt; files = {&apos;file&apos;: (&apos;report.csv&apos;, &apos;some,data,to,send\nanother,row,to,send\n&apos;)}
+
+&gt;&gt;&gt; r = requests.post(url, files=files)
+&gt;&gt;&gt; r.text
+&gt;&gt;&gt; {
+&gt;&gt;&gt; ...
+&gt;&gt;&gt; &quot;files&quot;: {
+
+    &quot;file&quot;: &quot;some,data,to,send\\nanother,row,to,send\\n&quot;
+
+},
+...
+}
+</code></pre><p>  如果你发送一个非常大的文件作为 multipart/form-data 请求，你可能希望将请求做成数据流。默认下 requests 不支持, 但有个第三方包 requests-toolbelt 是支持的。你可以阅读 toolbelt 文档 来了解使用方法。</p>
+<p>  在一个请求中发送多文件参考 高级用法 一节。</p>
+<p>  警告<br>  我们强烈建议你用二进制模式(binary mode)打开文件。这是因为 Requests 可能会试图为你提供 Content-Length header，在它这样做的时候，这个值会被设为文件的字节数（bytes）。如果用文本模式(text mode)打开文件，就可能会发生错误。</p>
+<p>  响应状态码<br>  我们可以检测响应状态码：</p>
+<pre><code>&gt;&gt;&gt; r = requests.get(&apos;http://httpbin.org/get&apos;)
+&gt;&gt;&gt; r.status_code
+&gt;&gt;&gt; 200
+&gt;&gt;&gt; 为方便引用，Requests 还附带了一个内置的状态码查询对象：
+
+&gt;&gt;&gt; r.status_code == requests.codes.ok
+&gt;&gt;&gt; True
+&gt;&gt;&gt; 如果发送了一个错误请求(一个 4XX 客户端错误，或者 5XX 服务器错误响应)，我们可以通过 Response.raise_for_status() 来抛出异常：
+
+&gt;&gt;&gt; bad_r = requests.get(&apos;http://httpbin.org/status/404&apos;)
+&gt;&gt;&gt; bad_r.status_code
+&gt;&gt;&gt; 404
+
+&gt;&gt;&gt; bad_r.raise_for_status()
+&gt;&gt;&gt; Traceback (most recent call last):
+&gt;&gt;&gt; File &quot;requests/models.py&quot;, line 832, in raise_for_status
+    raise http_error
+
+    requests.exceptions.HTTPError: 404 Client Error
+</code></pre><p>  但是，由于我们的例子中 r 的 status_code 是 200 ，当我们调用 raise_for_status() 时，得到的是：</p>
+<pre><code>&gt;&gt;&gt; r.raise_for_status()
+&gt;&gt;&gt; None
+&gt;&gt;&gt; 一切都挺和谐哈。
+</code></pre><p>  响应头<br>  我们可以查看以一个 Python 字典形式展示的服务器响应头：</p>
+<pre><code>&gt;&gt;&gt; r.headers
+&gt;&gt;&gt; {
+
+    &apos;content-encoding&apos;: &apos;gzip&apos;,
+    &apos;transfer-encoding&apos;: &apos;chunked&apos;,
+    &apos;connection&apos;: &apos;close&apos;,
+    &apos;server&apos;: &apos;nginx/1.0.4&apos;,
+    &apos;x-runtime&apos;: &apos;148ms&apos;,
+    &apos;etag&apos;: &apos;&quot;e1ca502697e5c9317743dc078f67693f&quot;&apos;,
+    &apos;content-type&apos;: &apos;application/json&apos;
+
+}
+</code></pre><p>  但是这个字典比较特殊：它是仅为 HTTP 头部而生的。根据 RFC 2616， HTTP 头部是大小写不敏感的。</p>
+<p>  因此，我们可以使用任意大写形式来访问这些响应头字段：</p>
+<pre><code>&gt;&gt;&gt; r.headers[&apos;Content-Type&apos;]
+&gt;&gt;&gt; &apos;application/json&apos;
+
+&gt;&gt;&gt; r.headers.get(&apos;content-type&apos;)
+&gt;&gt;&gt; &apos;application/json&apos;
+&gt;&gt;&gt; 它还有一个特殊点，那就是服务器可以多次接受同一 header，每次都使用不同的值。但 Requests 会将它们合并，这样它们就可以用一个映射来表示出来，参见 RFC 7230:
+</code></pre><p>  A recipient MAY combine multiple header fields with the same field name into one “field-name: field-value” pair, without changing the semantics of the message, by appending each subsequent field value to the combined field value in order, separated by a comma.</p>
+<p>  接收者可以合并多个相同名称的 header 栏位，把它们合为一个 “field-name: field-value” 配对，将每个后续的栏位值依次追加到合并的栏位值中，用逗号隔开即可，这样做不会改变信息的语义。</p>
+<p>  Cookie<br>  如果某个响应中包含一些 cookie，你可以快速访问它们：</p>
+<pre><code>&gt;&gt;&gt; url = &apos;http://example.com/some/cookie/setting/url&apos;
+&gt;&gt;&gt; r = requests.get(url)
+
+&gt;&gt;&gt; r.cookies[&apos;example_cookie_name&apos;]
+&gt;&gt;&gt; &apos;example_cookie_value&apos;
+&gt;&gt;&gt; 要想发送你的 cookies 到服务器，可以使用 cookies 参数：
+
+&gt;&gt;&gt; url = &apos;http://httpbin.org/cookies&apos;
+&gt;&gt;&gt; cookies = dict(cookies_are=&apos;working&apos;)
+
+&gt;&gt;&gt; r = requests.get(url, cookies=cookies)
+&gt;&gt;&gt; r.text
+&gt;&gt;&gt; &apos;{&quot;cookies&quot;: {&quot;cookies_are&quot;: &quot;working&quot;}}&apos;
+&gt;&gt;&gt; Cookie 的返回对象为 RequestsCookieJar，它的行为和字典类似，但接口更为完整，适合跨域名跨路径使用。你还可以把 Cookie Jar 传到 Requests 中：
+
+&gt;&gt;&gt; jar = requests.cookies.RequestsCookieJar()
+&gt;&gt;&gt; jar.set(&apos;tasty_cookie&apos;, &apos;yum&apos;, domain=&apos;httpbin.org&apos;, path=&apos;/cookies&apos;)
+&gt;&gt;&gt; jar.set(&apos;gross_cookie&apos;, &apos;blech&apos;, domain=&apos;httpbin.org&apos;, path=&apos;/elsewhere&apos;)
+&gt;&gt;&gt; url = &apos;http://httpbin.org/cookies&apos;
+&gt;&gt;&gt; r = requests.get(url, cookies=jar)
+&gt;&gt;&gt; r.text
+&gt;&gt;&gt; &apos;{&quot;cookies&quot;: {&quot;tasty_cookie&quot;: &quot;yum&quot;}}&apos;
+&gt;&gt;&gt; 重定向与请求历史
+&gt;&gt;&gt; 默认情况下，除了 HEAD, Requests 会自动处理所有重定向。
+</code></pre><p>  可以使用响应对象的 history 方法来追踪重定向。</p>
+<p>  Response.history 是一个 Response 对象的列表，为了完成请求而创建了这些对象。这个对象列表按照从最老到最近的请求进行排序。</p>
+<p>  例如，Github 将所有的 HTTP 请求重定向到 HTTPS：</p>
+<pre><code>&gt;&gt;&gt; r = requests.get(&apos;http://github.com&apos;)
+
+&gt;&gt;&gt; r.url
+&gt;&gt;&gt; &apos;https://github.com/&apos;
+
+&gt;&gt;&gt; r.status_code
+&gt;&gt;&gt; 200
+
+&gt;&gt;&gt; r.history
+&gt;&gt;&gt; [&lt;Response [301]&gt;]
+&gt;&gt;&gt; 如果你使用的是 GET、OPTIONS、POST、PUT、PATCH 或者 DELETE，那么你可以通过 allow_redirects 参数禁用重定向处理：
+
+&gt;&gt;&gt; r = requests.get(&apos;http://github.com&apos;, allow_redirects=False)
+&gt;&gt;&gt; r.status_code
+&gt;&gt;&gt; 301
+&gt;&gt;&gt; r.history
+&gt;&gt;&gt; []
+&gt;&gt;&gt; 如果你使用了 HEAD，你也可以启用重定向：
+
+&gt;&gt;&gt; r = requests.head(&apos;http://github.com&apos;, allow_redirects=True)
+&gt;&gt;&gt; r.url
+&gt;&gt;&gt; &apos;https://github.com/&apos;
+&gt;&gt;&gt; r.history
+&gt;&gt;&gt; [&lt;Response [301]&gt;]
+&gt;&gt;&gt; 超时
+&gt;&gt;&gt; 你可以告诉 requests 在经过以 timeout 参数设定的秒数时间之后停止等待响应。基本上所有的生产代码都应该使用这一参数。如果不使用，你的程序可能会永远失去响应：
+
+&gt;&gt;&gt; requests.get(&apos;http://github.com&apos;, timeout=0.001)
+&gt;&gt;&gt; Traceback (most recent call last):
+&gt;&gt;&gt; File &quot;&lt;stdin&gt;&quot;, line 1, in &lt;module&gt;
+&gt;&gt;&gt; requests.exceptions.Timeout: HTTPConnectionPool(host=&apos;github.com&apos;, port=80): Request timed out. (timeout=0.001)
+&gt;&gt;&gt; 注意
+&gt;&gt;&gt; timeout 仅对连接过程有效，与响应体的下载无关。 timeout 并不是整个下载响应的时间限制，而是如果服务器在 timeout 秒内没有应答，将会引发一个异常（更精确地说，是在 timeout 秒内没有从基础套接字上接收到任何字节的数据时）If no timeout is specified explicitly, requests do not time out.
+</code></pre><p>  错误与异常<br>  遇到网络问题（如：DNS 查询失败、拒绝连接等）时，Requests 会抛出一个 ConnectionError 异常。</p>
+<p>  如果 HTTP 请求返回了不成功的状态码， Response.raise_for_status() 会抛出一个 HTTPError 异常。</p>
+<p>  若请求超时，则抛出一个 Timeout 异常。</p>
+<p>  若请求超过了设定的最大重定向次数，则会抛出一个 TooManyRedirects 异常。</p>
+<p>  所有 Requests 显式抛出的异常都继承自 requests.exceptions.RequestException 。</p>
+<h3 id="Python-网页解析库-bs4"><a href="#Python-网页解析库-bs4" class="headerlink" title="Python 网页解析库 bs4"></a>Python 网页解析库 bs4</h3><p>  下面的一段 HTML 代码将作为例子被多次用到.这是 爱丽丝梦游仙境的 的一段内容(以后内容中简称为 爱丽丝 的文档):</p>
+<pre><code>html_doc = &quot;&quot;&quot;
+\&lt;html&gt;\&lt;head&gt;\&lt;title&gt;The Dormouse&apos;s story\&lt;/title&gt;\&lt;/head&gt;
+\&lt;body&gt;
+\&lt;p class=&quot;title&quot;&gt;\&lt;b&gt;The Dormouse&apos;s story\&lt;/b&gt;\&lt;/p&gt;
+
+\&lt;p class=&quot;story&quot;&gt;Once upon a time there were three little sisters; and their names were
+\&lt;a href=&quot;http://example.com/elsie&quot; class=&quot;sister&quot; id=&quot;link1&quot;&gt;Elsie\&lt;/a&gt;,
+\&lt;a href=&quot;http://example.com/lacie&quot; class=&quot;sister&quot; id=&quot;link2&quot;&gt;Lacie\&lt;/a&gt; and
+\&lt;a href=&quot;http://example.com/tillie&quot; class=&quot;sister&quot; id=&quot;link3&quot;&gt;Tillie\&lt;/a&gt;;
+and they lived at the bottom of a well.\&lt;/p&gt;
+
+\&lt;p class=&quot;story&quot;&gt;...\&lt;/p&gt;
+&quot;&quot;&quot;
+</code></pre><p>  使用BeautifulSoup解析这段代码,能够得到一个 BeautifulSoup 的对象,并能按照标准的缩进格式的结构输出:</p>
+<pre><code>from bs4 import BeautifulSoup
+soup = BeautifulSoup(html_doc)
+
+print(soup.prettify())
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br></pre></td><td class="code"><pre><span class="line">  # &lt;html&gt;</span><br><span class="line">  #  &lt;head&gt;</span><br><span class="line">  #   &lt;title&gt;</span><br><span class="line">  #    The Dormouse&apos;s story</span><br><span class="line">  #   &lt;/title&gt;</span><br><span class="line">  #  &lt;/head&gt;</span><br><span class="line">  #  &lt;body&gt;</span><br><span class="line">  #   &lt;p class=&quot;title&quot;&gt;</span><br><span class="line">  #    &lt;b&gt;</span><br><span class="line">  #     The Dormouse&apos;s story</span><br><span class="line">  #    &lt;/b&gt;</span><br><span class="line">  #   &lt;/p&gt;</span><br><span class="line">  #   &lt;p class=&quot;story&quot;&gt;</span><br><span class="line">  #    Once upon a time there were three little sisters; and their names were</span><br><span class="line">  #    &lt;a class=&quot;sister&quot; href=&quot;http://example.com/elsie&quot; id=&quot;link1&quot;&gt;</span><br><span class="line">  #     Elsie</span><br><span class="line">  #    &lt;/a&gt;</span><br><span class="line">  #    ,</span><br><span class="line">  #    &lt;a class=&quot;sister&quot; href=&quot;http://example.com/lacie&quot; id=&quot;link2&quot;&gt;</span><br><span class="line">  #     Lacie</span><br><span class="line">  #    &lt;/a&gt;</span><br><span class="line">  #    and</span><br><span class="line">  #    &lt;a class=&quot;sister&quot; href=&quot;http://example.com/tillie&quot; id=&quot;link2&quot;&gt;</span><br><span class="line">  #     Tillie</span><br><span class="line">  #    &lt;/a&gt;</span><br><span class="line">  #    ; and they lived at the bottom of a well.</span><br><span class="line">  #   &lt;/p&gt;</span><br><span class="line">  #   &lt;p class=&quot;story&quot;&gt;</span><br><span class="line">  #    ...</span><br><span class="line">  #   &lt;/p&gt;</span><br><span class="line">  #  &lt;/body&gt;</span><br><span class="line">  # &lt;/html&gt;</span><br><span class="line"></span><br><span class="line">几个简单的浏览结构化数据的方法:</span><br><span class="line"></span><br><span class="line">  soup.title</span><br><span class="line">  # &lt;title&gt;The Dormouse&apos;s story&lt;/title&gt;</span><br><span class="line"></span><br><span class="line">  soup.title.name</span><br><span class="line">  # u&apos;title&apos;</span><br><span class="line"></span><br><span class="line">  soup.title.string</span><br><span class="line">  # u&apos;The Dormouse&apos;s story&apos;</span><br><span class="line"></span><br><span class="line">  soup.title.parent.name</span><br><span class="line">  # u&apos;head&apos;</span><br><span class="line"></span><br><span class="line">  soup.p</span><br><span class="line">  # &lt;p class=&quot;title&quot;&gt;&lt;b&gt;The Dormouse&apos;s story&lt;/b&gt;&lt;/p&gt;</span><br><span class="line"></span><br><span class="line">  soup.p[&apos;class&apos;]</span><br><span class="line">  # u&apos;title&apos;</span><br><span class="line"></span><br><span class="line">  soup.a</span><br><span class="line">  # &lt;a class=&quot;sister&quot; href=&quot;http://example.com/elsie&quot; id=&quot;link1&quot;&gt;Elsie&lt;/a&gt;</span><br><span class="line"></span><br><span class="line">  soup.find_all(&apos;a&apos;)</span><br><span class="line">  # [&lt;a class=&quot;sister&quot; href=&quot;http://example.com/elsie&quot; id=&quot;link1&quot;&gt;Elsie&lt;/a&gt;,</span><br><span class="line">  #  &lt;a class=&quot;sister&quot; href=&quot;http://example.com/lacie&quot; id=&quot;link2&quot;&gt;Lacie&lt;/a&gt;,</span><br><span class="line">  #  &lt;a class=&quot;sister&quot; href=&quot;http://example.com/tillie&quot; id=&quot;link3&quot;&gt;Tillie&lt;/a&gt;]</span><br><span class="line"></span><br><span class="line">  soup.find(id=&quot;link3&quot;)</span><br><span class="line">  # &lt;a class=&quot;sister&quot; href=&quot;http://example.com/tillie&quot; id=&quot;link3&quot;&gt;Tillie&lt;/a&gt;</span><br><span class="line"></span><br><span class="line">从文档中找到所有a标签的链接:</span><br><span class="line"></span><br><span class="line">  for link in soup.find_all(&apos;a&apos;):</span><br><span class="line">      print(link.get(&apos;href&apos;))</span><br><span class="line">      # http://example.com/elsie</span><br><span class="line">      # http://example.com/lacie</span><br><span class="line">      # http://example.com/tillie</span><br><span class="line"></span><br><span class="line">从文档中获取所有文字内容:</span><br><span class="line"></span><br><span class="line">  print(soup.get_text())</span><br><span class="line">  # The Dormouse&apos;s story</span><br><span class="line">  #</span><br><span class="line">  # The Dormouse&apos;s story</span><br><span class="line">  #</span><br><span class="line">  # Once upon a time there were three little sisters; and their names were</span><br><span class="line">  # Elsie,</span><br><span class="line">  # Lacie and</span><br><span class="line">  # Tillie;</span><br><span class="line">  # and they lived at the bottom of a well.</span><br><span class="line">  #</span><br><span class="line">  # ...</span><br></pre></td></tr></table></figure>
+</code></pre><h3 id="Python-网页解析库-lxml"><a href="#Python-网页解析库-lxml" class="headerlink" title="Python 网页解析库 lxml"></a>Python 网页解析库 lxml</h3><p>菜鸟xpath</p>
+<blockquote>
+<p><a href="http://www.runoob.com/xpath/xpath-tutorial.html" target="_blank" rel="noopener">http://www.runoob.com/xpath/xpath-tutorial.html</a></p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">#引入html解析库</span><br><span class="line">from lxml import html</span><br><span class="line"></span><br><span class="line">#解析为dom树结构</span><br><span class="line">htm = html.fromstring(html_doc)</span><br><span class="line">#利用xpath获取目标数据，返回的是一个list结果集</span><br><span class="line">htm.xpath(xpath_str)</span><br></pre></td></tr></table></figure>
 <h1 id="python-实战"><a href="#python-实战" class="headerlink" title="python 实战"></a>python 实战</h1>
     </div>
   </div>
