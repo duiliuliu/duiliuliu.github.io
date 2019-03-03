@@ -586,7 +586,7 @@ input[type=search] {
     transition: all .5s;
   }
 
-  input[type=search]:focus{
+  input[type=search]:hover{
     width: 130px;
     background-color: #fff;
     border-color: #6dcff6;
