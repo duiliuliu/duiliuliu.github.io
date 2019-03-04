@@ -606,8 +606,6 @@ input[type=search] {
 
   .search-panel {
     position: fixed;
-    top: 45px;
-    right: 135px;
     z-index: 36;
     width: 200px;
     max-height: 70%;
