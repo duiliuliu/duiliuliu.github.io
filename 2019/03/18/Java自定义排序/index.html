@@ -28,12 +28,12 @@ var egg = " \
   
   
   
-  <title>更新过程中的查询 | Duiliuliu</title>
+  <title>Java自定义排序 | Duiliuliu</title>
 
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
   
-    <meta name="keywords" content="项目,项目,问题,">
+    <meta name="keywords" content="Java,java 排序,">
   
 
   <script>
@@ -210,159 +210,96 @@ var egg = " \
 
 <div class="post">
   <h1 class="article-title">
-    <span>更新过程中的查询</span>
+    <span>Java自定义排序</span>
   </h1>
   <div class="article-top-meta">
     <span>
       发布 : 
-      2019-01-20
+      2019-03-18
     </span>
     
       <span>
         分类 : 
-          <a href="/categories/项目/">
-            项目
+          <a href="/categories/Java/">
+            Java
           </a>
       </span>
     
     
       <span>
-        浏览 : <span class="article-timer" data-identity="更新过程中的查询"></span>
+        浏览 : <span class="article-timer" data-identity="Java自定义排序"></span>
       </span>
     
   </div>
 
   
-    <div id="更新过程中的查询" style="margin: 4rem 2px"></div>
-<script async>
-  (function(){
-    let playerTimer = setInterval(function(){
-      if(!window.APlayer){
-        return
-      }
-
-      new APlayer({
-        container: document.getElementById('更新过程中的查询'),
-        theme: '#e96900',
-        listFolded: false,
-        audio: [{"name":"Wonderful U","artist":"AGA","url":"http://36.27.210.18/amobile.music.tc.qq.com/C4000046g8Z62PJcgW.m4a?guid=8905546682&vkey=9F07E2F71526628E867E624060B3474D5A03A293A21CB9BC332A0140BD751DE53D1D6753B6E6DDBC955BF0F45C735AE423BF552850DB3BBB&uin=0&fromtag=66","cover":"https://y.gtimg.cn/music/photo_new/T002R300x300M000000V9yae4XbyxL.jpg?max_age=2592000"}]
-      });
-      
-      clearInterval(playerTimer)
-    }, 10);
-  })()
-</script>
-  
 
   <div class="article-content">
     <div class="markdown-body">
-      <h2 id="项目问题思考"><a href="#项目问题思考" class="headerlink" title="项目问题思考"></a>项目问题思考</h2><p>我们需要对每天的活跃用户进行划分群体(外部群体数据导入，ETL按照一定规则进行划分)，然后给其他需求方(如数据分析部、运营部、算法部等等)提供数据服务，</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">数据化运营</span><br><span class="line">用户画像    全球76亿人口中约2/3拥有手机，半数为 智能型设备  服务细分 千人千面</span><br><span class="line">日志分析  埋点日志/日志采集/日志分析</span><br></pre></td></tr></table></figure>
-<p>我们的元数据是 odps(阿里云提供的大数据计算平台) 宽表，以及外部数据导入</p>
-<p><img src="/2019/01/20/更新过程中的查询/用户信息系统底层架构.png" alt="用户信息系统底层架构"></p>
-<p>在系统架构设计中，遇到以下问题：</p>
+      <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>在很多场景中，我们需要对容器中的对象进行排序，那么我们可以有两种实现方法：</p>
 <ul>
-<li><p>底层架构初始问题：</p>
+<li>对于需要排序的类实现 Comparable 接口(类内部方法)</li>
+<li>实现 Comparetor 接口，在用<br><code>Collections.sort(List&lt;T&gt; list, Comparator&lt;? super T&gt; c)</code> 时传入</li>
+</ul>
+<p>对容器的排序使用<code>Colections.sort()</code></p>
+<p>Colections.sort()的调用有两种：分别对应我们前面所述的两种排序接口的实现:</p>
 <ul>
-<li><p>存储使用什么？</p>
-<ul>
-<li><p>MYSQL，目前该表大概有2亿条数据，之后在人群来源更多了之后，数据增长会更快，mysql应该是吃不消的。</p>
+<li><p>需排序的类实现 Comparable 接口，在内部实现 compareTo 方法，定义排序规则，在真<br>正排序时会通过调用 O1.compareTo(O2)</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">public static &lt;T extends Comparable&lt;? super T&gt;&gt; void sort(List&lt;T&gt; list) &#123;</span><br><span class="line">    list.sort(null);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 </li>
-<li><p>ADS(阿里云ADB)，继续使用ADS，这个是可以的，目前的解决方案也是在saas那个ads的库中。因为只同步一天的人群即可，所以不需要担心数据量的增长，</p>
-<p>但是同步到ADS中，稳定性是受ADS的影响的，目前来看ADS的稳定性并不是很能够得到保障，还有就是单独开一个ADS的库，成本也稍微高一些。</p>
-</li>
-<li><p>ES：使用ES直接存储人群关系的话，存储为一个index，两个fileld，无法按tagId字段删除。</p>
+<li><p>在外部创建类实现 Comparetor 接口，compare 方法中自定义排序规则，传入<br>Comparetor 实现类对象，排序时调用 compare(O1,O2)</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">public static &lt;T&gt; void sort(List&lt;T&gt; list, Comparator&lt;? super T&gt; c) &#123;</span><br><span class="line">    list.sort(c);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 </li>
 </ul>
-</li>
-<li><p>存储数据格式设计为什么样的？</p>
-<p>我们的业务需求是提供 /user/tags 这个接口的稳定对外服务，qps达到400-500</p>
-<p>可以直接存储 userid，tagid的对应关系，也可以直接存储userid，tagidList的对应关系。</p>
-<p>前者是直接存储人群;后者是需要在olap计算好用户和分群集合的对应关系，然后再进行存储。（这种应该是不提倡的，因为olap的稳定性和速度都没有办法保证，如果这么做的话和直接将查询落在olap上没有区别）</p>
-</li>
-<li><p>对外接口的数据存储定下来之后，olap中的分群变化后，如何去做数据同步到对外接口库？</p>
-</li>
-</ul>
-</li>
-</ul>
-<pre><code>那么为什么需要数据的同步呢
-
-人群的生成和变动最终都会落在olap库中，查询的接口使用的存储中的数据并不是实时更新的，所以需要从olap库中去同步这部分的更新数据。
-olap中的数据每天分为初始化和变动两个部分
-
-初始化：odps→ads用户宽表，规则动态分群更新，静态分群+自定义分群拷贝t-1，同步etl人群+圈选人群的生成的规则人群。
-变动：创建规则分群+同步etl人群+同步圈选规则人群
-做数据同步，可以以人群为粒度，每一个人群拆分成一个任务，交给EOS去执行同步，需要考虑的是上游只需要将任务拆分丢弃给EOS系统即可，失败重试，幂等性由EOS系统的任务保证。
-</code></pre><ul>
-<li>用户群新增更新操作时,此时如何保证查询到有效的数据</li>
-<li>数据同步更新时，如何保证查询到有效的数据<ul>
-<li>分群的存储和删除? 比如很快的新建分群，然后删除分群，同步是分布式任务，很可能先到达删除任务，在到达新建任务，此时如何处理</li>
-</ul>
-</li>
-</ul>
-<h2 id="数据化运营"><a href="#数据化运营" class="headerlink" title="数据化运营"></a>数据化运营</h2><blockquote>
-<p>DAU(Daily Active User)日活跃用户数量。常用于反映网站、互联网应用或网络游戏的运营情况。DAU 通常统计一日（统计日）之内，登录或使用了某个产品的用户数（去除重复登录的用户），这与流量统计工具里的访客（UV）概念相似。</p>
-</blockquote>
+<p>我们不管通过 O1.compareTo(O2)还是 compare(O1,O2)方法，最终需要返回一个 int 值，<br>其结果真正需要的是：正数、负数、0，分别表示大于、小于、等于</p>
 <blockquote>
-<p>通常 DAU 会结合 MAU（月活跃用户数量）一起使用，这两个指标一般用来衡量服务的用户粘性以及服务的衰退周期。 [1] MAU、DAU 分别从宏观和微观的角度对服务的用户粘性做了权衡，也可以这么说，MAU 更像战略层面的表征，DAU 更像战术层面的表征。通过这些宏观和细微的趋势变化，可以对营销及推广提供一些数据支持或者帮助。</p>
+<p>源码中解释： Compares its two arguments for order. Returns a negative<br>integer,zero, or a positive integer as the first argument is less than, equal<br>to, or greater than the second.</p>
 </blockquote>
-<p>假如有一个近来不景气的电商平台，平台日活从年初 50 万一路下跌，到了现在，剩下 40 万底裤，也就两条路可走了<br>1.老板绞尽脑汁去哄着投资人<br>2.老板勒紧裤带过日子(员工就更不好过了)</p>
-<p>这个时候老板那可以做什么呢？BD、市场、运营会如何做呢：</p>
+<h2 id="实现效果"><a href="#实现效果" class="headerlink" title="实现效果"></a>实现效果</h2><ol>
+<li>对要排序的类实现 Comparable 接口，实现 CompareTo 方法</li>
+</ol>
+<p>我们可以创建一个实现 Comparable 接口的类，重写 compareTo 方法</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">class SortObject implements Comparable &#123;</span><br><span class="line">    private final String name;</span><br><span class="line">    private final int count;</span><br><span class="line"></span><br><span class="line">    public SortObject(final String name, final int count) &#123;</span><br><span class="line">        this.name = name;</span><br><span class="line">        this.count = count;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public int compareTo(final Object o) &#123;</span><br><span class="line">        final SortObject obj = (SortObject) o;</span><br><span class="line">        return obj.count - this.count;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public String toString() &#123;</span><br><span class="line">        return &quot;SortObject&#123;&quot; +</span><br><span class="line">                &quot;name=&apos;&quot; + name + &apos;\&apos;&apos; +</span><br><span class="line">                &quot;, count=&quot; + count +</span><br><span class="line">                &apos;&#125;&apos;;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>然后通过 Colections.sort() 进行排序</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">public static void main(final String[] args) &#123;</span><br><span class="line">     final List&lt;SortObject&gt; sortObjectList = new ArrayList&lt;&gt;(4);</span><br><span class="line">     sortObjectList.add(new SortObject(&quot;o1&quot;, 1));</span><br><span class="line">     sortObjectList.add(new SortObject(&quot;o2&quot;, 7));</span><br><span class="line">     sortObjectList.add(new SortObject(&quot;o3&quot;, 4));</span><br><span class="line">     sortObjectList.add(new SortObject(&quot;o4&quot;, 12));</span><br><span class="line"></span><br><span class="line">     System.out.println(sortObjectList);</span><br><span class="line">     System.out.println(&quot;================sort==============&quot;);</span><br><span class="line">     Collections.sort(sortObjectList);</span><br><span class="line">     System.out.println(sortObjectList);</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
+<p>可以看到其结果</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[SortObject&#123;name=&apos;o1&apos;, count=1&#125;, SortObject&#123;name=&apos;o2&apos;, count=7&#125;, SortObject&#123;name=&apos;o3&apos;, count=4&#125;, SortObject&#123;name=&apos;o4&apos;, count=12&#125;]</span><br><span class="line">================sort==============</span><br><span class="line">[SortObject&#123;name=&apos;o4&apos;, count=12&#125;, SortObject&#123;name=&apos;o2&apos;, count=7&#125;, SortObject&#123;name=&apos;o3&apos;, count=4&#125;, SortObject&#123;name=&apos;o1&apos;, count=1&#125;]</span><br></pre></td></tr></table></figure>
+<ol start="2">
+<li>通过 lambda 表达式创建 Comparetor 匿名对象覆盖 compare 方法</li>
+</ol>
+<p>此处我们需要一个普通的类，在排序是外部加入排序规则</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">class SortObject &#123;</span><br><span class="line">    private final String name;</span><br><span class="line">    private final int count;</span><br><span class="line"></span><br><span class="line">    public SortObject(final String name, final int count) &#123;</span><br><span class="line">        this.name = name;</span><br><span class="line">        this.count = count;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public int getCount() &#123;</span><br><span class="line">        return count;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public String toString() &#123;</span><br><span class="line">        return &quot;SortObject&#123;&quot; +</span><br><span class="line">                &quot;name=&apos;&quot; + name + &apos;\&apos;&apos; +</span><br><span class="line">                &quot;, count=&quot; + count +</span><br><span class="line">                &apos;&#125;&apos;;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>接着，我们需要一个实现 Comparetor 接口的类去创建我们的排序规则，然后传入<br>Collections.sort 中，此处我们使用 lambda 表达式</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">public static void main(final String[] args) &#123;</span><br><span class="line">    final List&lt;SortObject&gt; sortObjectList = new ArrayList&lt;&gt;(4);</span><br><span class="line">    sortObjectList.add(new SortObject(&quot;o1&quot;, 1));</span><br><span class="line">    sortObjectList.add(new SortObject(&quot;o2&quot;, 7));</span><br><span class="line">    sortObjectList.add(new SortObject(&quot;o3&quot;, 4));</span><br><span class="line">    sortObjectList.add(new SortObject(&quot;o4&quot;, 12));</span><br><span class="line"></span><br><span class="line">    System.out.println(sortObjectList);</span><br><span class="line">    System.out.println(&quot;================sort==============&quot;);</span><br><span class="line">    Collections.sort(sortObjectList, (o1, o2) -&gt; o1.getCount() - o2.getCount());</span><br><span class="line">    System.out.println(sortObjectList);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>可以看到其结果</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[SortObject&#123;name=&apos;o1&apos;, count=1&#125;, SortObject&#123;name=&apos;o2&apos;, count=7&#125;, SortObject&#123;name=&apos;o3&apos;, count=4&#125;, SortObject&#123;name=&apos;o4&apos;, count=12&#125;]</span><br><span class="line">================sort==============</span><br><span class="line">[SortObject&#123;name=&apos;o1&apos;, count=1&#125;, SortObject&#123;name=&apos;o3&apos;, count=4&#125;, SortObject&#123;name=&apos;o2&apos;, count=7&#125;, SortObject&#123;name=&apos;o4&apos;, count=12&#125;]</span><br></pre></td></tr></table></figure>
+<h2 id="原理剖析"><a href="#原理剖析" class="headerlink" title="原理剖析"></a>原理剖析</h2><p>核心代码：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><span class="line">private static void mergeSort(Object[] src,</span><br><span class="line">                              Object[] dest,</span><br><span class="line">                              int low, int high, int off,</span><br><span class="line">                              Comparator c) &#123;</span><br><span class="line">    int length = high - low;</span><br><span class="line"></span><br><span class="line">    // Insertion sort on smallest arrays</span><br><span class="line">    //当数组的长度小于某个阈值(这里官方定义是7)使用冒泡排序法</span><br><span class="line">    if (length &lt; INSERTIONSORT_THRESHOLD) &#123;</span><br><span class="line">        for (int i=low; i&lt;high; i++)</span><br><span class="line">            //这里就调用到我们定义的排序规则，即当dest[j-1]&gt;dest[j]时，</span><br><span class="line">            //交换两个元素的顺序</span><br><span class="line">            for (int j=i; j&gt;low &amp;&amp; c.compare(dest[j-1], dest[j])&gt;0; j--)</span><br><span class="line">                swap(dest, j, j-1);</span><br><span class="line">        return;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    // Recursively sort halves of dest into src</span><br><span class="line">    // 如果数组比较长，就递归调用</span><br><span class="line">    int destLow  = low;</span><br><span class="line">    int destHigh = high;</span><br><span class="line">    low  += off;</span><br><span class="line">    high += off;</span><br><span class="line">    //下面这一句相当于int mid = (low+high)/2;</span><br><span class="line">    //在代码中为了避免溢出常写成int mid = low + (high - low)/2,</span><br><span class="line">    //这里使用位移运算符是因为在计算机中，位移运算要以除法运算快。</span><br><span class="line">    int mid = (low + high) &gt;&gt;&gt; 1;</span><br><span class="line">    mergeSort(dest, src, low, mid, -off, c);</span><br><span class="line">    mergeSort(dest, src, mid, high, -off, c);</span><br><span class="line"></span><br><span class="line">    // If list is already sorted, just copy from src to dest.  This is an</span><br><span class="line">    // optimization that results in faster sorts for nearly ordered lists.</span><br><span class="line">    //如果数组已经是有序，就直接将数组复制到目标数组中。</span><br><span class="line">    //这里的条件是前面一半的数组已经是有序的，后面一半的数组也是有序的，</span><br><span class="line">    //当前面数组的最后一个值小于后面数组的第一个值，则数组整体有序。</span><br><span class="line">    if (c.compare(src[mid-1], src[mid]) &lt;= 0) &#123;</span><br><span class="line">       System.arraycopy(src, low, dest, destLow, length);</span><br><span class="line">       return;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    // Merge sorted halves (now in src) into dest</span><br><span class="line">    // 合并两个排序的数组</span><br><span class="line">    for(int i = destLow, p = low, q = mid; i &lt; destHigh; i++) &#123;</span><br><span class="line">        if (q &gt;= high || p &lt; mid &amp;&amp; c.compare(src[p], src[q]) &lt;= 0)</span><br><span class="line">            dest[i] = src[p++];</span><br><span class="line">        else</span><br><span class="line">            dest[i] = src[q++];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>我们可以看到，排序算法用的是冒泡排序，不过当序列长度超过 7 时，则使用递归.</p>
+<h2 id="实际应用"><a href="#实际应用" class="headerlink" title="实际应用"></a>实际应用</h2><p>在我们平时的应用中，应根据场景选择实现的接口，对于复杂排序逻辑，可以根据离散逻辑<br>确定优先级进行排序</p>
+<p>例如：</p>
+<p>我们有行为 Behavior 对象：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">public class Behavior &#123;</span><br><span class="line">    private String name;</span><br><span class="line">    private String creator;</span><br><span class="line">    private BehaviorConfig behaviorConfig;</span><br><span class="line">    private Date created;</span><br><span class="line">    private BehaviorType behaviorType;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>现在我们从数据库中取出的对象需要进行排序，我们可以选择数据库排序然后取数据，或者<br>取出数据后进行排序。(推荐数据库排序，如果取出数据在进行排序，则取数据时不可以分<br>页取数，而是取全量数据进行排序，然后截取一页数据)</p>
+<p>那么对于排序的要求是，行为创建者为当前用户优先，其次按照时间倒序</p>
+<p>我们可以假设 情况 A: 行为对象为当前用户情况 B: 最新时间优先 ，对于时间的比较，我<br>们可以用时间戳进行比较</p>
+<p>那么对于排序的两个行为对象 o1 与 o2，我们可以假设</p>
+<p>o1 满足情况 A 为 A1 o2 满足情况 A 为 A2</p>
+<p>o1 满足情况 B 为 B1 o2 满足情况 B 为 B2</p>
+<p>所以可能结果有：</p>
 <ul>
-<li>“谈几家合作平台，互换资源搞些流量？”</li>
-<li>“投几个内容 KOL(关键意见领袖，如大 V)，或者投点广告主？”</li>
-<li>“加做几场促销吧，配合 Push 能涨点日活”</li>
-<li>捞回老客 流失老客召回一定比拉新成本更低，更精准，流量质量更好。</li>
-</ul>
-<p>这个时候我们可以针对老客户做运营，简单而有效的挺过难关</p>
-<p>对于捞老客户，运营可以这样做</p>
-<p>方法：</p>
-<ul>
-<li><p>推送消息 ： 网站私信/短信/邮件….</p>
-<p>在我们的日常中，这种营销很常见，而且现在的大平台会做一些精准话的营销，比如构建用户画像，分群，针对群体特点进行推送广告或者优惠信息！</p>
-</li>
-</ul>
-<ul>
-<li><p>搞活动：</p>
-<ul>
-<li>促销优惠</li>
-<li>赠送优惠券</li>
-<li><p>商品领取 回归免费领礼品 – 事实证明 这一事件很容易拉回老客户</p>
-</li>
-<li><p>社交裂变  </p>
-</li>
+<li>A1 A2<ul>
+<li>B 两种可能 B1 时间较新或者 B2 时间较新</li>
 </ul>
 </li>
-<li><p>数据化运营</p>
-<ul>
-<li>数据支撑<ul>
-<li>群体划分</li>
-<li>群体特征模型</li>
+<li>!A1 A2</li>
+<li>A1 !A2</li>
+<li>!A1 !A2</li>
 </ul>
-</li>
-<li><p>数据反馈</p>
-<ul>
-<li><p>响应数据 漏斗分析<br>假设我们在今日头条投放了一则广告，一段时间内，1000 人点击了广告，200 人点击后进行了注册，50 人注册后根据提示下载了 APP，最后只有 10 人在 APP 完成了消费转化。</p>
-<p>在这里，从 1000 到 10，就是一个简单的漏斗。任何一个活动，从触达后用户的首个特定动作发生到最终的转化，就是一个漏斗。漏斗展示了一次活动的直接成效，并将成效分解到各个步骤，为结果提供每个层次的归因</p>
-</li>
-<li><p>裂变数据<br>饿了么式的红包分享、拼多多式的助力砍价，还是每日优鲜的 0 元吃水果、携程的助力抢车票，亦或是近期朋友圈现象级的网易荣格心理测试、连咖啡的“我的咖啡店”，这些教科书级的活动或玩法，不论转化导向或传播导向，都是围绕“社交”这个价值点展开的</p>
-</li>
-<li><p>价值追踪</p>
-<ul>
-<li>对于新加入的用户，又可以继续追踪他们的日常行为进行进一步分析，为后续分分析提供支持</li>
-<li><p>知乎</p>
-<p>| 用户类型       | 用户行为               | 价值                         |<br>| ————– | ———————- | —————————- |<br>| 一般内容消费者 | 没事刷知乎，只看不说话 | 消费主体与流量主题，人多     |<br>| 传播互动型用户 | 点赞/评论/分享/转发    | 碎片内容生产，传播           |<br>| 知识付费者     | 购买会员或live私家课   | 核心内容消费者，重要收入     |<br>| 一般内容生产者 | 80%内容生产            | 内容生态的基石，大v的绿叶    |<br>| 大V            | 头部内容的生产         | 20%的内容带来80%的流量与收入 |</p>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-<pre><code>- 成本评估
-  - 有效的活动可以继续
-</code></pre>
+<p>因此可以得出我们需要的结果：</p>
+<p>A1 和 A2 都为真或者都为假时， 我们去根据时间判断否则 若 A1 为真 ，返回 -1 ，反之<br>则 A1 为假，A2 为真时， 返回 1</p>
+<p>代码如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">if(A1==A2)&#123;</span><br><span class="line">    return B1 ? -1 ：1;</span><br><span class="line">&#125;</span><br><span class="line">return A1 ? -1 : 1;</span><br><span class="line">``</span><br><span class="line"></span><br><span class="line">**假设行为类型有两种(复杂性为与简单行为)，我们需要复杂性为优先，当前用户优先级低，时间倒序呢**</span><br></pre></td></tr></table></figure>
     </div>
   </div>
   
@@ -373,7 +310,7 @@ olap中的数据每天分为初始化和变动两个部分
         
           本文作者 : 对六 <br>
         
-        原文链接 : <a href>http://duiliuliu.github.io/2019/01/20/更新过程中的查询/</a><br>
+        原文链接 : <a href>http://duiliuliu.github.io/2019/03/18/Java自定义排序/</a><br>
         版权声明 : 本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> 许可协议。转载请注明出处！
         </blockquote>
       </div>
@@ -433,14 +370,8 @@ olap中的数据每天分为初始化和变动两个部分
           <i class="iconfont icon-06tags"></i>标签: 
           
           <span class="span--tag">
-            <a href="/tags/项目/">
-              #项目
-            </a>
-          </span>
-          
-          <span class="span--tag">
-            <a href="/tags/问题/">
-              #问题
+            <a href="/tags/java-排序/">
+              #java 排序
             </a>
           </span>
           
@@ -466,13 +397,13 @@ olap中的数据每天分为初始化和变动两个部分
       <div class="nav-pre">
         <i class="iconfont icon-prev"></i>
         上一篇:
-        <a href="/2019/01/15/Java时间格式化/" target="_self">Java 时间格式化</a>
+        <a href="/2019/01/20/更新过程中的查询/" target="_self">更新过程中的查询</a>
       </div>
     
     
       <div class="nav-next">
         下一篇:
-        <a href="/2019/03/18/Java自定义排序/" target="_self">Java自定义排序</a>
+        <a href="/2019/03/18/Java格式化时间-面试题/" target="_self">Java格式化时间(面试题)</a>
         <i class="iconfont icon-next"></i>
       </div>
     

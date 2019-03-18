@@ -28,12 +28,12 @@ var egg = " \
   
   
   
-  <title>更新过程中的查询 | Duiliuliu</title>
+  <title>Java格式化时间(面试题) | Duiliuliu</title>
 
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
   
-    <meta name="keywords" content="项目,项目,问题,">
+    <meta name="keywords" content="java,面试 Java,">
   
 
   <script>
@@ -210,30 +210,30 @@ var egg = " \
 
 <div class="post">
   <h1 class="article-title">
-    <span>更新过程中的查询</span>
+    <span>Java格式化时间(面试题)</span>
   </h1>
   <div class="article-top-meta">
     <span>
       发布 : 
-      2019-01-20
+      2019-03-18
     </span>
     
       <span>
         分类 : 
-          <a href="/categories/项目/">
-            项目
+          <a href="/categories/java/">
+            java
           </a>
       </span>
     
     
       <span>
-        浏览 : <span class="article-timer" data-identity="更新过程中的查询"></span>
+        浏览 : <span class="article-timer" data-identity="Java格式化时间-面试题"></span>
       </span>
     
   </div>
 
   
-    <div id="更新过程中的查询" style="margin: 4rem 2px"></div>
+    <div id="Java格式化时间-面试题" style="margin: 4rem 2px"></div>
 <script async>
   (function(){
     let playerTimer = setInterval(function(){
@@ -242,10 +242,10 @@ var egg = " \
       }
 
       new APlayer({
-        container: document.getElementById('更新过程中的查询'),
+        container: document.getElementById('Java格式化时间-面试题'),
         theme: '#e96900',
         listFolded: false,
-        audio: [{"name":"Wonderful U","artist":"AGA","url":"http://36.27.210.18/amobile.music.tc.qq.com/C4000046g8Z62PJcgW.m4a?guid=8905546682&vkey=9F07E2F71526628E867E624060B3474D5A03A293A21CB9BC332A0140BD751DE53D1D6753B6E6DDBC955BF0F45C735AE423BF552850DB3BBB&uin=0&fromtag=66","cover":"https://y.gtimg.cn/music/photo_new/T002R300x300M000000V9yae4XbyxL.jpg?max_age=2592000"}]
+        audio: [{"name":"Insomnia (失眠)","artist":"Craig David (克雷格·大卫)","url":"http://dl.stream.qqmusic.qq.com/C40000290ccw4BgVhZ.m4a?guid=8905546682&vkey=5B98E8CD5F3C858F11F9E09CAD556B0C3B3AA49AA302405D71F2332D8E47580D21E2757AB59BBC573C150AECB9A4AC824447EE4D4389A461&uin=0&fromtag=66","cover":"https://y.gtimg.cn/music/photo_new/T002R300x300M000002JovPt2hyA7F.jpg?max_age=2592000"}]
       });
       
       clearInterval(playerTimer)
@@ -256,113 +256,134 @@ var egg = " \
 
   <div class="article-content">
     <div class="markdown-body">
-      <h2 id="项目问题思考"><a href="#项目问题思考" class="headerlink" title="项目问题思考"></a>项目问题思考</h2><p>我们需要对每天的活跃用户进行划分群体(外部群体数据导入，ETL按照一定规则进行划分)，然后给其他需求方(如数据分析部、运营部、算法部等等)提供数据服务，</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">数据化运营</span><br><span class="line">用户画像    全球76亿人口中约2/3拥有手机，半数为 智能型设备  服务细分 千人千面</span><br><span class="line">日志分析  埋点日志/日志采集/日志分析</span><br></pre></td></tr></table></figure>
-<p>我们的元数据是 odps(阿里云提供的大数据计算平台) 宽表，以及外部数据导入</p>
-<p><img src="/2019/01/20/更新过程中的查询/用户信息系统底层架构.png" alt="用户信息系统底层架构"></p>
-<p>在系统架构设计中，遇到以下问题：</p>
-<ul>
-<li><p>底层架构初始问题：</p>
-<ul>
-<li><p>存储使用什么？</p>
-<ul>
-<li><p>MYSQL，目前该表大概有2亿条数据，之后在人群来源更多了之后，数据增长会更快，mysql应该是吃不消的。</p>
-</li>
-<li><p>ADS(阿里云ADB)，继续使用ADS，这个是可以的，目前的解决方案也是在saas那个ads的库中。因为只同步一天的人群即可，所以不需要担心数据量的增长，</p>
-<p>但是同步到ADS中，稳定性是受ADS的影响的，目前来看ADS的稳定性并不是很能够得到保障，还有就是单独开一个ADS的库，成本也稍微高一些。</p>
-</li>
-<li><p>ES：使用ES直接存储人群关系的话，存储为一个index，两个fileld，无法按tagId字段删除。</p>
-</li>
-</ul>
-</li>
-<li><p>存储数据格式设计为什么样的？</p>
-<p>我们的业务需求是提供 /user/tags 这个接口的稳定对外服务，qps达到400-500</p>
-<p>可以直接存储 userid，tagid的对应关系，也可以直接存储userid，tagidList的对应关系。</p>
-<p>前者是直接存储人群;后者是需要在olap计算好用户和分群集合的对应关系，然后再进行存储。（这种应该是不提倡的，因为olap的稳定性和速度都没有办法保证，如果这么做的话和直接将查询落在olap上没有区别）</p>
-</li>
-<li><p>对外接口的数据存储定下来之后，olap中的分群变化后，如何去做数据同步到对外接口库？</p>
-</li>
-</ul>
-</li>
-</ul>
-<pre><code>那么为什么需要数据的同步呢
-
-人群的生成和变动最终都会落在olap库中，查询的接口使用的存储中的数据并不是实时更新的，所以需要从olap库中去同步这部分的更新数据。
-olap中的数据每天分为初始化和变动两个部分
-
-初始化：odps→ads用户宽表，规则动态分群更新，静态分群+自定义分群拷贝t-1，同步etl人群+圈选人群的生成的规则人群。
-变动：创建规则分群+同步etl人群+同步圈选规则人群
-做数据同步，可以以人群为粒度，每一个人群拆分成一个任务，交给EOS去执行同步，需要考虑的是上游只需要将任务拆分丢弃给EOS系统即可，失败重试，幂等性由EOS系统的任务保证。
-</code></pre><ul>
-<li>用户群新增更新操作时,此时如何保证查询到有效的数据</li>
-<li>数据同步更新时，如何保证查询到有效的数据<ul>
-<li>分群的存储和删除? 比如很快的新建分群，然后删除分群，同步是分布式任务，很可能先到达删除任务，在到达新建任务，此时如何处理</li>
-</ul>
-</li>
-</ul>
-<h2 id="数据化运营"><a href="#数据化运营" class="headerlink" title="数据化运营"></a>数据化运营</h2><blockquote>
-<p>DAU(Daily Active User)日活跃用户数量。常用于反映网站、互联网应用或网络游戏的运营情况。DAU 通常统计一日（统计日）之内，登录或使用了某个产品的用户数（去除重复登录的用户），这与流量统计工具里的访客（UV）概念相似。</p>
-</blockquote>
-<blockquote>
-<p>通常 DAU 会结合 MAU（月活跃用户数量）一起使用，这两个指标一般用来衡量服务的用户粘性以及服务的衰退周期。 [1] MAU、DAU 分别从宏观和微观的角度对服务的用户粘性做了权衡，也可以这么说，MAU 更像战略层面的表征，DAU 更像战术层面的表征。通过这些宏观和细微的趋势变化，可以对营销及推广提供一些数据支持或者帮助。</p>
-</blockquote>
-<p>假如有一个近来不景气的电商平台，平台日活从年初 50 万一路下跌，到了现在，剩下 40 万底裤，也就两条路可走了<br>1.老板绞尽脑汁去哄着投资人<br>2.老板勒紧裤带过日子(员工就更不好过了)</p>
-<p>这个时候老板那可以做什么呢？BD、市场、运营会如何做呢：</p>
-<ul>
-<li>“谈几家合作平台，互换资源搞些流量？”</li>
-<li>“投几个内容 KOL(关键意见领袖，如大 V)，或者投点广告主？”</li>
-<li>“加做几场促销吧，配合 Push 能涨点日活”</li>
-<li>捞回老客 流失老客召回一定比拉新成本更低，更精准，流量质量更好。</li>
-</ul>
-<p>这个时候我们可以针对老客户做运营，简单而有效的挺过难关</p>
-<p>对于捞老客户，运营可以这样做</p>
-<p>方法：</p>
-<ul>
-<li><p>推送消息 ： 网站私信/短信/邮件….</p>
-<p>在我们的日常中，这种营销很常见，而且现在的大平台会做一些精准话的营销，比如构建用户画像，分群，针对群体特点进行推送广告或者优惠信息！</p>
-</li>
-</ul>
-<ul>
-<li><p>搞活动：</p>
-<ul>
-<li>促销优惠</li>
-<li>赠送优惠券</li>
-<li><p>商品领取 回归免费领礼品 – 事实证明 这一事件很容易拉回老客户</p>
-</li>
-<li><p>社交裂变  </p>
-</li>
-</ul>
-</li>
-<li><p>数据化运营</p>
-<ul>
-<li>数据支撑<ul>
-<li>群体划分</li>
-<li>群体特征模型</li>
-</ul>
-</li>
-<li><p>数据反馈</p>
-<ul>
-<li><p>响应数据 漏斗分析<br>假设我们在今日头条投放了一则广告，一段时间内，1000 人点击了广告，200 人点击后进行了注册，50 人注册后根据提示下载了 APP，最后只有 10 人在 APP 完成了消费转化。</p>
-<p>在这里，从 1000 到 10，就是一个简单的漏斗。任何一个活动，从触达后用户的首个特定动作发生到最终的转化，就是一个漏斗。漏斗展示了一次活动的直接成效，并将成效分解到各个步骤，为结果提供每个层次的归因</p>
-</li>
-<li><p>裂变数据<br>饿了么式的红包分享、拼多多式的助力砍价，还是每日优鲜的 0 元吃水果、携程的助力抢车票，亦或是近期朋友圈现象级的网易荣格心理测试、连咖啡的“我的咖啡店”，这些教科书级的活动或玩法，不论转化导向或传播导向，都是围绕“社交”这个价值点展开的</p>
-</li>
-<li><p>价值追踪</p>
-<ul>
-<li>对于新加入的用户，又可以继续追踪他们的日常行为进行进一步分析，为后续分分析提供支持</li>
-<li><p>知乎</p>
-<p>| 用户类型       | 用户行为               | 价值                         |<br>| ————– | ———————- | —————————- |<br>| 一般内容消费者 | 没事刷知乎，只看不说话 | 消费主体与流量主题，人多     |<br>| 传播互动型用户 | 点赞/评论/分享/转发    | 碎片内容生产，传播           |<br>| 知识付费者     | 购买会员或live私家课   | 核心内容消费者，重要收入     |<br>| 一般内容生产者 | 80%内容生产            | 内容生态的基石，大v的绿叶    |<br>| 大V            | 头部内容的生产         | 20%的内容带来80%的流量与收入 |</p>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-<pre><code>- 成本评估
-  - 有效的活动可以继续
-</code></pre>
+      <h2 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h2><p>现有一个日期数据结构如下(对于不同语言自行实现类似的结构)：</p>
+<p>public class Date  {    public int Year;     public int Month;    public int Day;    public int Hour;     public int Minute;     public int Second; }<br>现要求编写一个DateFomatter将如上结构的Date数据格式化成特定结构的字符串，格式描述如下</p>
+<table>
+<thead>
+<tr>
+<th>符号</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>yyyy</td>
+<td>4位数字表示的年份，不足4位用0补齐，如2001，2012，0001</td>
+</tr>
+<tr>
+<td>yy</td>
+<td>2位数字表示的年份，不足2位用0补齐，如01，12，16</td>
+</tr>
+<tr>
+<td>———–</td>
+<td>——————————-</td>
+</tr>
+<tr>
+<td>M</td>
+<td>至少用1位表示的月份，如1，12</td>
+</tr>
+<tr>
+<td>dd</td>
+<td>2位数字表的日期，不足2位用0补齐，如08，30</td>
+</tr>
+<tr>
+<td>d</td>
+<td>至少用1位表示的日期，如8，30</td>
+</tr>
+<tr>
+<td>HH</td>
+<td>2位数字表示24小时制小时，不足2位用0补齐，如02，23</td>
+</tr>
+<tr>
+<td>H</td>
+<td>至少用1位表示的24小时制小时，如2，23</td>
+</tr>
+<tr>
+<td>hh</td>
+<td>2位数字表示12小时制小时，不足2位用0补齐，如02，12</td>
+</tr>
+<tr>
+<td>h</td>
+<td>至少用1位表示的12小时制小时，如2，12</td>
+</tr>
+<tr>
+<td>mm</td>
+<td>2位数字表示的分钟，不足2位用0补齐，如00，59</td>
+</tr>
+<tr>
+<td>m</td>
+<td>至少用1位数字表示的分钟，如0，59</td>
+</tr>
+<tr>
+<td>ss</td>
+<td>2位数字表示的秒数，不足2位用0补齐，如00，59</td>
+</tr>
+<tr>
+<td>s</td>
+<td>至少用1位数字表示的秒数，如0，59</td>
+</tr>
+<tr>
+<td>其它字符 直接输出</td>
+</tr>
+</tbody>
+</table>
+<p>注:其余任何使用y,M,d,H,h,m,s字符且不满足上述pattern的格式均视为无效格式，如hhh,y,yyyyy等，遇 到无效格式是formatter应输出invalid format</p>
+<p>样例: 对于数据<br>{    Year: 2001,    Month: 11,     Day: 21,     Hour: 13,    Mintue: 58     Second: 8 }</p>
+<table>
+<thead>
+<tr>
+<th>格式</th>
+<th>结果</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>yyyy­MM­ddTHH:mm:ss</td>
+<td>2001­11­21T13:58:08</td>
+</tr>
+<tr>
+<td>yy­M­d</td>
+<td>// H:m:s 01­11­21 // 13:58:8</td>
+</tr>
+<tr>
+<td>d/m/yyyy</td>
+<td>21/11/2001</td>
+</tr>
+<tr>
+<td>hh:mm:ss</td>
+<td>01:58:08</td>
+</tr>
+<tr>
+<td>hxmxs</td>
+<td>1x58x8</td>
+</tr>
+<tr>
+<td>“yyyy”</td>
+<td>“2001”</td>
+</tr>
+<tr>
+<td>yyyy­yy</td>
+<td>2001­01</td>
+</tr>
+<tr>
+<td>yyyy­MM­dd,yy­M­d</td>
+<td>2001­11­21,01­11­21</td>
+</tr>
+<tr>
+<td>HHH</td>
+<td>invalid format</td>
+</tr>
+<tr>
+<td>yyy­MM</td>
+<td>invalid format</td>
+</tr>
+<tr>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h2 id="解题"><a href="#解题" class="headerlink" title="解题"></a>解题</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">/**</span><br><span class="line"> * @author pengrui</span><br><span class="line"> * 2019/3/18</span><br><span class="line"> */</span><br><span class="line">public class DateDemo &#123;</span><br><span class="line">    public static void main(final String[] args) &#123;</span><br><span class="line">        final Date date = new Date(2019, 2, 12, 11, 03, 56);</span><br><span class="line">        final DateFomatter dateFomatter1 = new DateFomatter(&quot;yyyy\\u00ADMM\\u00ADddTHH:mm:ss&quot;);</span><br><span class="line">        System.out.println(&quot;1\t&quot; +</span><br><span class="line">                dateFomatter1.format(date)</span><br><span class="line">        );</span><br><span class="line"></span><br><span class="line">        final DateFomatter dateFomatter2 = new DateFomatter(&quot;yy\\u00ADM\\u00ADd // H:m:s&quot;);</span><br><span class="line">        System.out.println(&quot;2\t&quot; +</span><br><span class="line">                dateFomatter2.format(date)</span><br><span class="line">        );</span><br><span class="line"></span><br><span class="line">        final DateFomatter dateFomatter3 = new DateFomatter(&quot;d/m/yyyy&quot;);</span><br><span class="line">        System.out.println(&quot;3\t&quot; +</span><br><span class="line">                dateFomatter3.format(date)</span><br><span class="line">        );</span><br><span class="line"></span><br><span class="line">        final DateFomatter dateFomatter4 = new DateFomatter(&quot;hh:mm:ss&quot;);</span><br><span class="line">        System.out.println(&quot;4\t&quot; +</span><br><span class="line">                dateFomatter4.format(date)</span><br><span class="line">        );</span><br><span class="line"></span><br><span class="line">        final DateFomatter dateFomatter5 = new DateFomatter(</span><br><span class="line">                &quot;yyyy\u00ADMM\u00ADdd,yy\u00ADM\u00ADd&quot;);</span><br><span class="line">        System.out.println(&quot;5\t&quot; +</span><br><span class="line">                dateFomatter5.format(date)</span><br><span class="line">        );</span><br><span class="line"></span><br><span class="line">        final DateFomatter dateFomatter6 = new DateFomatter(</span><br><span class="line">                &quot;hxmxs&quot;);</span><br><span class="line">        System.out.println(&quot;6\t&quot; +</span><br><span class="line">                dateFomatter6.format(date)</span><br><span class="line">        );</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">class Date &#123;</span><br><span class="line">    public int Year;</span><br><span class="line">    public int Month;</span><br><span class="line">    public int Day;</span><br><span class="line">    public int Hour;</span><br><span class="line">    public int Minute;</span><br><span class="line">    public int Second;</span><br><span class="line"></span><br><span class="line">    public Date(final int year, final int month, final int day, final int hour, final int minute,</span><br><span class="line">            final int second) &#123;</span><br><span class="line">        Year = year;</span><br><span class="line">        Month = month;</span><br><span class="line">        Day = day;</span><br><span class="line">        Hour = hour;</span><br><span class="line">        Minute = minute;</span><br><span class="line">        Second = second;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">class DateFomatter &#123;</span><br><span class="line">    private final String formatStr;</span><br><span class="line">    static final Exception InvalidException = new Exception(&quot;invalid format&quot;);</span><br><span class="line"></span><br><span class="line">    public DateFomatter(final String format) &#123;</span><br><span class="line">        this.formatStr = format;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public String format(final Date date) &#123;</span><br><span class="line">        char ch = &apos; &apos;;</span><br><span class="line">        int i = 0, j = 1;</span><br><span class="line">        final StringBuilder sb = new StringBuilder();</span><br><span class="line">        try &#123;</span><br><span class="line">            while (i++ &lt; formatStr.length()) &#123;</span><br><span class="line">                j = 1;</span><br><span class="line">                while (i &lt; formatStr.length() &amp;&amp; (ch = formatStr.charAt(i)) == formatStr.charAt(</span><br><span class="line">                        i - 1)) &#123;</span><br><span class="line">                    i++;</span><br><span class="line">                    j++;</span><br><span class="line">                &#125;</span><br><span class="line">                sb.append(formatDate(formatStr.charAt(i - 1), j, date));</span><br><span class="line">            &#125;</span><br><span class="line">        &#125; catch (final Exception e) &#123;</span><br><span class="line">            return e.getMessage();</span><br><span class="line">        &#125;</span><br><span class="line">        return sb.toString();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    private String formatDate(final char ch, final int length, final Date date) throws Exception &#123;</span><br><span class="line">        switch (ch) &#123;</span><br><span class="line">        case &apos;y&apos;:</span><br><span class="line">            return formatTwoOrFour(length, date.Year);</span><br><span class="line">        case &apos;M&apos;:</span><br><span class="line">            return formatOneOrTwo(length, date.Month);</span><br><span class="line">        case &apos;d&apos;:</span><br><span class="line">            return formatOneOrTwo(length, date.Day);</span><br><span class="line">        case &apos;H&apos;:</span><br><span class="line">            return formatOneOrTwo(length == 1 &amp;&amp; date.Hour &gt; 10 ? 2 : length, date.Hour);</span><br><span class="line">        case &apos;h&apos;:</span><br><span class="line">            return formatOneOrTwo(length == 1 &amp;&amp; date.Hour &gt; 10 ? 2 : length, date.Hour % 12);</span><br><span class="line">        case &apos;m&apos;:</span><br><span class="line">            return formatOneOrTwo(length == 1 &amp;&amp; date.Minute &gt; 10 ? 2 : length, date.Minute);</span><br><span class="line">        case &apos;s&apos;:</span><br><span class="line">            return formatOneOrTwo(length == 1 &amp;&amp; date.Second &gt; 10 ? 2 : length, date.Second);</span><br><span class="line">        default:</span><br><span class="line">            return ch + &quot;&quot;;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    private String intToString(final int needLength, final int number) &#123;</span><br><span class="line">        int length = 0;</span><br><span class="line">        int temp = number;</span><br><span class="line">        final StringBuilder sb = new StringBuilder();</span><br><span class="line">        while (temp &gt; 0 &amp;&amp; length++ &lt; needLength) &#123;</span><br><span class="line">            sb.append(temp % 10);</span><br><span class="line">            temp /= 10;</span><br><span class="line">        &#125;</span><br><span class="line">        while (length++ &lt; needLength) &#123;</span><br><span class="line">            sb.append(0);</span><br><span class="line">        &#125;</span><br><span class="line">        return sb.reverse().toString();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    private String formatOne(final int number) &#123;</span><br><span class="line">        return intToString(1, number);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    private String formatTwo(final int number) &#123;</span><br><span class="line">        return intToString(2, number);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    private String formatFour(final int number) &#123;</span><br><span class="line">        return intToString(4, number);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    private String formatOneOrTwo(final int length, final int number) throws Exception &#123;</span><br><span class="line">        if (length == 1) &#123;</span><br><span class="line">            return formatOne(number);</span><br><span class="line">        &#125; else if (length == 2) &#123;</span><br><span class="line">            return formatTwo(number);</span><br><span class="line">        &#125;</span><br><span class="line">        throw InvalidException;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    private String formatTwoOrFour(final int length, final int number) throws Exception &#123;</span><br><span class="line">        if (length == 2) &#123;</span><br><span class="line">            return formatTwo(number);</span><br><span class="line">        &#125; else if (length == 4) &#123;</span><br><span class="line">            return formatFour(number);</span><br><span class="line">        &#125;</span><br><span class="line">        throw InvalidException;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="结果："><a href="#结果：" class="headerlink" title="结果："></a>结果：</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">1	2019\u0AD02\u0AD12T11:03:56</span><br><span class="line">2	19\u0AD2\u0AD2 / 11:3:56</span><br><span class="line">3	2/3/2019</span><br><span class="line">4	11:03:56</span><br><span class="line">5	2019­02­12,19­2­2</span><br><span class="line">6	11x3x56</span><br></pre></td></tr></table></figure>
     </div>
   </div>
   
@@ -373,7 +394,7 @@ olap中的数据每天分为初始化和变动两个部分
         
           本文作者 : 对六 <br>
         
-        原文链接 : <a href>http://duiliuliu.github.io/2019/01/20/更新过程中的查询/</a><br>
+        原文链接 : <a href>http://duiliuliu.github.io/2019/03/18/Java格式化时间-面试题/</a><br>
         版权声明 : 本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> 许可协议。转载请注明出处！
         </blockquote>
       </div>
@@ -433,14 +454,8 @@ olap中的数据每天分为初始化和变动两个部分
           <i class="iconfont icon-06tags"></i>标签: 
           
           <span class="span--tag">
-            <a href="/tags/项目/">
-              #项目
-            </a>
-          </span>
-          
-          <span class="span--tag">
-            <a href="/tags/问题/">
-              #问题
+            <a href="/tags/面试-Java/">
+              #面试 Java
             </a>
           </span>
           
@@ -466,15 +481,9 @@ olap中的数据每天分为初始化和变动两个部分
       <div class="nav-pre">
         <i class="iconfont icon-prev"></i>
         上一篇:
-        <a href="/2019/01/15/Java时间格式化/" target="_self">Java 时间格式化</a>
-      </div>
-    
-    
-      <div class="nav-next">
-        下一篇:
         <a href="/2019/03/18/Java自定义排序/" target="_self">Java自定义排序</a>
-        <i class="iconfont icon-next"></i>
       </div>
+    
     
   </nav>
 
