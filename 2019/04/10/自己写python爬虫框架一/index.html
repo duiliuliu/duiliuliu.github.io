@@ -245,7 +245,7 @@ var egg = " \
         container: document.getElementById('自己写python爬虫框架一'),
         theme: '#e96900',
         listFolded: false,
-        audio: [{"name":"Sera Mejor Decirte Adio&#769;s","artist":"Los Bondadosos","url":"http://dl.stream.qqmusic.qq.com/C400001fq4xP3Cn7dA.m4a?vkey=0384B5AE82F5B605992346B904593DE06A0581537123A0471DA38CEC612DF748BDBF35856263B19331E7E8B992ED61FB1A153F8205797B31&guid=9870159400&uin=2181111110&fromtag=66","cover":"https://y.gtimg.cn/music/photo_new/T002R300x300M000004LnIsT0PucUG.jpg"}]
+        audio: [{"name":"魔鬼中的天使","artist":"康树龙","url":"http://dl.stream.qqmusic.qq.com/C400001z7IOv2REA48.m4a?vkey=&guid=9870159400&uin=2181111110&fromtag=66","cover":"https://y.gtimg.cn/music/photo_new/T002R300x300M000002Zt6vu26hkuW.jpg"}]
       });
       
       clearInterval(playerTimer)
@@ -260,6 +260,7 @@ var egg = " \
 <h2 id="整体架构"><a href="#整体架构" class="headerlink" title="整体架构"></a>整体架构</h2><p><img src="/2019/04/10/自己写python爬虫框架一/爬虫结构.png" alt="架构"></p>
 <ul>
 <li><p>调度器<br>从请求管理器中取请求，然后调用下载器进行下载，调度解析器进行解析，对解析出的请求再次加入到请求管理器中；解析出的数据进行缓存，最后写入到文本中</p>
+<p>调度器为爬虫框架的核心，也是爬虫的入口，其成员变量为下载器、解析器、请求管理器、文件写入类、日志类，对于不同的爬虫需求，可以对以上接口有不同的实现。</p>
 <p>核心方法：</p>
 <p>从请求管理器中取用 request,采用模板设计模式，不可被子类重写</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">def startcrawl(self):</span><br><span class="line">  self.__logger.info(&apos;\tStart crawl...&apos;)</span><br><span class="line">  while self.__requestManager.has_new_request():</span><br><span class="line">      request = self.__requestManager.get_new_request()</span><br><span class="line">      self.crawl(request)</span><br><span class="line">  self._logger.info(&apos;\tEnd crawl...&apos;)</span><br><span class="line">  DataWriter._writter_buffer_flush()</span><br></pre></td></tr></table></figure>
