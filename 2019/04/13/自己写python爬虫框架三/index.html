@@ -264,37 +264,17 @@ var egg = " \
 <p>在 response 的内部，我们增加了 response 对象转化 htmlElment 对象方法，其根本上使用用 lxml 库进行解析为 HtmlElement 对象的。</p>
 <p>response对象支持的属性有：</p>
 <ul>
-<li>text 文本类型的response ，如： <blockquote>
-<blockquote>
-<blockquote>
-<p><code>response = HtmlDownloader().downloader(request)</code><br>response.text<br>…</p>
-</blockquote>
-</blockquote>
-</blockquote>
+<li><p>text 文本类型的response ，如： </p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; `response = HtmlDownloader().downloader(request)`</span><br><span class="line">&gt;&gt;&gt; response.text</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
 </li>
-<li>content 二进制的response数据，如<blockquote>
-<blockquote>
-<blockquote>
-<p><code>response = HtmlDownloader().downloader(request)</code><br>response.content<br>…</p>
-</blockquote>
-</blockquote>
-</blockquote>
+<li><p>content 二进制的response数据，如</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; `response = HtmlDownloader().downloader(request)`</span><br><span class="line">&gt;&gt;&gt; response.content</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
 </li>
-<li>json() 将response转化为json对象，解析失败抛出异常<blockquote>
-<blockquote>
-<blockquote>
-<p><code>response = HtmlDownloader().downloader(request)</code><br>response.json()<br>…</p>
-</blockquote>
-</blockquote>
-</blockquote>
+<li><p>json() 将response转化为json对象，解析失败抛出异常</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; `response = HtmlDownloader().downloader(request)`</span><br><span class="line">&gt;&gt;&gt; response.json()</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
 </li>
-<li>html() 将response转化为HtmlElement对象，解析失败抛出异常<blockquote>
-<blockquote>
-<blockquote>
-<p><code>response = HtmlDownloader().downloader(request)</code><br>response.html()<br>…</p>
-</blockquote>
-</blockquote>
-</blockquote>
+<li><p>html() 将response转化为HtmlElement对象，解析失败抛出异常</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; `response = HtmlDownloader().downloader(request)`</span><br><span class="line">&gt;&gt;&gt; response.html()</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
 </li>
 </ul>
 <p>因此我们解析器可以依赖response内部的属性以及方法进行解析。</p>
