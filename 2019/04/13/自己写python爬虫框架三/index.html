@@ -28,12 +28,12 @@ var egg = " \
   
   
   
-  <title>归档: 2019/1 | Duiliuliu</title>
+  <title>自己写python爬虫框架(三)-解析器 | Duiliuliu</title>
 
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
   
-    <meta name="keywords" content="Hexo, duiliuliu">
+    <meta name="keywords" content="自己写爬虫框架,python,爬虫,">
   
 
   <script>
@@ -195,85 +195,379 @@ var egg = " \
   })
 </script>
 
-      <div class="container">
-  <div class="timeline">
-  <span class="archive-move-on"></span>
-  <span class="archive-page-counter">
-    
-      <span>Wow! 一共有 20 篇文章</span>
-    
-  </span>
+      
+
+
+
+
+
+
+
+
+<div class="container post-index">
+
   
+
+<div class="post">
+  <h1 class="article-title">
+    <span>自己写python爬虫框架(三)-解析器</span>
+  </h1>
+  <div class="article-top-meta">
+    <span>
+      发布 : 
+      2019-04-13
+    </span>
+    
+      <span>
+        分类 : 
+          <a href="/categories/自己写爬虫框架/">
+            自己写爬虫框架
+          </a>
+      </span>
+    
+    
+      <span>
+        浏览 : <span class="article-timer" data-identity="自己写python爬虫框架三"></span>
+      </span>
+    
+  </div>
+
   
-    <div class="collection-title">
-      <h2>
-        <span>2019</span>
-      </h2>
+    <div id="自己写python爬虫框架三" style="margin: 4rem 2px"></div>
+<script async>
+  (function(){
+    let playerTimer = setInterval(function(){
+      if(!window.APlayer){
+        return
+      }
+
+      new APlayer({
+        container: document.getElementById('自己写python爬虫框架三'),
+        theme: '#e96900',
+        listFolded: false,
+        audio: [{"name":"最佳损友","artist":"陈奕迅","url":"http://dl.stream.qqmusic.qq.com/C400003hFxQh276Cv5.m4a?vkey=02A664C302A19BBCD7000E5D37A2AE1839449A64A484CD166E803326B0D8563230A2A6902BCCDE17C0A8C295A1CCB48CA5B8E8A4B8FA59AA&guid=9870159400&uin=2181111110&fromtag=66","cover":"https://y.gtimg.cn/music/photo_new/T002R300x300M000002FT46H18G1jW.jpg"}]
+      });
+      
+      clearInterval(playerTimer)
+    }, 10);
+  })()
+</script>
+  
+
+  <div class="article-content">
+    <div class="markdown-body">
+      <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>解析器，是对下载器请求下载得到的响应数据进行解析，以获取我们需要的数据。网络中各个网站有着不同的结构，不同的前端实现等等，这些早就了解析器的复杂，针对这些复杂的情况，我们可以设计实现通用的解析器以及针对特定网站定制化的解析器。通用的解析器则是对网页中文本数据的批量抓取，显得比较粗暴，实现比较简洁，需要注意的是现在很多网页是异步加载的，在初期是不会有过多的文本数据显示到网页中，所以这儿需要考虑对 JavaScript 的渲染；针对特定网站的定制化解析器可以继承通用解析器进行进一步的解析或者对通用解析器解析获取到的数据进行数据清洗以获得需要的数据。</p>
+<p>我们的解析器依赖于 lxml 框架，一个解析 xml 文档的 python 库。</p>
+<blockquote>
+<p><a href="https://lxml.de/lxmlhtml.html" target="_blank" rel="noopener">lxml 文档</a></p>
+</blockquote>
+<p>在 response 的内部，我们增加了 response 对象转化 htmlElment 对象方法，其根本上使用用 lxml 库进行解析为 HtmlElement 对象的。</p>
+<p>response对象支持的属性有：</p>
+<ul>
+<li>text 文本类型的response ，如： <blockquote>
+<blockquote>
+<blockquote>
+<p><code>response = HtmlDownloader().downloader(request)</code><br>response.text<br>…</p>
+</blockquote>
+</blockquote>
+</blockquote>
+</li>
+<li>content 二进制的response数据，如<blockquote>
+<blockquote>
+<blockquote>
+<p><code>response = HtmlDownloader().downloader(request)</code><br>response.content<br>…</p>
+</blockquote>
+</blockquote>
+</blockquote>
+</li>
+<li>json() 将response转化为json对象，解析失败抛出异常<blockquote>
+<blockquote>
+<blockquote>
+<p><code>response = HtmlDownloader().downloader(request)</code><br>response.json()<br>…</p>
+</blockquote>
+</blockquote>
+</blockquote>
+</li>
+<li>html() 将response转化为HtmlElement对象，解析失败抛出异常<blockquote>
+<blockquote>
+<blockquote>
+<p><code>response = HtmlDownloader().downloader(request)</code><br>response.html()<br>…</p>
+</blockquote>
+</blockquote>
+</blockquote>
+</li>
+</ul>
+<p>因此我们解析器可以依赖response内部的属性以及方法进行解析。</p>
+<h2 id="解析器实现"><a href="#解析器实现" class="headerlink" title="解析器实现"></a>解析器实现</h2><p>作为解析器，则是从传入的response中获取可以再次爬取的request以及需要的数据，所以我们的返回数据应为一个map结构的数据，key为requests与data，分别表示可深入爬取的request与解析到的文本</p>
+<p>那么，如何实现一个通用的解析器呢，通用的解析器则是抽象广大爬虫解析共有的特诊：获取可深入爬取的request、获取该文档中的非标签文本，如：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">class HtmlParser(AbstractParser):</span><br><span class="line"></span><br><span class="line">    &apos;&apos;&apos;</span><br><span class="line">    解析器</span><br><span class="line"></span><br><span class="line">    对传入的文本进行解析</span><br><span class="line"></span><br><span class="line">    在爬取网页中，这部分时很难统一的，各个网站有不同的特色，所以此部分是一般需要用户自己独立重写的</span><br><span class="line">    &apos;&apos;&apos;</span><br><span class="line"></span><br><span class="line">    @typeassert(response=Response)</span><br><span class="line">    def parse(self, response):</span><br><span class="line">        htm = response.html()</span><br><span class="line">        requests = []</span><br><span class="line">        for item in htm.iter(&apos;a&apos;):</span><br><span class="line">            request = copy.copy(response.request)</span><br><span class="line">            request.method = &apos;get&apos;</span><br><span class="line">            request.url = item.get(&apos;href&apos;)</span><br><span class="line">            request.level = response.level+1</span><br><span class="line">            requests.append(request)</span><br><span class="line">        datas = [text.strip() for text in htm.itertext()]</span><br><span class="line">        return requests, datas</span><br></pre></td></tr></table></figure>
+<p>具体实现的解析器继承(实现)之前定义好的解析器接口，@typeassert 对传入的参数类型进行校验，传入参数 response 必须为 Response 类，Response内部一系列的属性与方法支撑了我们的解析器。</p>
+<ul>
+<li style="list-style: none"><input type="checkbox"> 定制化解析</li>
+</ul>
+<h2 id="可扩展思考"><a href="#可扩展思考" class="headerlink" title="可扩展思考"></a>可扩展思考</h2><p>同样的，在对response解析前后，我们可以添加很多操作以满足我们复杂的爬虫需求，比如在解析后对解析得到的数据进行清洗。在此框架中，可以运用装饰者模式对其进行扩展，也可以自己继承实现 AbstractParser 接口中的方法。</p>
+    </div>
+  </div>
+  
+    <div class="copy-right">
+      <div class="markdown-body">
+        <blockquote>
+        
+        
+          本文作者 : 对六 <br>
+        
+        原文链接 : <a href>http://duiliuliu.github.io/2019/04/13/自己写python爬虫框架三/</a><br>
+        版权声明 : 本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> 许可协议。转载请注明出处！
+        </blockquote>
+      </div>
     </div>
   
   
   
-  <article class="posts-collapse">
-    <header>
-      <h2>
-        <a href="/2019/01/20/更新过程中的查询/">
-          <span>更新过程中的查询</span>
-        </a>
-      </h2>
-      <div class="post-meta">
-        01-20
-      </div>
-    </header>
-  </article>
-  
-  
-  <article class="posts-collapse">
-    <header>
-      <h2>
-        <a href="/2019/01/15/Java时间格式化/">
-          <span>Java 时间格式化</span>
-        </a>
-      </h2>
-      <div class="post-meta">
-        01-15
-      </div>
-    </header>
-  </article>
-  
-  
-  <article class="posts-collapse">
-    <header>
-      <h2>
-        <a href="/2019/01/14/mybatis参数/">
-          <span>mybatis参数</span>
-        </a>
-      </h2>
-      <div class="post-meta">
-        01-14
-      </div>
-    </header>
-  </article>
-  
-  
-  <article class="posts-collapse">
-    <header>
-      <h2>
-        <a href="/2019/01/08/gitlabci自动化打包上传UDF/">
-          <span>gitlabci自动化打包上传UDF</span>
-        </a>
-      </h2>
-      <div class="post-meta">
-        01-08
-      </div>
-    </header>
-  </article>
-  
+    <div class="social-share" style="margin-top: -2rem" data-wechat-qrcode-title="<p>微信扫一扫</p>" data-wechat-qrcode-helper="<p>微信右上角, 扫一扫分享</p>" data-sites="douban, google, facebook, twitter">
+  <span style="color: #6b7487; font-size: 1.4rem;">分享到: </span>
 </div>
-  <nav class="page-navigation">
+<script src="https://cdn.bootcss.com/social-share.js/1.0.16/js/social-share.min.js" async></script>
+  
+
+  
+    <div id="reward">
+  
+    <p id="reward-meta">你我共勉！</p>
+  
+  <button id="reward-btn">
+    
+    <span>共勉</span>
+  </button>
+  <div id="reward-qrcode">
+    
+      <div class="reward-qrcode--container">
+        <img class="qrcode-img" src="/images/wechat.png" alt="微信">
+        <p class="qrcode-meta">微信</p>
+      </div>
+    
+      <div class="reward-qrcode--container">
+        <img class="qrcode-img" src="/images/alipay.png" alt="支付宝">
+        <p class="qrcode-meta">支付宝</p>
+      </div>
+    
+  </div>
+
+</div>
+
+<script>
+  (() => {
+    let button = document.querySelector('#reward-btn'),
+      qrcode = document.querySelector('#reward-qrcode'),
+      display = false;
+    
+    button.addEventListener('click', () => {
+      qrcode.style.display = display ? 'none' : 'block'
+      display = !display
+    }, false)
+  })()
+</script>
+  
+
+  <div class="article-footer">
+    <div class="article-meta pull-left">
+      <span>
+        
+          <i class="iconfont icon-06tags"></i>标签: 
+          
+          <span class="span--tag">
+            <a href="/tags/python/">
+              #python
+            </a>
+          </span>
+          
+          <span class="span--tag">
+            <a href="/tags/爬虫/">
+              #爬虫
+            </a>
+          </span>
+          
+        
+      </span>
+    </div>
+    <div class="article-meta pull-right">
+    </div>
+  </div>
+</div>
+
+
+  <aside id="sidebar">
+    <p id="sidebar-header"></p>
+    <ol id="sidebar-toc"></ol>
+    <img id="sidebar-icon">
+  </aside>
+  <script async>setTimeout(generateToc, 10);</script>
+
+
+  <nav class="post-navigation">
+    
+      <div class="nav-pre">
+        <i class="iconfont icon-prev"></i>
+        上一篇:
+        <a href="/2019/04/11/自己写python爬虫框架二/" target="_self">自己写python爬虫框架(二)-下载器</a>
+      </div>
     
     
   </nav>
+
+  
+    <a href="#comment" class="comment-anchor"></a>
+<div class="comment-title"><i class="iconfont icon-footprint"></i> 留下足迹 <i class="iconfont icon-footprint"></i></div>
+<div id="vcomments"></div>
+
+<script defer>
+  if( true ) {
+    let path = getRealPath()
+    new Valine({
+      el: "#vcomments",
+      appId: "VPNwETUGMJnwGnY6Pc7GaVna-gzGzoHsz",
+      appKey: "niJbsuSCKuploWnG8Qvbgb5P",
+      notify: false,
+      verify: false,
+      avatar: "robohash",
+      placeholder: "正确填写邮箱, 才能及时收到回复哦♪(^∇^*)",
+      path
+    });
+  }
+</script>
+   
+
+  
+    <script defer>
+const valineAPI = (() => {
+  try {
+    AV.init("VPNwETUGMJnwGnY6Pc7GaVna-gzGzoHsz", "niJbsuSCKuploWnG8Qvbgb5P");
+  } catch(error) {}
+  const isExist = (identity) => {
+    identity = identity || getRealPath();
+    let query = new AV.Query('Timer');
+    return new Promise((resolve, reject) => {
+      query.equalTo("identity", identity);
+      query.find().then(results => {
+        resolve(results.length > 0);
+      }, error => reject(error));
+    })
+  }
+
+  const _get = (identity) => {
+    let query = null;
+    if(identity && identity instanceof Array){
+      let querys = [];
+      for(let i = 0; i < identity.length; ++i) {
+        querys[i] = new AV.Query('Timer');
+        querys[i].equalTo('identity', identity[i]);
+      }
+      query = AV.Query.or.apply(null ,querys);
+    } else {
+      identity = identity || getRealPath();
+      query = new AV.Query("Timer");
+      query.equalTo("identity", identity);
+    }
+
+    return new Promise((resolve, reject) => {
+      query.find()
+      .then(results => resolve(results))
+      .catch(error => reject(error))
+    })
+  }
+
+  const create = (identity) => {
+    identity = identity || getRealPath();
+    return new Promise((resolve, reject) => {
+      let Todo = AV.Object.extend('Timer');
+      let todo = new Todo();
+      todo.set("times", 1);
+      todo.set("identity", identity);
+      todo.save().then(res => resolve(true), error => reject(error));
+    })
+  }
+
+  const update = (identity) => {
+    identity = identity || getRealPath();
+    return new Promise((resolve, reject) => {
+      let query = new AV.Query('Timer');
+      query.equalTo("identity", identity);
+      query.find().then(todos => {
+        todos.forEach(todo => {
+          todo.set("times", todo.attributes.times + 1);
+        });
+        return AV.Object.saveAll(todos);
+      }).then(todos => resolve(true), error => reject(error));
+    })
+  }
+
+  return {
+    isExist,
+    _get,
+    update,
+    create
+  }
+})()
+
+const calcAndWriteTimes = () => {
+  let isPost = true;
+
+  let timerAllDOM = document.querySelectorAll(".article-timer");
+
+  if(isPost) {
+    let identity = timerAllDOM[0].getAttribute("data-identity");
+    valineAPI.isExist(identity)
+    .then(exist => {
+      if(exist) {
+        return valineAPI.update(identity);
+      }
+      return new Promise(resolve => resolve(true));
+    })
+    .then( succuess => valineAPI._get(identity))
+    .then( result => timerAllDOM[0].innerText = result[0].attributes.times)
+    .catch(error => console.log(error.message))
+    return ;
+  }
+
+  let timerDOMCache = {};
+
+  for(let timerDOM of timerAllDOM) {
+    let identity = timerDOM.getAttribute("data-identity");
+    if(timerDOMCache.hasOwnProperty(identity)){
+      timerDOMCache[identity].dom.push(timerDOM);
+    }else{
+      timerDOMCache[identity] = {
+        dom: [timerDOM],
+        times: undefined
+      };
+    }
+  }
+
+  let identities = Object.keys(timerDOMCache);
+  valineAPI._get(identities).then(results => {
+    for(let result of results) {
+      let {identity, times} = result.attributes;
+      timerDOMCache[identity].times = times;
+      timerDOMCache[identity].dom.map(item => item.innerText = times);
+    }
+    for(let identity of identities) {
+      if(timerDOMCache[identity].times){
+        continue;
+      }
+      timerDOMCache[identity].dom.map(item => item.innerText = 1);
+      valineAPI.create(identity);
+    }
+  }).catch(error => console.log(error.message))
+}
+
+if(true){
+  calcAndWriteTimes();
+}
+</script>
+   
+
 </div>
+
 
       <footer>
   <p class="site-info">
