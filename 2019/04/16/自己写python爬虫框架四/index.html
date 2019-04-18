@@ -28,12 +28,12 @@ var egg = " \
   
   
   
-  <title>归档 | Duiliuliu</title>
+  <title>自己写python爬虫框架(四)-请求管理器 | Duiliuliu</title>
 
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
   
-    <meta name="keywords" content="Hexo, duiliuliu">
+    <meta name="keywords" content="自己写爬虫框架,python,爬虫,">
   
 
   <script>
@@ -195,179 +195,356 @@ var egg = " \
   })
 </script>
 
-      <div class="container">
-  <div class="timeline">
-  <span class="archive-move-on"></span>
-  <span class="archive-page-counter">
-    
-      <span>Wow! 一共有 22 篇文章</span>
-    
-  </span>
+      
+
+
+
+
+
+
+
+
+<div class="container post-index">
+
   
+
+<div class="post">
+  <h1 class="article-title">
+    <span>自己写python爬虫框架(四)-请求管理器</span>
+  </h1>
+  <div class="article-top-meta">
+    <span>
+      发布 : 
+      2019-04-16
+    </span>
+    
+      <span>
+        分类 : 
+          <a href="/categories/自己写爬虫框架/">
+            自己写爬虫框架
+          </a>
+      </span>
+    
+    
+      <span>
+        浏览 : <span class="article-timer" data-identity="自己写python爬虫框架四"></span>
+      </span>
+    
+  </div>
+
   
-    <div class="collection-title">
-      <h2>
-        <span>2019</span>
-      </h2>
+    <div id="自己写python爬虫框架四" style="margin: 4rem 2px"></div>
+<script async>
+  (function(){
+    let playerTimer = setInterval(function(){
+      if(!window.APlayer){
+        return
+      }
+
+      new APlayer({
+        container: document.getElementById('自己写python爬虫框架四'),
+        theme: '#e96900',
+        listFolded: false,
+        audio: [{"name":"烟火里的尘埃","artist":"华晨宇","url":"http://music.163.com/song/media/outer/url?id=29418039.mp3","cover":"http://p2.music.126.net/quKpGJmfiW9PXZpWk-kXAg==/6627856092854279.jpg"}]
+      });
+      
+      clearInterval(playerTimer)
+    }, 10);
+  })()
+</script>
+  
+
+  <div class="article-content">
+    <div class="markdown-body">
+      <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>请求管理器是对所有的 请求 进行管理，保证爬取过的 请求 不再重复被爬取，未被爬取的 请求 按照一定的优先策略进行爬取。在请求管理器中需要具体实现我们对于请求的排队策略。排队策略则是在操作系统常见的有：先进先出、短作业优先、多级队列、轮转调度、多级反馈队列等等。而在请求管理器中还需要注意我们是对网络数据的抓取，在网络中访时问，是选择广度优先的策略还是深度优先呢？</p>
+<p>在本爬虫通用的请求管理器中选用广度优先的策略，当同一广度的 请求 都被访问之后接着对下一深度的 请求 进行访问，每个深度设置一个队列按照先进先出的排队策略，同时维护一个已爬取 请求 池，对所有新添加的 请求 进行判断，是否已经爬取过，倘若已经对该 请求 进行爬取，便不再重复爬取。对于深度使用 level 标识，初始深度为 1，依次递增。初始化请求管理器的时候会初始化一个最大深度限制变量 limit_level，防止爬虫陷入网络死循环，值默认为 1，可在初始化请求管理器的时候自定义值。</p>
+<h2 id="请求管理器实现"><a href="#请求管理器实现" class="headerlink" title="请求管理器实现"></a>请求管理器实现</h2><p>可以来看看请求管理器的抽象结构,主要有三个方法：添加请求、判断是否还有新请求、取出请求</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">def add_new_request(self, request):</span><br><span class="line">    raise NotImplementedError(&quot;未实现的父类方法: %s.%s&quot; % (</span><br><span class="line">        self.__class__.__name__, get__function_name()))</span><br><span class="line"></span><br><span class="line">def has_new_request(self):</span><br><span class="line">    raise NotImplementedError(&quot;未实现的父类方法: %s.%s&quot; % (</span><br><span class="line">        self.__class__.__name__, get__function_name()))</span><br><span class="line"></span><br><span class="line">def get_new_request(self):</span><br><span class="line">    raise NotImplementedError(&quot;未实现的父类方法: %s.%s&quot; % (</span><br><span class="line">        self.__class__.__name__, get__function_name()))</span><br></pre></td></tr></table></figure>
+<p>因此，请求管理器最简单的实现便是维护一个队列，在队尾添加新的请求，队首 pop 请求，当队尾指针与队首指针指向同一数据时，则表示队列为空，没有请求了。</p>
+<p>本爬虫按照广度优先的策略，维护一个多级队列，分别存储管理不同网络深度的请求。每一级别的队列按照先进先出的排队策略。需要维护一个已爬取请求池，判断且保证对于所有爬取过的请求不能二次爬取。并且初始化一个最大深度限制爬取深度。这样看来请求管理器在初始化时需要维护一个多级队列、一个已爬取请求池以及一个最大深度变量：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">def __init__(self, limit_level=1):</span><br><span class="line">    &apos;&apos;&apos;</span><br><span class="line">    请求管理器初始化函数</span><br><span class="line"></span><br><span class="line">        @param :: limit_level : 爬取层数限制，默认限制3层</span><br><span class="line">        @member :: level : 当前爬取层数</span><br><span class="line">        @member :: new_requests : 未爬取请求集合，采用字典存储，key对应相应的层数，value相应层数未请求的请求集合</span><br><span class="line">        @member :: old_requests : 已存储请求集合，采用元组存储，每个请求计算128位md5码进行存储</span><br><span class="line">        @member :: limit_level : 爬取层数限制，默认限制3层</span><br><span class="line"></span><br><span class="line">    &apos;&apos;&apos;</span><br><span class="line">    self.__level = 1</span><br><span class="line">    self.__new_requests = &#123;&#125;</span><br><span class="line">    self.__old_requests = set()</span><br><span class="line">    self.__limit_level = limit_level</span><br></pre></td></tr></table></figure>
+<p>接下来我们需要实现具体的添加请求、取出请求的细节。</p>
+<p>添加请求是将外部传入的请求添加到请求管理器中，但是请求可能是已经被访问过的，所以我们需要扔进已爬取请求池中判断：是否被访问过，如果已被访问过，那便不再添加到请求管理器中；反之，将其添加到请求管理器中。因此，我们的实现逻辑为：</p>
+<p><img src="/2019/04/16/自己写python爬虫框架四/添加逻辑.png" alt="添加逻辑"></p>
+<p>在具体的实现中，我们将新的请求添加到请求队列的同时，还将请求添加到了已爬取请求池中，这样可以防止在我们还未进行访问该请求却已经添加该请求到请求队列的这一段时间中插入重复已有的请求。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">@typeassert(request=Request)</span><br><span class="line">def add_new_request(self, request):</span><br><span class="line">    if not request in self.__old_requests:</span><br><span class="line">        # 向请求队列中添加请求</span><br><span class="line">        self.__add_new_request(request)</span><br><span class="line">        # 向已爬取请求池中添加请求</span><br><span class="line">        self.__add_old_request(request)</span><br></pre></td></tr></table></figure>
+<p>请求队列是多级队列，所以在添加请求的时候还需要根据请求的深度去初始化队列并添加请求。具体做法如下：</p>
+<ol>
+<li>如果请求深度大于请求管理器最大爬取深度，则直接返回</li>
+<li>如果当前多级队列容器不存在这一层级，则初始化这一层级的队列</li>
+<li>添加请求到相应层级的队列中</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">def __add_new_request(self, request):</span><br><span class="line">    if request.level &gt; self.__limit_level:</span><br><span class="line">        return</span><br><span class="line"></span><br><span class="line">    if not str(request.level) in self.__new_requests:</span><br><span class="line">        self.__init_level(request.level)</span><br><span class="line"></span><br><span class="line">    self.__new_requests[str(request.level)].add(request)</span><br></pre></td></tr></table></figure>
+<p>将请求添加到了已爬取请求池的实现中，考虑到存储已爬取请求信息只是为了验证该请求不被重复爬取，所以我们选择了 MD5 算法将请求信息转换为 128 位的摘要，这儿只取 32 字节的摘要进行判断，大大的节省了内存的消耗</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">def __add_old_request(self, request):</span><br><span class="line">    md5 = hashlib.md5()</span><br><span class="line">    md5.update(request.__str__().encode(&apos;utf-8&apos;))</span><br><span class="line">    self.__old_requests.add(md5.hexdigest()[8:-8])</span><br></pre></td></tr></table></figure>
+<p>将请求添加到请求管理器中，我们还需要将请求取出来使用。请求的取出可以按照队列的级别取出相应队首的请求，也可以直接取出此时请求管理器中最优先的请求：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">def get_new_request(self, level=self.__level):</span><br><span class="line">    if not self.has_new_request(level):</span><br><span class="line">        return None</span><br><span class="line"></span><br><span class="line">    if len(self.__new_requests[str(self.__level)]) &lt;= 1:</span><br><span class="line">        self.__add_level()</span><br><span class="line">    return self.__get_new_request(level)</span><br></pre></td></tr></table></figure>
+<p>同样的，判断请求管理器中是否还有未被访问的请求与取出请求类似：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">def has_new_request(self, level=None):</span><br><span class="line">    return self.new_requests_size(level) &gt; 0</span><br><span class="line"></span><br><span class="line">def new_requests_size(self, level=None):</span><br><span class="line">    if level:</span><br><span class="line">        return self.__new_request_size(level)</span><br><span class="line">    else:</span><br><span class="line">        return sum(map(lambda x: self.__new_request_size(x), self.__new_requests))</span><br></pre></td></tr></table></figure>
+<h2 id="可扩展思考"><a href="#可扩展思考" class="headerlink" title="可扩展思考"></a>可扩展思考</h2><p>以图的结构存储 请求(通过邻接表数据结构或者图数据库)，这样便可参数化的选择广度优先策略或是深度优先策略了。</p>
+<p>如何扩展到分布式呢</p>
+    </div>
+  </div>
+  
+    <div class="copy-right">
+      <div class="markdown-body">
+        <blockquote>
+        
+        
+          本文作者 : 对六 <br>
+        
+        原文链接 : <a href>http://duiliuliu.github.io/2019/04/16/自己写python爬虫框架四/</a><br>
+        版权声明 : 本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> 许可协议。转载请注明出处！
+        </blockquote>
+      </div>
     </div>
   
   
   
-  <article class="posts-collapse">
-    <header>
-      <h2>
-        <a href="/2019/01/08/gitlabci自动化打包上传UDF/">
-          <span>gitlabci自动化打包上传UDF</span>
-        </a>
-      </h2>
-      <div class="post-meta">
-        01-08
-      </div>
-    </header>
-  </article>
-  
-  
-    <div class="collection-title">
-      <h2>
-        <span>2018</span>
-      </h2>
-    </div>
-  
-  <article class="posts-collapse">
-    <header>
-      <h2>
-        <a href="/2018/07/25/2018-07-25-elasticsearch入门/">
-          <span>elasticsearch入门</span>
-        </a>
-      </h2>
-      <div class="post-meta">
-        07-25
-      </div>
-    </header>
-  </article>
-  
-  
-  <article class="posts-collapse">
-    <header>
-      <h2>
-        <a href="/2018/07/23/Springboot中使用线程池/">
-          <span>Springboot 中使用线程池</span>
-        </a>
-      </h2>
-      <div class="post-meta">
-        07-23
-      </div>
-    </header>
-  </article>
-  
-  
-  <article class="posts-collapse">
-    <header>
-      <h2>
-        <a href="/2018/07/07/2018-07-07-jest与enzyme对react项目自动化测试/">
-          <span>jest与enzyme对react项目自动化测试</span>
-        </a>
-      </h2>
-      <div class="post-meta">
-        07-07
-      </div>
-    </header>
-  </article>
-  
-  
-  <article class="posts-collapse">
-    <header>
-      <h2>
-        <a href="/2018/07/01/2018-06-31-自动化测试jest/">
-          <span>自动化测试jest</span>
-        </a>
-      </h2>
-      <div class="post-meta">
-        07-01
-      </div>
-    </header>
-  </article>
-  
-  
-  <article class="posts-collapse">
-    <header>
-      <h2>
-        <a href="/2018/06/26/2018-06-26-javascript-export用法/">
-          <span>javascript-export、import用法</span>
-        </a>
-      </h2>
-      <div class="post-meta">
-        06-26
-      </div>
-    </header>
-  </article>
-  
-  
-  <article class="posts-collapse">
-    <header>
-      <h2>
-        <a href="/2018/06/12/2018-06-12-Ubantu 搭建FTP文件服务/">
-          <span>Ubantu 搭建FTP文件服务</span>
-        </a>
-      </h2>
-      <div class="post-meta">
-        06-12
-      </div>
-    </header>
-  </article>
-  
-  
-  <article class="posts-collapse">
-    <header>
-      <h2>
-        <a href="/2018/06/01/2018-06-01-js中forEach与map/">
-          <span>js中forEach与map</span>
-        </a>
-      </h2>
-      <div class="post-meta">
-        06-01
-      </div>
-    </header>
-  </article>
-  
-  
-  <article class="posts-collapse">
-    <header>
-      <h2>
-        <a href="/2018/05/21/git操作详解/">
-          <span>git操作详解</span>
-        </a>
-      </h2>
-      <div class="post-meta">
-        05-21
-      </div>
-    </header>
-  </article>
-  
-  
-  <article class="posts-collapse">
-    <header>
-      <h2>
-        <a href="/2018/04/23/2018-04-23-Chrome开发者工具/">
-          <span>Chrome开发者工具</span>
-        </a>
-      </h2>
-      <div class="post-meta">
-        04-23
-      </div>
-    </header>
-  </article>
-  
+    <div class="social-share" style="margin-top: -2rem" data-wechat-qrcode-title="<p>微信扫一扫</p>" data-wechat-qrcode-helper="<p>微信右上角, 扫一扫分享</p>" data-sites="douban, google, facebook, twitter">
+  <span style="color: #6b7487; font-size: 1.4rem;">分享到: </span>
 </div>
-  <nav class="page-navigation">
+<script src="https://cdn.bootcss.com/social-share.js/1.0.16/js/social-share.min.js" async></script>
+  
+
+  
+    <div id="reward">
+  
+    <p id="reward-meta">你我共勉！</p>
+  
+  <button id="reward-btn">
     
-      <a href="/archives/">上一页</a>
+    <span>共勉</span>
+  </button>
+  <div id="reward-qrcode">
     
+      <div class="reward-qrcode--container">
+        <img class="qrcode-img" src="/images/wechat.png" alt="微信">
+        <p class="qrcode-meta">微信</p>
+      </div>
     
-      <a href="/archives/page/3/">下一页</a>
+      <div class="reward-qrcode--container">
+        <img class="qrcode-img" src="/images/alipay.png" alt="支付宝">
+        <p class="qrcode-meta">支付宝</p>
+      </div>
+    
+  </div>
+
+</div>
+
+<script>
+  (() => {
+    let button = document.querySelector('#reward-btn'),
+      qrcode = document.querySelector('#reward-qrcode'),
+      display = false;
+    
+    button.addEventListener('click', () => {
+      qrcode.style.display = display ? 'none' : 'block'
+      display = !display
+    }, false)
+  })()
+</script>
+  
+
+  <div class="article-footer">
+    <div class="article-meta pull-left">
+      <span>
+        
+          <i class="iconfont icon-06tags"></i>标签: 
+          
+          <span class="span--tag">
+            <a href="/tags/python/">
+              #python
+            </a>
+          </span>
+          
+          <span class="span--tag">
+            <a href="/tags/爬虫/">
+              #爬虫
+            </a>
+          </span>
+          
+        
+      </span>
+    </div>
+    <div class="article-meta pull-right">
+    </div>
+  </div>
+</div>
+
+
+  <aside id="sidebar">
+    <p id="sidebar-header"></p>
+    <ol id="sidebar-toc"></ol>
+    <img id="sidebar-icon">
+  </aside>
+  <script async>setTimeout(generateToc, 10);</script>
+
+
+  <nav class="post-navigation">
+    
+      <div class="nav-pre">
+        <i class="iconfont icon-prev"></i>
+        上一篇:
+        <a href="/2019/04/15/计算机网络一/" target="_self">计算机网络(一)</a>
+      </div>
+    
     
   </nav>
+
+  
+    <a href="#comment" class="comment-anchor"></a>
+<div class="comment-title"><i class="iconfont icon-footprint"></i> 留下足迹 <i class="iconfont icon-footprint"></i></div>
+<div id="vcomments"></div>
+
+<script defer>
+  if( true ) {
+    let path = getRealPath()
+    new Valine({
+      el: "#vcomments",
+      appId: "VPNwETUGMJnwGnY6Pc7GaVna-gzGzoHsz",
+      appKey: "niJbsuSCKuploWnG8Qvbgb5P",
+      notify: false,
+      verify: false,
+      avatar: "robohash",
+      placeholder: "正确填写邮箱, 才能及时收到回复哦♪(^∇^*)",
+      path
+    });
+  }
+</script>
+   
+
+  
+    <script defer>
+const valineAPI = (() => {
+  try {
+    AV.init("VPNwETUGMJnwGnY6Pc7GaVna-gzGzoHsz", "niJbsuSCKuploWnG8Qvbgb5P");
+  } catch(error) {}
+  const isExist = (identity) => {
+    identity = identity || getRealPath();
+    let query = new AV.Query('Timer');
+    return new Promise((resolve, reject) => {
+      query.equalTo("identity", identity);
+      query.find().then(results => {
+        resolve(results.length > 0);
+      }, error => reject(error));
+    })
+  }
+
+  const _get = (identity) => {
+    let query = null;
+    if(identity && identity instanceof Array){
+      let querys = [];
+      for(let i = 0; i < identity.length; ++i) {
+        querys[i] = new AV.Query('Timer');
+        querys[i].equalTo('identity', identity[i]);
+      }
+      query = AV.Query.or.apply(null ,querys);
+    } else {
+      identity = identity || getRealPath();
+      query = new AV.Query("Timer");
+      query.equalTo("identity", identity);
+    }
+
+    return new Promise((resolve, reject) => {
+      query.find()
+      .then(results => resolve(results))
+      .catch(error => reject(error))
+    })
+  }
+
+  const create = (identity) => {
+    identity = identity || getRealPath();
+    return new Promise((resolve, reject) => {
+      let Todo = AV.Object.extend('Timer');
+      let todo = new Todo();
+      todo.set("times", 1);
+      todo.set("identity", identity);
+      todo.save().then(res => resolve(true), error => reject(error));
+    })
+  }
+
+  const update = (identity) => {
+    identity = identity || getRealPath();
+    return new Promise((resolve, reject) => {
+      let query = new AV.Query('Timer');
+      query.equalTo("identity", identity);
+      query.find().then(todos => {
+        todos.forEach(todo => {
+          todo.set("times", todo.attributes.times + 1);
+        });
+        return AV.Object.saveAll(todos);
+      }).then(todos => resolve(true), error => reject(error));
+    })
+  }
+
+  return {
+    isExist,
+    _get,
+    update,
+    create
+  }
+})()
+
+const calcAndWriteTimes = () => {
+  let isPost = true;
+
+  let timerAllDOM = document.querySelectorAll(".article-timer");
+
+  if(isPost) {
+    let identity = timerAllDOM[0].getAttribute("data-identity");
+    valineAPI.isExist(identity)
+    .then(exist => {
+      if(exist) {
+        return valineAPI.update(identity);
+      }
+      return new Promise(resolve => resolve(true));
+    })
+    .then( succuess => valineAPI._get(identity))
+    .then( result => timerAllDOM[0].innerText = result[0].attributes.times)
+    .catch(error => console.log(error.message))
+    return ;
+  }
+
+  let timerDOMCache = {};
+
+  for(let timerDOM of timerAllDOM) {
+    let identity = timerDOM.getAttribute("data-identity");
+    if(timerDOMCache.hasOwnProperty(identity)){
+      timerDOMCache[identity].dom.push(timerDOM);
+    }else{
+      timerDOMCache[identity] = {
+        dom: [timerDOM],
+        times: undefined
+      };
+    }
+  }
+
+  let identities = Object.keys(timerDOMCache);
+  valineAPI._get(identities).then(results => {
+    for(let result of results) {
+      let {identity, times} = result.attributes;
+      timerDOMCache[identity].times = times;
+      timerDOMCache[identity].dom.map(item => item.innerText = times);
+    }
+    for(let identity of identities) {
+      if(timerDOMCache[identity].times){
+        continue;
+      }
+      timerDOMCache[identity].dom.map(item => item.innerText = 1);
+      valineAPI.create(identity);
+    }
+  }).catch(error => console.log(error.message))
+}
+
+if(true){
+  calcAndWriteTimes();
+}
+</script>
+   
+
 </div>
+
 
       <footer>
   <p class="site-info">

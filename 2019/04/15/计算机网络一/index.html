@@ -28,12 +28,12 @@ var egg = " \
   
   
   
-  <title>归档 | Duiliuliu</title>
+  <title>计算机网络(一) | Duiliuliu</title>
 
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
   
-    <meta name="keywords" content="Hexo, duiliuliu">
+    <meta name="keywords" content="计算机网络,计算机网络,">
   
 
   <script>
@@ -195,179 +195,434 @@ var egg = " \
   })
 </script>
 
-      <div class="container">
-  <div class="timeline">
-  <span class="archive-move-on"></span>
-  <span class="archive-page-counter">
-    
-      <span>Wow! 一共有 22 篇文章</span>
-    
-  </span>
+      
+
+
+
+
+
+
+
+
+<div class="container post-index">
+
   
+
+<div class="post">
+  <h1 class="article-title">
+    <span>计算机网络(一)</span>
+  </h1>
+  <div class="article-top-meta">
+    <span>
+      发布 : 
+      2019-04-15
+    </span>
+    
+      <span>
+        分类 : 
+          <a href="/categories/计算机网络/">
+            计算机网络
+          </a>
+      </span>
+    
+    
+      <span>
+        浏览 : <span class="article-timer" data-identity="计算机网络一"></span>
+      </span>
+    
+  </div>
+
   
-    <div class="collection-title">
-      <h2>
-        <span>2019</span>
-      </h2>
+    <div id="计算机网络一" style="margin: 4rem 2px"></div>
+<script async>
+  (function(){
+    let playerTimer = setInterval(function(){
+      if(!window.APlayer){
+        return
+      }
+
+      new APlayer({
+        container: document.getElementById('计算机网络一'),
+        theme: '#e96900',
+        listFolded: false,
+        audio: [{"name":"飞云之下","artist":"韩红","url":"http://music.163.com/song/media/outer/url?id=554242032.mp3","cover":"http://p1.music.126.net/YsQrEZ_M6kduwN2zh6Q6kg==/109951163311406661.jpg"}]
+      });
+      
+      clearInterval(playerTimer)
+    }, 10);
+  })()
+</script>
+  
+
+  <div class="article-content">
+    <div class="markdown-body">
+      <h2 id="计算机网络基础"><a href="#计算机网络基础" class="headerlink" title="计算机网络基础"></a>计算机网络基础</h2><p>以问题入门吧！</p>
+<ul>
+<li>协议是什么？</li>
+<li>为什么要网络分层</li>
+<li>网络分层有什么坏处</li>
+<li>因特网模型与 OSI 模型分别是什么</li>
+<li>DOS 攻击是什么？有什么常用的手段？该如何防备呢？</li>
+</ul>
+<h2 id="协议是什么"><a href="#协议是什么" class="headerlink" title="协议是什么"></a>协议是什么</h2><p>协议：简言之就是约定，大家约定好的成文并相互公告之</p>
+<p>那么网络协议约定什么呢？</p>
+<p>网络协议主要是对两个或者多个通信主体间的协议，主要是约定交换报文的格式、次序、发送与接受的动作，或者说约定相互通信的语法、语义、时序</p>
+<h2 id="网络分层"><a href="#网络分层" class="headerlink" title="网络分层"></a>网络分层</h2><p>对于大而复杂的系统，分层可以将其概念化、结构化，便于人们理解、完成、维护这个系统；每个层次可以进行模块化的设计与完成，单个模块的改变并不会影响其他模块，易于扩展与维护</p>
+<ul>
+<li><p>为什么网络分层</p>
+<ul>
+<li>利用分层的体系结构，可以更好的定义复杂系统</li>
+<li>模块化的设计与完成</li>
+<li>简化大而复杂的系统<ul>
+<li>概念化</li>
+<li>结构化</li>
+</ul>
+</li>
+<li>易扩展、易维护<ul>
+<li>单个模块的改变不影响其他模块</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>有什么坏处呢</p>
+</li>
+</ul>
+<h2 id="因特网模型与-OSI-模型"><a href="#因特网模型与-OSI-模型" class="headerlink" title="因特网模型与 OSI 模型"></a>因特网模型与 OSI 模型</h2><p>因特网模型与 OSI 模型很类似</p>
+<table>
+<thead>
+<tr>
+<th>因特网模型</th>
+<th>OSI 模型</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>应用层</td>
+<td>应用层 <br> 表示层 <br> 会话层</td>
+</tr>
+<tr>
+<td>传输层</td>
+<td>传输层</td>
+</tr>
+<tr>
+<td>网络层</td>
+<td>网络层</td>
+</tr>
+<tr>
+<td>链路层</td>
+<td>链路层</td>
+</tr>
+<tr>
+<td>物理层</td>
+<td>物理层</td>
+</tr>
+</tbody>
+</table>
+<h2 id="关键字"><a href="#关键字" class="headerlink" title="关键字"></a>关键字</h2><p>端系统通过 <strong>通信链路</strong>(communication link) 和 <strong>分组交换机</strong>(packet switch) 连接到一起</p>
+<p>链路的传输速率：比特/秒 (bit/s 或者 bps)</p>
+<p>分组： 一台端系统向另一台端系统发送数据时，发送端系统将数据分段，并在每段加上首部字节，由此形成的信息包</p>
+<p>分组交换机</p>
+<ul>
+<li>路由器</li>
+<li><p>链路层交换机 通常用于接入网</p>
+</li>
+<li><p>网络边缘 与因特网相连的端系统与应用</p>
+<ul>
+<li>主机 === 端系统</li>
+<li>主机<ul>
+<li>client</li>
+<li>server</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>接入网</li>
+</ul>
+<ul>
+<li>分组交换<ul>
+<li>交换报文</li>
+<li>长报文划分为较小的数据块 – 分组</li>
+<li>假如 某源端系统或分组交换机 经过 一条链路 发送一个 L 比特的分组，链路传输速率为 R 比特。秒 ，则传输该分组时间为 L/R 秒</li>
+<li>存储转发传输</li>
+<li>排队时延和分组丢失<ul>
+<li>网络拥塞 – 排队时延</li>
+<li>缓存满 – 分组丢失</li>
+</ul>
+</li>
+<li>时延<ul>
+<li>节点处理时延、排队时延、传输时延、传播时延</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li>电路交换</li>
+</ul>
+<p><strong>因特网服务商</strong>(Internet service provider，ISP)</p>
+<p>因特网主要协议： TCP/IP</p>
+    </div>
+  </div>
+  
+    <div class="copy-right">
+      <div class="markdown-body">
+        <blockquote>
+        
+        
+          本文作者 : 对六 <br>
+        
+        原文链接 : <a href>http://duiliuliu.github.io/2019/04/15/计算机网络一/</a><br>
+        版权声明 : 本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> 许可协议。转载请注明出处！
+        </blockquote>
+      </div>
     </div>
   
   
   
-  <article class="posts-collapse">
-    <header>
-      <h2>
-        <a href="/2019/01/08/gitlabci自动化打包上传UDF/">
-          <span>gitlabci自动化打包上传UDF</span>
-        </a>
-      </h2>
-      <div class="post-meta">
-        01-08
-      </div>
-    </header>
-  </article>
-  
-  
-    <div class="collection-title">
-      <h2>
-        <span>2018</span>
-      </h2>
-    </div>
-  
-  <article class="posts-collapse">
-    <header>
-      <h2>
-        <a href="/2018/07/25/2018-07-25-elasticsearch入门/">
-          <span>elasticsearch入门</span>
-        </a>
-      </h2>
-      <div class="post-meta">
-        07-25
-      </div>
-    </header>
-  </article>
-  
-  
-  <article class="posts-collapse">
-    <header>
-      <h2>
-        <a href="/2018/07/23/Springboot中使用线程池/">
-          <span>Springboot 中使用线程池</span>
-        </a>
-      </h2>
-      <div class="post-meta">
-        07-23
-      </div>
-    </header>
-  </article>
-  
-  
-  <article class="posts-collapse">
-    <header>
-      <h2>
-        <a href="/2018/07/07/2018-07-07-jest与enzyme对react项目自动化测试/">
-          <span>jest与enzyme对react项目自动化测试</span>
-        </a>
-      </h2>
-      <div class="post-meta">
-        07-07
-      </div>
-    </header>
-  </article>
-  
-  
-  <article class="posts-collapse">
-    <header>
-      <h2>
-        <a href="/2018/07/01/2018-06-31-自动化测试jest/">
-          <span>自动化测试jest</span>
-        </a>
-      </h2>
-      <div class="post-meta">
-        07-01
-      </div>
-    </header>
-  </article>
-  
-  
-  <article class="posts-collapse">
-    <header>
-      <h2>
-        <a href="/2018/06/26/2018-06-26-javascript-export用法/">
-          <span>javascript-export、import用法</span>
-        </a>
-      </h2>
-      <div class="post-meta">
-        06-26
-      </div>
-    </header>
-  </article>
-  
-  
-  <article class="posts-collapse">
-    <header>
-      <h2>
-        <a href="/2018/06/12/2018-06-12-Ubantu 搭建FTP文件服务/">
-          <span>Ubantu 搭建FTP文件服务</span>
-        </a>
-      </h2>
-      <div class="post-meta">
-        06-12
-      </div>
-    </header>
-  </article>
-  
-  
-  <article class="posts-collapse">
-    <header>
-      <h2>
-        <a href="/2018/06/01/2018-06-01-js中forEach与map/">
-          <span>js中forEach与map</span>
-        </a>
-      </h2>
-      <div class="post-meta">
-        06-01
-      </div>
-    </header>
-  </article>
-  
-  
-  <article class="posts-collapse">
-    <header>
-      <h2>
-        <a href="/2018/05/21/git操作详解/">
-          <span>git操作详解</span>
-        </a>
-      </h2>
-      <div class="post-meta">
-        05-21
-      </div>
-    </header>
-  </article>
-  
-  
-  <article class="posts-collapse">
-    <header>
-      <h2>
-        <a href="/2018/04/23/2018-04-23-Chrome开发者工具/">
-          <span>Chrome开发者工具</span>
-        </a>
-      </h2>
-      <div class="post-meta">
-        04-23
-      </div>
-    </header>
-  </article>
-  
+    <div class="social-share" style="margin-top: -2rem" data-wechat-qrcode-title="<p>微信扫一扫</p>" data-wechat-qrcode-helper="<p>微信右上角, 扫一扫分享</p>" data-sites="douban, google, facebook, twitter">
+  <span style="color: #6b7487; font-size: 1.4rem;">分享到: </span>
 </div>
-  <nav class="page-navigation">
+<script src="https://cdn.bootcss.com/social-share.js/1.0.16/js/social-share.min.js" async></script>
+  
+
+  
+    <div id="reward">
+  
+    <p id="reward-meta">你我共勉！</p>
+  
+  <button id="reward-btn">
     
-      <a href="/archives/">上一页</a>
+    <span>共勉</span>
+  </button>
+  <div id="reward-qrcode">
+    
+      <div class="reward-qrcode--container">
+        <img class="qrcode-img" src="/images/wechat.png" alt="微信">
+        <p class="qrcode-meta">微信</p>
+      </div>
+    
+      <div class="reward-qrcode--container">
+        <img class="qrcode-img" src="/images/alipay.png" alt="支付宝">
+        <p class="qrcode-meta">支付宝</p>
+      </div>
+    
+  </div>
+
+</div>
+
+<script>
+  (() => {
+    let button = document.querySelector('#reward-btn'),
+      qrcode = document.querySelector('#reward-qrcode'),
+      display = false;
+    
+    button.addEventListener('click', () => {
+      qrcode.style.display = display ? 'none' : 'block'
+      display = !display
+    }, false)
+  })()
+</script>
+  
+
+  <div class="article-footer">
+    <div class="article-meta pull-left">
+      <span>
+        
+          <i class="iconfont icon-06tags"></i>标签: 
+          
+          <span class="span--tag">
+            <a href="/tags/计算机网络/">
+              #计算机网络
+            </a>
+          </span>
+          
+        
+      </span>
+    </div>
+    <div class="article-meta pull-right">
+    </div>
+  </div>
+</div>
+
+
+  <aside id="sidebar">
+    <p id="sidebar-header"></p>
+    <ol id="sidebar-toc"></ol>
+    <img id="sidebar-icon">
+  </aside>
+  <script async>setTimeout(generateToc, 10);</script>
+
+
+  <nav class="post-navigation">
+    
+      <div class="nav-pre">
+        <i class="iconfont icon-prev"></i>
+        上一篇:
+        <a href="/2019/04/13/自己写python爬虫框架三/" target="_self">自己写python爬虫框架(三)-解析器</a>
+      </div>
     
     
-      <a href="/archives/page/3/">下一页</a>
+      <div class="nav-next">
+        下一篇:
+        <a href="/2019/04/16/自己写python爬虫框架四/" target="_self">自己写python爬虫框架(四)-请求管理器</a>
+        <i class="iconfont icon-next"></i>
+      </div>
     
   </nav>
+
+  
+    <a href="#comment" class="comment-anchor"></a>
+<div class="comment-title"><i class="iconfont icon-footprint"></i> 留下足迹 <i class="iconfont icon-footprint"></i></div>
+<div id="vcomments"></div>
+
+<script defer>
+  if( true ) {
+    let path = getRealPath()
+    new Valine({
+      el: "#vcomments",
+      appId: "VPNwETUGMJnwGnY6Pc7GaVna-gzGzoHsz",
+      appKey: "niJbsuSCKuploWnG8Qvbgb5P",
+      notify: false,
+      verify: false,
+      avatar: "robohash",
+      placeholder: "正确填写邮箱, 才能及时收到回复哦♪(^∇^*)",
+      path
+    });
+  }
+</script>
+   
+
+  
+    <script defer>
+const valineAPI = (() => {
+  try {
+    AV.init("VPNwETUGMJnwGnY6Pc7GaVna-gzGzoHsz", "niJbsuSCKuploWnG8Qvbgb5P");
+  } catch(error) {}
+  const isExist = (identity) => {
+    identity = identity || getRealPath();
+    let query = new AV.Query('Timer');
+    return new Promise((resolve, reject) => {
+      query.equalTo("identity", identity);
+      query.find().then(results => {
+        resolve(results.length > 0);
+      }, error => reject(error));
+    })
+  }
+
+  const _get = (identity) => {
+    let query = null;
+    if(identity && identity instanceof Array){
+      let querys = [];
+      for(let i = 0; i < identity.length; ++i) {
+        querys[i] = new AV.Query('Timer');
+        querys[i].equalTo('identity', identity[i]);
+      }
+      query = AV.Query.or.apply(null ,querys);
+    } else {
+      identity = identity || getRealPath();
+      query = new AV.Query("Timer");
+      query.equalTo("identity", identity);
+    }
+
+    return new Promise((resolve, reject) => {
+      query.find()
+      .then(results => resolve(results))
+      .catch(error => reject(error))
+    })
+  }
+
+  const create = (identity) => {
+    identity = identity || getRealPath();
+    return new Promise((resolve, reject) => {
+      let Todo = AV.Object.extend('Timer');
+      let todo = new Todo();
+      todo.set("times", 1);
+      todo.set("identity", identity);
+      todo.save().then(res => resolve(true), error => reject(error));
+    })
+  }
+
+  const update = (identity) => {
+    identity = identity || getRealPath();
+    return new Promise((resolve, reject) => {
+      let query = new AV.Query('Timer');
+      query.equalTo("identity", identity);
+      query.find().then(todos => {
+        todos.forEach(todo => {
+          todo.set("times", todo.attributes.times + 1);
+        });
+        return AV.Object.saveAll(todos);
+      }).then(todos => resolve(true), error => reject(error));
+    })
+  }
+
+  return {
+    isExist,
+    _get,
+    update,
+    create
+  }
+})()
+
+const calcAndWriteTimes = () => {
+  let isPost = true;
+
+  let timerAllDOM = document.querySelectorAll(".article-timer");
+
+  if(isPost) {
+    let identity = timerAllDOM[0].getAttribute("data-identity");
+    valineAPI.isExist(identity)
+    .then(exist => {
+      if(exist) {
+        return valineAPI.update(identity);
+      }
+      return new Promise(resolve => resolve(true));
+    })
+    .then( succuess => valineAPI._get(identity))
+    .then( result => timerAllDOM[0].innerText = result[0].attributes.times)
+    .catch(error => console.log(error.message))
+    return ;
+  }
+
+  let timerDOMCache = {};
+
+  for(let timerDOM of timerAllDOM) {
+    let identity = timerDOM.getAttribute("data-identity");
+    if(timerDOMCache.hasOwnProperty(identity)){
+      timerDOMCache[identity].dom.push(timerDOM);
+    }else{
+      timerDOMCache[identity] = {
+        dom: [timerDOM],
+        times: undefined
+      };
+    }
+  }
+
+  let identities = Object.keys(timerDOMCache);
+  valineAPI._get(identities).then(results => {
+    for(let result of results) {
+      let {identity, times} = result.attributes;
+      timerDOMCache[identity].times = times;
+      timerDOMCache[identity].dom.map(item => item.innerText = times);
+    }
+    for(let identity of identities) {
+      if(timerDOMCache[identity].times){
+        continue;
+      }
+      timerDOMCache[identity].dom.map(item => item.innerText = 1);
+      valineAPI.create(identity);
+    }
+  }).catch(error => console.log(error.message))
+}
+
+if(true){
+  calcAndWriteTimes();
+}
+</script>
+   
+
 </div>
+
 
       <footer>
   <p class="site-info">
