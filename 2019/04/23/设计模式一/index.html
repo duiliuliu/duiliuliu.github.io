@@ -28,12 +28,12 @@ var egg = " \
   
   
   
-  <title>计算机网络(一) | Duiliuliu</title>
+  <title>设计模式(一) | Duiliuliu</title>
 
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
   
-    <meta name="keywords" content="计算机网络,计算机网络,">
+    <meta name="keywords" content="设计模式,设计模式,">
   
 
   <script>
@@ -210,157 +210,113 @@ var egg = " \
 
 <div class="post">
   <h1 class="article-title">
-    <span>计算机网络(一)</span>
+    <span>设计模式(一)</span>
   </h1>
   <div class="article-top-meta">
     <span>
       发布 : 
-      2019-04-15
+      2019-04-23
     </span>
     
       <span>
         分类 : 
-          <a href="/categories/计算机网络/">
-            计算机网络
+          <a href="/categories/设计模式/">
+            设计模式
           </a>
       </span>
     
     
       <span>
-        浏览 : <span class="article-timer" data-identity="计算机网络一"></span>
+        浏览 : <span class="article-timer" data-identity="设计模式一"></span>
       </span>
     
   </div>
 
   
-    <div id="计算机网络一" style="margin: 4rem 2px"></div>
-<script async>
-  (function(){
-    let playerTimer = setInterval(function(){
-      if(!window.APlayer){
-        return
-      }
-
-      new APlayer({
-        container: document.getElementById('计算机网络一'),
-        theme: '#e96900',
-        listFolded: false,
-        audio: [{"name":"飞云之下","artist":"韩红","url":"http://music.163.com/song/media/outer/url?id=554242032.mp3","cover":"http://p1.music.126.net/YsQrEZ_M6kduwN2zh6Q6kg==/109951163311406661.jpg"}]
-      });
-      
-      clearInterval(playerTimer)
-    }, 10);
-  })()
-</script>
-  
 
   <div class="article-content">
     <div class="markdown-body">
-      <h2 id="计算机网络基础"><a href="#计算机网络基础" class="headerlink" title="计算机网络基础"></a>计算机网络基础</h2><p>以问题入门吧！</p>
+      <blockquote>
+<p>《图解设计模式》、《、<a href="http://www.runoob.com/design-pattern/design-pattern-tutorial.html" target="_blank" rel="noopener">菜鸟教程设计模式</a></p>
+</blockquote>
+<p>什么是设计模式？</p>
+<p>有什么用</p>
+<p>设计模式原则</p>
+<p>设计模式分类</p>
+<p>怎么理解</p>
+<h2 id="什么是设计模式"><a href="#什么是设计模式" class="headerlink" title="什么是设计模式"></a>什么是设计模式</h2><p>设计模式是计算机前辈们多年编码总结出的一套可复用的、便于维护的编码模式。</p>
+<p>设计模式方便我们进行沟通，提升代码可维护性，同样方便理解复杂的系统架构</p>
+<h2 id="设计模式原则"><a href="#设计模式原则" class="headerlink" title="设计模式原则"></a>设计模式原则</h2><p>在设计模式的使用中，遵循以下 6 个原则：</p>
 <ul>
-<li>协议是什么？</li>
-<li>为什么要网络分层</li>
-<li>网络分层有什么坏处</li>
-<li>因特网模型与 OSI 模型分别是什么</li>
-<li>DOS 攻击是什么？有什么常用的手段？该如何防备呢？</li>
+<li>开闭原则<br>对扩展开放，对修改关闭</li>
+<li>里氏替换原则<br>所有父类出现的地方，子类亦可以出现。Java 中多态的使用便是对里氏替换原则的实现</li>
+<li>依赖倒转原则<br>针对接口编程，依赖于抽象而不依赖与具体。易扩展</li>
+<li>接口隔离<br>或者可以说是单一职责原则，每个抽象只负责自己域的行为。降低类之间的耦合度</li>
+<li>迪米特原则或者最少知道原则<br>每个类应当尽可能的独立，减少对其他的依赖</li>
+<li>合成复用原则<br>多使用组合，少使用继承。更加灵活易维护</li>
 </ul>
-<h2 id="协议是什么"><a href="#协议是什么" class="headerlink" title="协议是什么"></a>协议是什么</h2><p>协议：简言之就是约定，大家约定好的成文并相互公告之</p>
-<p>那么网络协议约定什么呢？</p>
-<p>网络协议主要是对两个或者多个通信主体间的协议，主要是约定交换报文的格式、次序、发送与接受的动作，或者说约定相互通信的语法、语义、时序</p>
-<h2 id="网络分层"><a href="#网络分层" class="headerlink" title="网络分层"></a>网络分层</h2><p>对于大而复杂的系统，分层可以将其概念化、结构化，便于人们理解、完成、维护这个系统；每个层次可以进行模块化的设计与完成，单个模块的改变并不会影响其他模块，易于扩展与维护</p>
+<h2 id="设计模式分类"><a href="#设计模式分类" class="headerlink" title="设计模式分类"></a>设计模式分类</h2><p>在《图解设计模式》一书以及各大博客文章中，设计模式主要有 23 中，并以创建型、结构型、行为型进行分类。</p>
+<p>以下为 23 中设计模式：</p>
 <ul>
-<li><p>为什么网络分层</p>
-<ul>
-<li>利用分层的体系结构，可以更好的定义复杂系统</li>
-<li>模块化的设计与完成</li>
-<li>简化大而复杂的系统<ul>
-<li>概念化</li>
-<li>结构化</li>
+<li>创建型<ul>
+<li>单例模式</li>
+<li>抽象工厂模式</li>
+<li>工厂模式</li>
+<li>模板方法模式</li>
+<li>建造者模式</li>
 </ul>
 </li>
-<li>易扩展、易维护<ul>
-<li>单个模块的改变不影响其他模块</li>
+<li>结构型<ul>
+<li>原型模式</li>
+<li>代理模式</li>
+<li>适配器模式</li>
+<li>桥接模式</li>
+<li>过滤器模式</li>
+<li>组合模式</li>
+<li>装饰器模式</li>
+<li>外观模式</li>
+<li>享元模式</li>
 </ul>
 </li>
-</ul>
-</li>
-<li><p>有什么坏处呢</p>
-</li>
-</ul>
-<h2 id="因特网模型与-OSI-模型"><a href="#因特网模型与-OSI-模型" class="headerlink" title="因特网模型与 OSI 模型"></a>因特网模型与 OSI 模型</h2><p>因特网模型与 OSI 模型很类似</p>
-<table>
-<thead>
-<tr>
-<th>因特网模型</th>
-<th>OSI 模型</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>应用层</td>
-<td>应用层 <br> 表示层 <br> 会话层</td>
-</tr>
-<tr>
-<td>传输层</td>
-<td>传输层</td>
-</tr>
-<tr>
-<td>网络层</td>
-<td>网络层</td>
-</tr>
-<tr>
-<td>链路层</td>
-<td>链路层</td>
-</tr>
-<tr>
-<td>物理层</td>
-<td>物理层</td>
-</tr>
-</tbody>
-</table>
-<h2 id="关键字"><a href="#关键字" class="headerlink" title="关键字"></a>关键字</h2><p>端系统通过 <strong>通信链路</strong>(communication link) 和 <strong>分组交换机</strong>(packet switch) 连接到一起</p>
-<p>链路的传输速率：比特/秒 (bit/s 或者 bps)</p>
-<p>分组： 一台端系统向另一台端系统发送数据时，发送端系统将数据分段，并在每段加上首部字节，由此形成的信息包</p>
-<p>分组交换机</p>
-<ul>
-<li>路由器</li>
-<li><p>链路层交换机 通常用于接入网</p>
-</li>
-<li><p>网络边缘 与因特网相连的端系统与应用</p>
-<ul>
-<li>主机 === 端系统</li>
-<li>主机<ul>
-<li>client</li>
-<li>server</li>
+<li>行为型<ul>
+<li>责任链模式</li>
+<li>命令模式</li>
+<li>解释器模式</li>
+<li>迭代器模式</li>
+<li>中介者模式</li>
+<li>备忘录模式</li>
+<li>观察者模式</li>
+<li>状态模式</li>
+<li>访问者模式</li>
+<li>空对象模式</li>
+<li>策略模式</li>
+<li>模板模式</li>
 </ul>
 </li>
 </ul>
-</li>
-<li>接入网</li>
-</ul>
-<ul>
-<li>分组交换<ul>
-<li>交换报文</li>
-<li>长报文划分为较小的数据块 – 分组</li>
-<li>假如 某源端系统或分组交换机 经过 一条链路 发送一个 L 比特的分组，链路传输速率为 R 比特。秒 ，则传输该分组时间为 L/R 秒</li>
-<li>存储转发传输</li>
-<li>排队时延和分组丢失<ul>
-<li>网络拥塞 – 排队时延</li>
-<li>缓存满 – 分组丢失</li>
-</ul>
-</li>
-<li>时延<ul>
-<li>节点处理时延、排队时延、传输时延、传播时延</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-<ul>
-<li>电路交换</li>
-</ul>
-<p><strong>因特网服务商</strong>(Internet service provider，ISP)</p>
-<p>因特网主要协议： TCP/IP</p>
+<p>单例模式、享元模式、原型模式</p>
+<pre><code>在一定程度上，三者都有避免对象重复创建与销毁的意图。具体区别：
+1. 单例模式更多的是一个全局对象，可以对各个对象共享其状态。实例对象只有一个，节省系统资源。主要实现方式是私有化构造器并提供静态工厂方法返回唯一实例。
+2. 享元模式也是用于减少对象的创建，运用共享有效的支持大粒度的对象。即对大对象不必重复创建，直接使用以有的。类似与将大对象缓存。主要实现方式是缓存已创建的对象(通过map结构进行存储)，当需要同样结构的对象时不再重复创建(同样是提供一个工厂方法返回实例)，而是直接返回已有的对象。对枚举对象也相像，不过枚举值是固定数量的，而享元模式中对象实例灵活可变的
+3.对于大对象的重复创建，原型模式则是从自身出发，提供一个克隆接口将自己复制，以此提高性能。
+</code></pre><p>代理模式、装饰器模式、适配器模式、策略模式</p>
+<pre><code>装饰器模式、适配器模式、策略模式更多的像不同场景下代理模式的变体，或者这四个模式有共同的特征：最终行为的实现是通过其他对象实现的。
+1. 代理模式和适配器模式的区别：适配器模式主要改变所考虑对象的接口，而代理模式不能改变所代理类的接口。
+2. 代理模式和装饰器模式的区别：装饰器模式为了增强功能，而代理模式是为了加以控制。
+3. 代理模式和策略模式的区别：策略模式是对方法的实现与对象解耦，代理模式更多代理的是对象。
+</code></pre><p>状态模式、备忘录模式</p>
+<pre><code>状态模式则是不同的状态对应不同的行为，对应Java中则是很类似枚举对象的实现，不同的枚举对象有着不同的方法实现；
+备忘录模式内部也维护者一个状态，备忘录模式更多的是对对象状态的存储，以便恢复之前或者上一个状态
+</code></pre><p>工厂模式、抽象工厂、模板方法</p>
+<pre><code>工厂模式是用来创建实例的，而抽象工厂是对各个抽象零件的组装，模板方法则是提供不可被子类修改的方法模板进行使用
+</code></pre><p>抽象工厂、组合模式 这二者比较相像，组合模式是对类的组装，抽象工厂更多的是对接口的组装</p>
+<p>责任链模式、过滤器模式、链式操作等等</p>
+<pre><code>在责任链中则是通过每个处理对象构造时确定好了下一级处理对象，将被处理对象进行传递
+而过滤器与链式操作则是对同一数据结构的对象操作，然后接着然后同样数据结构类型的数据，依次可以一直进行链式操作
+</code></pre><p>解释器模式与命令模式</p>
+<pre><code>对于一些命令操作等，可以封装为命令对象，然后进行操作
+解释器模式则是对于语法的解析，比如sql语法等，需要构建语法树，进行递归解析
+</code></pre>
     </div>
   </div>
   
@@ -371,7 +327,7 @@ var egg = " \
         
           本文作者 : 对六 <br>
         
-        原文链接 : <a href>http://duiliuliu.github.io/2019/04/15/计算机网络一/</a><br>
+        原文链接 : <a href>http://duiliuliu.github.io/2019/04/23/设计模式一/</a><br>
         版权声明 : 本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> 许可协议。转载请注明出处！
         </blockquote>
       </div>
@@ -431,8 +387,8 @@ var egg = " \
           <i class="iconfont icon-06tags"></i>标签: 
           
           <span class="span--tag">
-            <a href="/tags/计算机网络/">
-              #计算机网络
+            <a href="/tags/设计模式/">
+              #设计模式
             </a>
           </span>
           
@@ -458,15 +414,9 @@ var egg = " \
       <div class="nav-pre">
         <i class="iconfont icon-prev"></i>
         上一篇:
-        <a href="/2019/04/13/自己写python爬虫框架三/" target="_self">自己写python爬虫框架(三)-解析器</a>
-      </div>
-    
-    
-      <div class="nav-next">
-        下一篇:
         <a href="/2019/04/16/自己写python爬虫框架四/" target="_self">自己写python爬虫框架(四)-请求管理器</a>
-        <i class="iconfont icon-next"></i>
       </div>
+    
     
   </nav>
 
