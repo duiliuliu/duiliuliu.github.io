@@ -215,7 +215,7 @@ var egg = " \
   <div class="article-top-meta">
     <span>
       发布 : 
-      2019-04-23
+      2019-04-20
     </span>
     
       <span>
@@ -237,13 +237,8 @@ var egg = " \
   <div class="article-content">
     <div class="markdown-body">
       <blockquote>
-<p>《图解设计模式》、《、<a href="http://www.runoob.com/design-pattern/design-pattern-tutorial.html" target="_blank" rel="noopener">菜鸟教程设计模式</a></p>
+<p>《图解设计模式》、<a href="http://www.runoob.com/design-pattern/design-pattern-tutorial.html" target="_blank" rel="noopener">菜鸟教程设计模式</a></p>
 </blockquote>
-<p>什么是设计模式？</p>
-<p>有什么用</p>
-<p>设计模式原则</p>
-<p>设计模式分类</p>
-<p>怎么理解</p>
 <h2 id="什么是设计模式"><a href="#什么是设计模式" class="headerlink" title="什么是设计模式"></a>什么是设计模式</h2><p>设计模式是计算机前辈们多年编码总结出的一套可复用的、便于维护的编码模式。</p>
 <p>设计模式方便我们进行沟通，提升代码可维护性，同样方便理解复杂的系统架构</p>
 <h2 id="设计模式原则"><a href="#设计模式原则" class="headerlink" title="设计模式原则"></a>设计模式原则</h2><p>在设计模式的使用中，遵循以下 6 个原则：</p>
@@ -257,63 +252,36 @@ var egg = " \
 </ul>
 <h2 id="设计模式分类"><a href="#设计模式分类" class="headerlink" title="设计模式分类"></a>设计模式分类</h2><p>在《图解设计模式》一书以及各大博客文章中，设计模式主要有 23 中，并以创建型、结构型、行为型进行分类。</p>
 <p>以下为 23 中设计模式：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">- 创建型</span><br><span class="line">  - 单例模式</span><br><span class="line">  - 抽象工厂模式</span><br><span class="line">  - 工厂模式</span><br><span class="line">  - 模板方法模式</span><br><span class="line">  - 建造者模式</span><br><span class="line">- 结构型</span><br><span class="line">  - 原型模式</span><br><span class="line">  - 代理模式</span><br><span class="line">  - 适配器模式</span><br><span class="line">  - 桥接模式</span><br><span class="line">  - 过滤器模式</span><br><span class="line">  - 组合模式</span><br><span class="line">  - 装饰器模式</span><br><span class="line">  - 外观模式</span><br><span class="line">  - 享元模式</span><br><span class="line">- 行为型</span><br><span class="line">  - 责任链模式</span><br><span class="line">  - 命令模式</span><br><span class="line">  - 解释器模式</span><br><span class="line">  - 迭代器模式</span><br><span class="line">  - 中介者模式</span><br><span class="line">  - 备忘录模式</span><br><span class="line">  - 观察者模式</span><br><span class="line">  - 状态模式</span><br><span class="line">  - 访问者模式</span><br><span class="line">  - 空对象模式</span><br><span class="line">  - 策略模式</span><br><span class="line">  - 模板模式</span><br></pre></td></tr></table></figure>
 <ul>
-<li>创建型<ul>
-<li>单例模式</li>
-<li>抽象工厂模式</li>
-<li>工厂模式</li>
-<li>模板方法模式</li>
-<li>建造者模式</li>
-</ul>
+<li><p>单例模式、享元模式、原型模式</p>
+<p>在一定程度上，三者都有避免对象重复创建与销毁的意图。具体区别：</p>
+<ol>
+<li>单例模式更多的是一个全局对象，可以对各个对象共享其状态。实例对象只有一个，节省系统资源。主要实现方式是私有化构造器并提供静态工厂方法返回唯一实例。</li>
+<li>享元模式也是用于减少对象的创建，运用共享有效的支持大粒度的对象。即对大对象不必重复创建，直接使用以有的。类似与将大对象缓存。主要实现方式是缓存已创建的对象(通过 map 结构进行存储)，当需要同样结构的对象时不再重复创建(同样是提供一个工厂方法返回实例)，而是直接返回已有的对象。对枚举对象也相像，不过枚举值是固定数量的，而享元模式中对象实例灵活可变的 3.对于大对象的重复创建，原型模式则是从自身出发，提供一个克隆接口将自己复制，以此提高性能。</li>
+</ol>
 </li>
-<li>结构型<ul>
-<li>原型模式</li>
-<li>代理模式</li>
-<li>适配器模式</li>
-<li>桥接模式</li>
-<li>过滤器模式</li>
-<li>组合模式</li>
-<li>装饰器模式</li>
-<li>外观模式</li>
-<li>享元模式</li>
-</ul>
+<li><p>代理模式、装饰器模式、适配器模式、策略模式</p>
+<p>装饰器模式、适配器模式、策略模式更多的像不同场景下代理模式的变体，或者这四个模式有共同的特征：最终行为的实现是通过其他对象实现的。</p>
+<ol>
+<li>代理模式和适配器模式的区别：适配器模式主要改变所考虑对象的接口，而代理模式不能改变所代理类的接口。</li>
+<li>代理模式和装饰器模式的区别：装饰器模式为了增强功能，而代理模式是为了加以控制。</li>
+<li>代理模式和策略模式的区别：策略模式是对方法的实现与对象解耦，代理模式更多代理的是对象。</li>
+</ol>
 </li>
-<li>行为型<ul>
-<li>责任链模式</li>
-<li>命令模式</li>
-<li>解释器模式</li>
-<li>迭代器模式</li>
-<li>中介者模式</li>
-<li>备忘录模式</li>
-<li>观察者模式</li>
-<li>状态模式</li>
-<li>访问者模式</li>
-<li>空对象模式</li>
-<li>策略模式</li>
-<li>模板模式</li>
-</ul>
+<li><p>状态模式、备忘录模式</p>
+<p>状态模式则是不同的状态对应不同的行为，对应 Java 中则是很类似枚举对象的实现，不同的枚举对象有着不同的方法实现；<br>备忘录模式内部也维护者一个状态，备忘录模式更多的是对对象状态的存储，以便恢复之前或者上一个状态</p>
+</li>
+<li><p>工厂模式、抽象工厂、模板方法</p>
+<p>工厂模式是用来创建实例的，而抽象工厂是对各个抽象零件的组装，模板方法则是提供不可被子类修改的方法模板进行使用</p>
+</li>
+<li><p>抽象工厂、组合模式 这二者比较相像，组合模式是对类的组装，抽象工厂更多的是对接口的组装</p>
+</li>
+<li><p>责任链模式、过滤器模式、链式操作等等</p>
+<p>在责任链中则是通过每个处理对象构造时确定好了下一级处理对象，将被处理对象进行传递<br>而过滤器与链式操作则是对同一数据结构的对象操作，然后接着然后同样数据结构类型的数据，依次可以一直进行链式操作</p>
 </li>
 </ul>
-<p>单例模式、享元模式、原型模式</p>
-<pre><code>在一定程度上，三者都有避免对象重复创建与销毁的意图。具体区别：
-1. 单例模式更多的是一个全局对象，可以对各个对象共享其状态。实例对象只有一个，节省系统资源。主要实现方式是私有化构造器并提供静态工厂方法返回唯一实例。
-2. 享元模式也是用于减少对象的创建，运用共享有效的支持大粒度的对象。即对大对象不必重复创建，直接使用以有的。类似与将大对象缓存。主要实现方式是缓存已创建的对象(通过map结构进行存储)，当需要同样结构的对象时不再重复创建(同样是提供一个工厂方法返回实例)，而是直接返回已有的对象。对枚举对象也相像，不过枚举值是固定数量的，而享元模式中对象实例灵活可变的
-3.对于大对象的重复创建，原型模式则是从自身出发，提供一个克隆接口将自己复制，以此提高性能。
-</code></pre><p>代理模式、装饰器模式、适配器模式、策略模式</p>
-<pre><code>装饰器模式、适配器模式、策略模式更多的像不同场景下代理模式的变体，或者这四个模式有共同的特征：最终行为的实现是通过其他对象实现的。
-1. 代理模式和适配器模式的区别：适配器模式主要改变所考虑对象的接口，而代理模式不能改变所代理类的接口。
-2. 代理模式和装饰器模式的区别：装饰器模式为了增强功能，而代理模式是为了加以控制。
-3. 代理模式和策略模式的区别：策略模式是对方法的实现与对象解耦，代理模式更多代理的是对象。
-</code></pre><p>状态模式、备忘录模式</p>
-<pre><code>状态模式则是不同的状态对应不同的行为，对应Java中则是很类似枚举对象的实现，不同的枚举对象有着不同的方法实现；
-备忘录模式内部也维护者一个状态，备忘录模式更多的是对对象状态的存储，以便恢复之前或者上一个状态
-</code></pre><p>工厂模式、抽象工厂、模板方法</p>
-<pre><code>工厂模式是用来创建实例的，而抽象工厂是对各个抽象零件的组装，模板方法则是提供不可被子类修改的方法模板进行使用
-</code></pre><p>抽象工厂、组合模式 这二者比较相像，组合模式是对类的组装，抽象工厂更多的是对接口的组装</p>
-<p>责任链模式、过滤器模式、链式操作等等</p>
-<pre><code>在责任链中则是通过每个处理对象构造时确定好了下一级处理对象，将被处理对象进行传递
-而过滤器与链式操作则是对同一数据结构的对象操作，然后接着然后同样数据结构类型的数据，依次可以一直进行链式操作
-</code></pre><p>解释器模式与命令模式</p>
+<p>解释器模式与命令模式</p>
 <pre><code>对于一些命令操作等，可以封装为命令对象，然后进行操作
 解释器模式则是对于语法的解析，比如sql语法等，需要构建语法树，进行递归解析
 </code></pre>
@@ -327,7 +295,7 @@ var egg = " \
         
           本文作者 : 对六 <br>
         
-        原文链接 : <a href>http://duiliuliu.github.io/2019/04/23/设计模式一/</a><br>
+        原文链接 : <a href>http://duiliuliu.github.io/2019/04/20/设计模式一/</a><br>
         版权声明 : 本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> 许可协议。转载请注明出处！
         </blockquote>
       </div>
