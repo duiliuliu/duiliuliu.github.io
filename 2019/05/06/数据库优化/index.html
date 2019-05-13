@@ -28,12 +28,12 @@ var egg = " \
   
   
   
-  <title>标签: Java | Duiliuliu</title>
+  <title>数据库优化 | Duiliuliu</title>
 
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
   
-    <meta name="keywords" content="Hexo, duiliuliu">
+    <meta name="keywords" content="数据库,数据库,">
   
 
   <script>
@@ -195,87 +195,368 @@ var egg = " \
   })
 </script>
 
-      <div class="container">
-  <div class="timeline">
-  <span class="archive-move-on"></span>
-  <span class="archive-page-counter">
-    
-      <span>当前位于 1/1 页</span>
-    
-  </span>
+      
+
+
+
+
+
+
+
+
+<div class="container post-index">
+
   
+
+<div class="post">
+  <h1 class="article-title">
+    <span>数据库优化</span>
+  </h1>
+  <div class="article-top-meta">
+    <span>
+      发布 : 
+      2019-05-06
+    </span>
+    
+      <span>
+        分类 : 
+          <a href="/categories/数据库/">
+            数据库
+          </a>
+      </span>
+    
+    
+      <span>
+        浏览 : <span class="article-timer" data-identity="数据库优化"></span>
+      </span>
+    
+  </div>
+
   
-    <div class="collection-title">
-      <h2>
+
+  <div class="article-content">
+    <div class="markdown-body">
+      <h2 id="MariaBD-与-Mysql"><a href="#MariaBD-与-Mysql" class="headerlink" title="MariaBD 与 Mysql"></a>MariaBD 与 Mysql</h2><p>两者异同<br>MariaDB 由开源社区提供支持，与 Mysql 兼容，属于不同的代码分支，因为 oracle 收购 sun 公司，大家害怕 Oracle 闭源</p>
+<p>MariaDB 支持 XtraDB 引擎，其是 Innodb 引擎的增强版<br>支持 Aria 引擎，是 MyIsam 引擎的增强版，Aria 引擎支持动态列，支持 json 格式数据，通过大量缓存的方式由于 MYISAM 引擎</p>
+<blockquote>
+<p>DDL define 定义<br>DML manipulation 操纵<br>DCL control 权限控制</p>
+</blockquote>
+<h2 id="性能调优"><a href="#性能调优" class="headerlink" title="性能调优"></a>性能调优</h2><ul>
+<li>硬件</li>
+<li>表结构</li>
+<li>查询</li>
+</ul>
+<h3 id="表结构"><a href="#表结构" class="headerlink" title="表结构"></a>表结构</h3><p>关系数据库</p>
+<p>关系模型 – 范式<br>越高的范式 数据冗余越低</p>
+<p>关系数据库中，关系-属性-元组 对应数据库中 表-列-行</p>
+<p>范式：</p>
+<ul>
+<li>第一范式 属性不可再分，每个属性原子性</li>
+<li>第二范式 属性都依赖于主关键字</li>
+<li>第三范式 去掉传递依赖，属性都直接依赖与主关键字，而不是传递函数依赖与主关键字</li>
+</ul>
+<p>范式可以消除数据冗余、更新异常、插入异常、删除异常的问题</p>
+<h3 id="数据字段类型选择"><a href="#数据字段类型选择" class="headerlink" title="数据字段类型选择"></a>数据字段类型选择</h3><ul>
+<li>数值型数据<br>MySQL 支持的数值数据类型有：<br>TINYINT 1byte<br>SMALLINT 2byte<br>MEDIUMINT 3byte<br>INT 4byte<br>BIGINT 8byte</li>
+<li>字符型数据<br>char 定长<br>varchar 不定长，需要额外的 1-2 字节空间存储长度</li>
+<li>日期型数据<br>datetime 8 字节<br>timestamp 4 字节</li>
+</ul>
+<h3 id="锁机制"><a href="#锁机制" class="headerlink" title="锁机制"></a>锁机制</h3><p>表锁 MYISAM 只支持表锁，读的时候，其他事务可读不可写；写的时候，其他事务不可读写<br>行锁 Innodb 支持，只给索引上的索引项加锁，也就是说：只有通过索引检索数据才会加行锁，否则加表锁<br>页面锁 介于表锁与行锁</p>
+<p>当大量的事务因无法立即获得锁而挂起，将会占用资源影响服务性能，为提升性能，可以设置锁超时时间，一般为 100 秒<br><code>innodb-lock-wait-timeout=100</code></p>
+<p><strong>死锁</strong> 两个事务都需要获得对方持有的排他锁才能继续完成事务<br>Innodb 一般可以自动检测到死锁(图),它会让一个事物释放锁并回滚，另一个事务拿到锁，完成事务</p>
+<h3 id="Innodb-与-MYISAM-区别"><a href="#Innodb-与-MYISAM-区别" class="headerlink" title="Innodb 与 MYISAM 区别"></a>Innodb 与 MYISAM 区别</h3><p>Innodb 支持行级锁，支持事务回滚 ACID，比较安全，提供崩溃回复功能，多版本并发控制</p>
+<p>Myisam 支持全文索引，查询高效，不支持外键与事务，并且每张 MYISAM 表都存储为三个文件 frm 表定义文件、myd 数据文件、myi 索引文件</p>
+<h3 id="事务"><a href="#事务" class="headerlink" title="事务"></a>事务</h3><p>innodb 事务的实现：日制先行</p>
+<p>隔离级别：</p>
+<ul>
+<li>读未提交 read uncommited</li>
+<li>读已提交 read commited</li>
+<li>可重复度 repeatable read</li>
+<li>序列化读 serializable</li>
+</ul>
+<p>实现原理</p>
+<p>慢查询</p>
+<p>慢查询即运行较慢的查询</p>
+<p>MySQL 开启慢查询：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">slow_query_log = 1</span><br><span class="line">slow_query_log_file = mysql.slow</span><br><span class="line">long_query_time = 2</span><br></pre></td></tr></table></figure>
+<p>索引</p>
+<ul>
+<li>聚集</li>
+<li>非聚集</li>
+</ul>
+<h3 id="SQL-优化"><a href="#SQL-优化" class="headerlink" title="SQL 优化"></a>SQL 优化</h3><ol>
+<li>not in 与 子查询 –&gt; join 连接</li>
+<li><p>模式匹配 like “%xxx%”<br>like “xxx%” 可以命中索引，而 like “%xxx%”不可以<br>不过我们可以通过覆盖索引的方式优化 SQL</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"># 原始SQL</span><br><span class="line">select count(*) from artist where name like &apos;%Queen&apos;</span><br><span class="line"># 优化后SQL</span><br><span class="line">select count(*) from artist a</span><br><span class="line">  join (select artist_id from attist where name like &apos;%Queen%&apos;) b</span><br><span class="line">  on a.artist_id = b.artist_id</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>limit 优化<br>通过索引定位，然后 limit(0,10) 优于直接 limit(10000,10)</p>
+</li>
+<li>count(索引) 优于 count(*)</li>
+<li>or<br>or 条件语句不会使用索引，因此可以选择改为 union all 合并结果</li>
+<li>合理使用索引</li>
+</ol>
+    </div>
+  </div>
+  
+    <div class="copy-right">
+      <div class="markdown-body">
+        <blockquote>
         
-          <span>标签 : Java</span>
         
-      </h2>
+          本文作者 : 对六 <br>
+        
+        原文链接 : <a href>http://duiliuliu.github.io/2019/05/06/数据库优化/</a><br>
+        版权声明 : 本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> 许可协议。转载请注明出处！
+        </blockquote>
+      </div>
     </div>
   
   
   
-  <article class="posts-collapse">
-    <header>
-      <h2>
-        <a href="/2019/05/10/java并发一/">
-          <span>Java并发(一)-相关概念</span>
-        </a>
-      </h2>
-      <div class="post-meta">
-        05-10
-      </div>
-    </header>
-  </article>
-  
-  
-  <article class="posts-collapse">
-    <header>
-      <h2>
-        <a href="/2019/03/18/Java格式化时间-面试题/">
-          <span>Java格式化时间(面试题)</span>
-        </a>
-      </h2>
-      <div class="post-meta">
-        03-18
-      </div>
-    </header>
-  </article>
-  
-  
-  <article class="posts-collapse">
-    <header>
-      <h2>
-        <a href="/2019/01/15/Java时间格式化/">
-          <span>Java 时间格式化</span>
-        </a>
-      </h2>
-      <div class="post-meta">
-        01-15
-      </div>
-    </header>
-  </article>
-  
-  
-  <article class="posts-collapse">
-    <header>
-      <h2>
-        <a href="/2019/01/14/mybatis参数/">
-          <span>mybatis参数</span>
-        </a>
-      </h2>
-      <div class="post-meta">
-        01-14
-      </div>
-    </header>
-  </article>
-  
+    <div class="social-share" style="margin-top: -2rem" data-wechat-qrcode-title="<p>微信扫一扫</p>" data-wechat-qrcode-helper="<p>微信右上角, 扫一扫分享</p>" data-sites="douban, google, facebook, twitter">
+  <span style="color: #6b7487; font-size: 1.4rem;">分享到: </span>
 </div>
-  <nav class="page-navigation">
+<script src="https://cdn.bootcss.com/social-share.js/1.0.16/js/social-share.min.js" async></script>
+  
+
+  
+    <div id="reward">
+  
+    <p id="reward-meta">你我共勉！</p>
+  
+  <button id="reward-btn">
     
+    <span>共勉</span>
+  </button>
+  <div id="reward-qrcode">
+    
+      <div class="reward-qrcode--container">
+        <img class="qrcode-img" src="/images/wechat.png" alt="微信">
+        <p class="qrcode-meta">微信</p>
+      </div>
+    
+      <div class="reward-qrcode--container">
+        <img class="qrcode-img" src="/images/alipay.png" alt="支付宝">
+        <p class="qrcode-meta">支付宝</p>
+      </div>
+    
+  </div>
+
+</div>
+
+<script>
+  (() => {
+    let button = document.querySelector('#reward-btn'),
+      qrcode = document.querySelector('#reward-qrcode'),
+      display = false;
+    
+    button.addEventListener('click', () => {
+      qrcode.style.display = display ? 'none' : 'block'
+      display = !display
+    }, false)
+  })()
+</script>
+  
+
+  <div class="article-footer">
+    <div class="article-meta pull-left">
+      <span>
+        
+          <i class="iconfont icon-06tags"></i>标签: 
+          
+          <span class="span--tag">
+            <a href="/tags/数据库/">
+              #数据库
+            </a>
+          </span>
+          
+        
+      </span>
+    </div>
+    <div class="article-meta pull-right">
+    </div>
+  </div>
+</div>
+
+
+  <aside id="sidebar">
+    <p id="sidebar-header"></p>
+    <ol id="sidebar-toc"></ol>
+    <img id="sidebar-icon">
+  </aside>
+  <script async>setTimeout(generateToc, 10);</script>
+
+
+  <nav class="post-navigation">
+    
+      <div class="nav-pre">
+        <i class="iconfont icon-prev"></i>
+        上一篇:
+        <a href="/2019/04/24/渐进式哈希/" target="_self">渐进式哈希</a>
+      </div>
+    
+    
+      <div class="nav-next">
+        下一篇:
+        <a href="/2019/05/10/java并发一/" target="_self">Java并发(一)-相关概念</a>
+        <i class="iconfont icon-next"></i>
+      </div>
     
   </nav>
+
+  
+    <a href="#comment" class="comment-anchor"></a>
+<div class="comment-title"><i class="iconfont icon-footprint"></i> 留下足迹 <i class="iconfont icon-footprint"></i></div>
+<div id="vcomments"></div>
+
+<script defer>
+  if( true ) {
+    let path = getRealPath()
+    new Valine({
+      el: "#vcomments",
+      appId: "VPNwETUGMJnwGnY6Pc7GaVna-gzGzoHsz",
+      appKey: "niJbsuSCKuploWnG8Qvbgb5P",
+      notify: false,
+      verify: false,
+      avatar: "robohash",
+      placeholder: "正确填写邮箱, 才能及时收到回复哦♪(^∇^*)",
+      path
+    });
+  }
+</script>
+   
+
+  
+    <script defer>
+const valineAPI = (() => {
+  try {
+    AV.init("VPNwETUGMJnwGnY6Pc7GaVna-gzGzoHsz", "niJbsuSCKuploWnG8Qvbgb5P");
+  } catch(error) {}
+  const isExist = (identity) => {
+    identity = identity || getRealPath();
+    let query = new AV.Query('Timer');
+    return new Promise((resolve, reject) => {
+      query.equalTo("identity", identity);
+      query.find().then(results => {
+        resolve(results.length > 0);
+      }, error => reject(error));
+    })
+  }
+
+  const _get = (identity) => {
+    let query = null;
+    if(identity && identity instanceof Array){
+      let querys = [];
+      for(let i = 0; i < identity.length; ++i) {
+        querys[i] = new AV.Query('Timer');
+        querys[i].equalTo('identity', identity[i]);
+      }
+      query = AV.Query.or.apply(null ,querys);
+    } else {
+      identity = identity || getRealPath();
+      query = new AV.Query("Timer");
+      query.equalTo("identity", identity);
+    }
+
+    return new Promise((resolve, reject) => {
+      query.find()
+      .then(results => resolve(results))
+      .catch(error => reject(error))
+    })
+  }
+
+  const create = (identity) => {
+    identity = identity || getRealPath();
+    return new Promise((resolve, reject) => {
+      let Todo = AV.Object.extend('Timer');
+      let todo = new Todo();
+      todo.set("times", 1);
+      todo.set("identity", identity);
+      todo.save().then(res => resolve(true), error => reject(error));
+    })
+  }
+
+  const update = (identity) => {
+    identity = identity || getRealPath();
+    return new Promise((resolve, reject) => {
+      let query = new AV.Query('Timer');
+      query.equalTo("identity", identity);
+      query.find().then(todos => {
+        todos.forEach(todo => {
+          todo.set("times", todo.attributes.times + 1);
+        });
+        return AV.Object.saveAll(todos);
+      }).then(todos => resolve(true), error => reject(error));
+    })
+  }
+
+  return {
+    isExist,
+    _get,
+    update,
+    create
+  }
+})()
+
+const calcAndWriteTimes = () => {
+  let isPost = true;
+
+  let timerAllDOM = document.querySelectorAll(".article-timer");
+
+  if(isPost) {
+    let identity = timerAllDOM[0].getAttribute("data-identity");
+    valineAPI.isExist(identity)
+    .then(exist => {
+      if(exist) {
+        return valineAPI.update(identity);
+      }
+      return new Promise(resolve => resolve(true));
+    })
+    .then( succuess => valineAPI._get(identity))
+    .then( result => timerAllDOM[0].innerText = result[0].attributes.times)
+    .catch(error => console.log(error.message))
+    return ;
+  }
+
+  let timerDOMCache = {};
+
+  for(let timerDOM of timerAllDOM) {
+    let identity = timerDOM.getAttribute("data-identity");
+    if(timerDOMCache.hasOwnProperty(identity)){
+      timerDOMCache[identity].dom.push(timerDOM);
+    }else{
+      timerDOMCache[identity] = {
+        dom: [timerDOM],
+        times: undefined
+      };
+    }
+  }
+
+  let identities = Object.keys(timerDOMCache);
+  valineAPI._get(identities).then(results => {
+    for(let result of results) {
+      let {identity, times} = result.attributes;
+      timerDOMCache[identity].times = times;
+      timerDOMCache[identity].dom.map(item => item.innerText = times);
+    }
+    for(let identity of identities) {
+      if(timerDOMCache[identity].times){
+        continue;
+      }
+      timerDOMCache[identity].dom.map(item => item.innerText = 1);
+      valineAPI.create(identity);
+    }
+  }).catch(error => console.log(error.message))
+}
+
+if(true){
+  calcAndWriteTimes();
+}
+</script>
+   
+
 </div>
+
 
       <footer>
   <p class="site-info">

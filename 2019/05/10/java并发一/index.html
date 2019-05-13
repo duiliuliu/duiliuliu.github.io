@@ -28,12 +28,12 @@ var egg = " \
   
   
   
-  <title>标签: Java | Duiliuliu</title>
+  <title>Java并发(一)-相关概念 | Duiliuliu</title>
 
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
   
-    <meta name="keywords" content="Hexo, duiliuliu">
+    <meta name="keywords" content="Java,Java并发,Java,并发,">
   
 
   <script>
@@ -195,87 +195,379 @@ var egg = " \
   })
 </script>
 
-      <div class="container">
-  <div class="timeline">
-  <span class="archive-move-on"></span>
-  <span class="archive-page-counter">
-    
-      <span>当前位于 1/1 页</span>
-    
-  </span>
+      
+
+
+
+
+
+
+
+
+<div class="container post-index">
+
   
+
+<div class="post">
+  <h1 class="article-title">
+    <span>Java并发(一)-相关概念</span>
+  </h1>
+  <div class="article-top-meta">
+    <span>
+      发布 : 
+      2019-05-10
+    </span>
+    
+      <span>
+        分类 : 
+          <a href="/categories/Java/">
+            Java
+          </a>
+      </span>
+    
+    
+      <span>
+        浏览 : <span class="article-timer" data-identity="java并发一"></span>
+      </span>
+    
+  </div>
+
   
-    <div class="collection-title">
-      <h2>
+
+  <div class="article-content">
+    <div class="markdown-body">
+      <h2 id="Java-并发相关概念"><a href="#Java-并发相关概念" class="headerlink" title="Java 并发相关概念"></a>Java 并发相关概念</h2><h3 id="并发"><a href="#并发" class="headerlink" title="并发"></a>并发</h3><p>并发是在单核处理机上所任务运行的一种方式，根本上是串行的运行方式，通过时间多路复用算法(复用 CPU)达到部分并行的效果</p>
+<h3 id="并行"><a href="#并行" class="headerlink" title="并行"></a>并行</h3><p>多核 cpu 运行方式</p>
+<h3 id="计算密集"><a href="#计算密集" class="headerlink" title="计算密集"></a>计算密集</h3><p>大量计算</p>
+<h3 id="IO-密集"><a href="#IO-密集" class="headerlink" title="IO 密集"></a>IO 密集</h3><p>频繁 IO 读写</p>
+<h3 id="死锁"><a href="#死锁" class="headerlink" title="死锁"></a>死锁</h3><p>造成死锁的四个必要条件：</p>
+<ol>
+<li>互斥</li>
+<li>请求与等待</li>
+<li>不可剥夺条件</li>
+<li>循环与等待<br>而破坏死锁的条件即是：破坏以上任意一个条件即可</li>
+</ol>
+<h3 id="饥饿"><a href="#饥饿" class="headerlink" title="饥饿"></a>饥饿</h3><p>长时间未等待到 cpu 调度</p>
+<h3 id="竞争条件"><a href="#竞争条件" class="headerlink" title="竞争条件"></a>竞争条件</h3><p>不可抢占资源在某一时刻只能有一个线程占有，因此对于不可抢占资源的使用需要线程竞争</p>
+<h3 id="原子性"><a href="#原子性" class="headerlink" title="原子性"></a>原子性</h3><p>原子是世界上最小的单位，具有不可分割性<br>一个操作时原子操作，那么我们称他具有原子性</p>
+<h3 id="可见性"><a href="#可见性" class="headerlink" title="可见性"></a>可见性</h3><p>指当多个线程访问同一个变量时，一个线程修改了这个变量的指，其他线程能够立即看到修改的值</p>
+<h3 id="有序性"><a href="#有序性" class="headerlink" title="有序性"></a>有序性</h3><p>程序执行的顺序按照代码的先后顺序执行</p>
+<h3 id="内存栅栏"><a href="#内存栅栏" class="headerlink" title="内存栅栏"></a>内存栅栏</h3><p>内存栅栏(memory barrier)就是从本地或工作内存到主存之间的拷贝动作。<br>仅当写操作先跨越内存栅栏，读操作后跨越内存栅栏的情况下，读操作才可以对写操作的更新可见。<br>关键字 synchronized 和 valatile 都强制规定了所有的变更必须全局可见，该特性有助于跨越内存栅栏<br>在程序运行过程中，所有的更改会在高速缓存或者寄存器中完成，然后才会拷贝到主存一跨越内存栅栏。这种跨越序列或顺序称之为 happen###before</p>
+<h3 id="缓存一致性"><a href="#缓存一致性" class="headerlink" title="缓存一致性"></a>缓存一致性</h3><p>写操作更改发生在缓存中，缓存与主存数据需要保持一致性<br>如何解决缓存不一致的问题：</p>
+<ol>
+<li>通过在总线 LOCK 加锁的方式：<br>因为 CPU 和其他部件通信都是通过总线进行数据传输的，如果对总线加 LOCK 锁的话，也就是说阻塞了其他 CPU 对内存的访问，从而使得这一个只有一个 CPU 能只用这个变量的内存</li>
+<li>通过缓存一致性协议<br>最出名的就是 Intel 的 MESI 协议，MESI 协议保证了每个缓存中使用的共享变量的副本都是一致的。他的核心思想是：当 CPU 写数据时，如果发现操作的变量是共享变量，即在其他 CPU 缓存中也存在该变量的副本，会发出信号通知(广播)其他 CPU，将该变量的缓存行置为无效，因此，当其他 CPU 需要读取这个变量时候，发现自己缓存的变量是无效的，那么它会立即从内存中重新读取</li>
+</ol>
+<h3 id="CAS"><a href="#CAS" class="headerlink" title="CAS"></a>CAS</h3><p>CAS 算法是由硬件直接支持来保证原子性的，有三个操作数：内存位置 V、旧的预期值 A 和新值 B，当且仅当 V 符合预期值 A 时，CAS 用新值 B 原子化地更新 V 的值，否则，它什么都不做。</p>
+<p>CAS 的 ABA 问题</p>
+<p>当然 CAS 也并不完美，它存在”ABA”问题，假若一个变量初次读取是 A，在 compare 阶段依然是 A，但其实可能在此过程中，它先被改为 B，再被改回 A，而 CAS 是无法意识到这个问题的。CAS 只关注了比较前后的值是否改变，而无法清楚在此过程中变量的变更明细，这就是所谓的 ABA 漏洞。</p>
+<h3 id="锁相关"><a href="#锁相关" class="headerlink" title="锁相关"></a>锁相关</h3><ul>
+<li><p>可重入锁<br>如果锁具备可重入性，则称作为可重入锁。像 synchronized 和 ReentrantLock 都是可重入锁，可重入性在我看来实际上表明了锁的分配机制：基于线程的分配，而不是基于方法调用的分配。举个简单的例子，当一个线程执行到某个 synchronized 方法时，比如说 method1，而在 method1 中会调用另外一个 synchronized 方法 method2，此时线程不必重新去申请锁，而是可以直接执行方法 method2。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">public MyClass&#123;</span><br><span class="line">    public synchronized void method1()&#123;</span><br><span class="line">        method2();</span><br><span class="line">    &#125;</span><br><span class="line">    public synchronized void method2()&#123;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>实现原理：每个锁都关联一个请求计数器和一个占有他的线程，当请求计数器为 0 时，这个锁可以被认为是 unheld 的，当一个线程请求一个 unheld 的锁时，JVM 记录<strong>锁的拥有者，并把锁的请求计数</strong>加 1，如果同一个线程再次请求这个锁时，请求计数器就会增加，当该线程退出 syncronized 块时，计数器减 1，当计数器为 0 时，锁被释放。</p>
+</li>
+<li><p>可中断锁<br>可中断锁：顾名思义，就是可以响应中断的锁。</p>
+<p>在 Java 中，synchronized 就不是可中断锁，而 Lock 是可中断锁。</p>
+<p>如果某一线程 A 正在执行锁中的代码，另一线程 B 正在等待获取该锁，可能由于等待时间过长，线程 B 不想等待了，想先处理其他事情，我们可以让它中断自己或者在别的线程中中断它，这种就是可中断锁。</p>
+</li>
+<li><p>公平锁<br>公平锁即尽量以请求锁的顺序来获取锁。比如同是有多个线程在等待一个锁，当这个锁被释放时，等待时间最久的线程(最先请求的线程)会获得该所，这种就是公平锁。</p>
+<p>非公平锁即无法保证锁的获取是按照请求锁的顺序进行的。这样就可能导致某个或者一些线程永远获取不到锁。</p>
+<p>在 Java 中，<strong>synchronized 就是非公平锁</strong>，它无法保证等待的线程获取锁的顺序。</p>
+<p>而对于 ReentrantLock 和 ReentrantReadWriteLock，它默认情况下是非公平锁，但是可以设置为公平锁。</p>
+<p><code>ReentrantLock lock = new ReentrantLock(true); \\公平锁</code></p>
+<p>实现原理： <strong>通过链表记录线程请求锁的顺序</strong></p>
+</li>
+<li><p>读写锁<br>更加细粒度的锁<br>读写锁将对一个资源(比如文件)的访问分成了 2 个锁，一个读锁和一个写锁。</p>
+<p>正因为有了读写锁，才使得多个线程之间的读操作不会发生冲突。</p>
+<p>ReadWriteLock 就是读写锁，它是一个接口，ReentrantReadWriteLock 实现了这个接口。</p>
+<p>可以通过 readLock()获取读锁，通过 writeLock()获取写锁</p>
+</li>
+<li><p>偏向锁<br>java 偏向锁(Biased Locking)是 java6 引入的一项多线程优化.它通过消除资源无竞争 q 情况下的同步原语,进一步提高了程序的运行性能.</p>
+<p>偏向锁，顾名思义，它会偏向于第一个访问锁的线程，如果在接下来的运行过程中，该锁没有被其他的线程访问，则持有偏向锁的线程将永远不需要触发同步。</p>
+<p>如果在运行过程中，遇到了其他线程抢占锁，则持有偏向锁的线程会被挂起，JVM 会尝试消除它身上的偏向锁，将锁恢复到标准的轻量级锁。(偏向锁只能在单线程下起作用)</p>
+<p>因此 流程是这样的 偏向锁-&gt;轻量级锁-&gt;重量级锁</p>
+<p>偏向锁，简单的讲，就是在锁对象的对象头中有个 ThreaddId 字段，这个字段如果是空的，第一次获取锁的时候，就将自身的 ThreadId 写入到锁的 ThreadId 字段内，将锁头内的是否偏向锁的状态位置 1.这样下次获取锁的时候，直接检查 ThreadId 是否和自身线程 Id 一致，如果一致，则认为当前线程已经获取了锁，因此不需再次获取锁，略过了轻量级锁和重量级锁的加锁阶段。提高了效率。</p>
+</li>
+</ul>
+<ul>
+<li><p>乐观锁、悲观锁<br>乐观锁</p>
+<p>总是认为不会产生并发问题，每次读取数据的时候认为不会有其他线程对数据进行修改，因此不会上锁。</p>
+<p>但是在更新的时候会判断其他线程在这之前有没有对数据进行修改,一般会使用版本控制机制或 CAS 实现。</p>
+<p>实现原理：</p>
+<ul>
+<li>版本控制机制</li>
+</ul>
+<p>一般是在数据表中加上一个数据版本号字段(version，或者版本更新时间字段)，表示数据被修改的次数,当数据被修改时，version 值会加 1.</p>
+<p>当线程 A 要更新数据时，读取数据的同时也会读取 version，提交更新时对比 version，若之前读取的 version 与此刻数据库中 version 相等时进行更新，否则重试更新操作，直到更新成功。(类似锁的自旋)</p>
+<ul>
+<li>CAS</li>
+</ul>
+<p>即 compare and swap 或者 compare and set,涉及到三个操作数:数据所在的内存值，预期值，新值。</p>
+<p>当需要更新时,判断内存值(公共)与旧的预期值(之前取的值)是否相等,若相等，则没有被其他线程修改过，使用新值进行更新，否则进行重试,一般情况下是一个自旋，即不断的重试。</p>
+</li>
+</ul>
+    </div>
+  </div>
+  
+    <div class="copy-right">
+      <div class="markdown-body">
+        <blockquote>
         
-          <span>标签 : Java</span>
         
-      </h2>
+          本文作者 : 对六 <br>
+        
+        原文链接 : <a href>http://duiliuliu.github.io/2019/05/10/java并发一/</a><br>
+        版权声明 : 本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> 许可协议。转载请注明出处！
+        </blockquote>
+      </div>
     </div>
   
   
   
-  <article class="posts-collapse">
-    <header>
-      <h2>
-        <a href="/2019/05/10/java并发一/">
-          <span>Java并发(一)-相关概念</span>
-        </a>
-      </h2>
-      <div class="post-meta">
-        05-10
-      </div>
-    </header>
-  </article>
-  
-  
-  <article class="posts-collapse">
-    <header>
-      <h2>
-        <a href="/2019/03/18/Java格式化时间-面试题/">
-          <span>Java格式化时间(面试题)</span>
-        </a>
-      </h2>
-      <div class="post-meta">
-        03-18
-      </div>
-    </header>
-  </article>
-  
-  
-  <article class="posts-collapse">
-    <header>
-      <h2>
-        <a href="/2019/01/15/Java时间格式化/">
-          <span>Java 时间格式化</span>
-        </a>
-      </h2>
-      <div class="post-meta">
-        01-15
-      </div>
-    </header>
-  </article>
-  
-  
-  <article class="posts-collapse">
-    <header>
-      <h2>
-        <a href="/2019/01/14/mybatis参数/">
-          <span>mybatis参数</span>
-        </a>
-      </h2>
-      <div class="post-meta">
-        01-14
-      </div>
-    </header>
-  </article>
-  
+    <div class="social-share" style="margin-top: -2rem" data-wechat-qrcode-title="<p>微信扫一扫</p>" data-wechat-qrcode-helper="<p>微信右上角, 扫一扫分享</p>" data-sites="douban, google, facebook, twitter">
+  <span style="color: #6b7487; font-size: 1.4rem;">分享到: </span>
 </div>
-  <nav class="page-navigation">
+<script src="https://cdn.bootcss.com/social-share.js/1.0.16/js/social-share.min.js" async></script>
+  
+
+  
+    <div id="reward">
+  
+    <p id="reward-meta">你我共勉！</p>
+  
+  <button id="reward-btn">
+    
+    <span>共勉</span>
+  </button>
+  <div id="reward-qrcode">
+    
+      <div class="reward-qrcode--container">
+        <img class="qrcode-img" src="/images/wechat.png" alt="微信">
+        <p class="qrcode-meta">微信</p>
+      </div>
+    
+      <div class="reward-qrcode--container">
+        <img class="qrcode-img" src="/images/alipay.png" alt="支付宝">
+        <p class="qrcode-meta">支付宝</p>
+      </div>
+    
+  </div>
+
+</div>
+
+<script>
+  (() => {
+    let button = document.querySelector('#reward-btn'),
+      qrcode = document.querySelector('#reward-qrcode'),
+      display = false;
+    
+    button.addEventListener('click', () => {
+      qrcode.style.display = display ? 'none' : 'block'
+      display = !display
+    }, false)
+  })()
+</script>
+  
+
+  <div class="article-footer">
+    <div class="article-meta pull-left">
+      <span>
+        
+          <i class="iconfont icon-06tags"></i>标签: 
+          
+          <span class="span--tag">
+            <a href="/tags/Java/">
+              #Java
+            </a>
+          </span>
+          
+          <span class="span--tag">
+            <a href="/tags/并发/">
+              #并发
+            </a>
+          </span>
+          
+        
+      </span>
+    </div>
+    <div class="article-meta pull-right">
+    </div>
+  </div>
+</div>
+
+
+  <aside id="sidebar">
+    <p id="sidebar-header"></p>
+    <ol id="sidebar-toc"></ol>
+    <img id="sidebar-icon">
+  </aside>
+  <script async>setTimeout(generateToc, 10);</script>
+
+
+  <nav class="post-navigation">
+    
+      <div class="nav-pre">
+        <i class="iconfont icon-prev"></i>
+        上一篇:
+        <a href="/2019/05/06/数据库优化/" target="_self">数据库优化</a>
+      </div>
     
     
   </nav>
+
+  
+    <a href="#comment" class="comment-anchor"></a>
+<div class="comment-title"><i class="iconfont icon-footprint"></i> 留下足迹 <i class="iconfont icon-footprint"></i></div>
+<div id="vcomments"></div>
+
+<script defer>
+  if( true ) {
+    let path = getRealPath()
+    new Valine({
+      el: "#vcomments",
+      appId: "VPNwETUGMJnwGnY6Pc7GaVna-gzGzoHsz",
+      appKey: "niJbsuSCKuploWnG8Qvbgb5P",
+      notify: false,
+      verify: false,
+      avatar: "robohash",
+      placeholder: "正确填写邮箱, 才能及时收到回复哦♪(^∇^*)",
+      path
+    });
+  }
+</script>
+   
+
+  
+    <script defer>
+const valineAPI = (() => {
+  try {
+    AV.init("VPNwETUGMJnwGnY6Pc7GaVna-gzGzoHsz", "niJbsuSCKuploWnG8Qvbgb5P");
+  } catch(error) {}
+  const isExist = (identity) => {
+    identity = identity || getRealPath();
+    let query = new AV.Query('Timer');
+    return new Promise((resolve, reject) => {
+      query.equalTo("identity", identity);
+      query.find().then(results => {
+        resolve(results.length > 0);
+      }, error => reject(error));
+    })
+  }
+
+  const _get = (identity) => {
+    let query = null;
+    if(identity && identity instanceof Array){
+      let querys = [];
+      for(let i = 0; i < identity.length; ++i) {
+        querys[i] = new AV.Query('Timer');
+        querys[i].equalTo('identity', identity[i]);
+      }
+      query = AV.Query.or.apply(null ,querys);
+    } else {
+      identity = identity || getRealPath();
+      query = new AV.Query("Timer");
+      query.equalTo("identity", identity);
+    }
+
+    return new Promise((resolve, reject) => {
+      query.find()
+      .then(results => resolve(results))
+      .catch(error => reject(error))
+    })
+  }
+
+  const create = (identity) => {
+    identity = identity || getRealPath();
+    return new Promise((resolve, reject) => {
+      let Todo = AV.Object.extend('Timer');
+      let todo = new Todo();
+      todo.set("times", 1);
+      todo.set("identity", identity);
+      todo.save().then(res => resolve(true), error => reject(error));
+    })
+  }
+
+  const update = (identity) => {
+    identity = identity || getRealPath();
+    return new Promise((resolve, reject) => {
+      let query = new AV.Query('Timer');
+      query.equalTo("identity", identity);
+      query.find().then(todos => {
+        todos.forEach(todo => {
+          todo.set("times", todo.attributes.times + 1);
+        });
+        return AV.Object.saveAll(todos);
+      }).then(todos => resolve(true), error => reject(error));
+    })
+  }
+
+  return {
+    isExist,
+    _get,
+    update,
+    create
+  }
+})()
+
+const calcAndWriteTimes = () => {
+  let isPost = true;
+
+  let timerAllDOM = document.querySelectorAll(".article-timer");
+
+  if(isPost) {
+    let identity = timerAllDOM[0].getAttribute("data-identity");
+    valineAPI.isExist(identity)
+    .then(exist => {
+      if(exist) {
+        return valineAPI.update(identity);
+      }
+      return new Promise(resolve => resolve(true));
+    })
+    .then( succuess => valineAPI._get(identity))
+    .then( result => timerAllDOM[0].innerText = result[0].attributes.times)
+    .catch(error => console.log(error.message))
+    return ;
+  }
+
+  let timerDOMCache = {};
+
+  for(let timerDOM of timerAllDOM) {
+    let identity = timerDOM.getAttribute("data-identity");
+    if(timerDOMCache.hasOwnProperty(identity)){
+      timerDOMCache[identity].dom.push(timerDOM);
+    }else{
+      timerDOMCache[identity] = {
+        dom: [timerDOM],
+        times: undefined
+      };
+    }
+  }
+
+  let identities = Object.keys(timerDOMCache);
+  valineAPI._get(identities).then(results => {
+    for(let result of results) {
+      let {identity, times} = result.attributes;
+      timerDOMCache[identity].times = times;
+      timerDOMCache[identity].dom.map(item => item.innerText = times);
+    }
+    for(let identity of identities) {
+      if(timerDOMCache[identity].times){
+        continue;
+      }
+      timerDOMCache[identity].dom.map(item => item.innerText = 1);
+      valineAPI.create(identity);
+    }
+  }).catch(error => console.log(error.message))
+}
+
+if(true){
+  calcAndWriteTimes();
+}
+</script>
+   
+
 </div>
+
 
       <footer>
   <p class="site-info">
